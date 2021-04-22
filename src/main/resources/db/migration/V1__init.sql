@@ -1,35 +1,35 @@
 CREATE TABLE "author" (
-                          "author_id" bigint PRIMARY KEY,
+                          "author_id" BIGSERIAL PRIMARY KEY,
                           "name" varchar
 );
 
 CREATE TABLE "author_book" (
-                               "author_id" bigint,
-                               "book_id" bigint
+                               "author_id" BIGINT,
+                               "book_id" BIGINT
 );
 
 CREATE TABLE "translator" (
-                              "translator_id" bigint PRIMARY KEY,
+                              "translator_id" BIGSERIAL PRIMARY KEY,
                               "name" varchar
 );
 
 CREATE TABLE "translator_book" (
-                                   "translator_id" bigint,
-                                   "book_id" bigint
+                                   "translator_id" BIGINT,
+                                   "book_id" BIGINT
 );
 
 CREATE TABLE "genre" (
-                         "genre_id" bigint PRIMARY KEY,
+                         "genre_id" BIGSERIAL PRIMARY KEY,
                          "name" varchar
 );
 
 CREATE TABLE "genre_book" (
-                              "genre_id" bigint,
-                              "book_id" bigint
+                              "genre_id" BIGINT,
+                              "book_id" BIGINT
 );
 
 CREATE TABLE "book" (
-                        "book_id" bigint PRIMARY KEY,
+                        "book_id" BIGSERIAL PRIMARY KEY,
                         "name" varchar,
                         "publishing_house" varchar,
                         "publishing_year" int,
@@ -37,14 +37,14 @@ CREATE TABLE "book" (
 );
 
 CREATE TABLE "client" (
-                          "client_id" bigint PRIMARY KEY,
+                          "client_id" BIGSERIAL PRIMARY KEY,
                           "name" varchar
 );
 
 CREATE TABLE "reserv" (
-                          "reserv_id" bigint PRIMARY KEY,
-                          "client_id" bigint,
-                          "book_id" bigint,
+                          "reserv_id" BIGSERIAL PRIMARY KEY,
+                          "client_id" BIGINT,
+                          "book_id" BIGINT,
                           "reservation_date" date,
                           "reservation_date_cancel" date
 );

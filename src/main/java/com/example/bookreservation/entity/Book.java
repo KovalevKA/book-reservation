@@ -35,5 +35,4 @@ public class Book extends AbstractEntity {
     private List<Translator> translatorList;
 
 
-
 }

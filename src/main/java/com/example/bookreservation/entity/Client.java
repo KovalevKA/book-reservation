@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @AttributeOverride(name = "id", column = @Column(name = "client_id"))
 @Table(name = "client")
-public class Client extends AbstractEntity{
+public class Client extends AbstractEntity {
 
     @Column(name = "name")
     private String name;
