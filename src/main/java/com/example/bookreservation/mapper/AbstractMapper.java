@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 
 public interface AbstractMapper<Entity, DTO> {
 
-    ModelMapper mapper = new ModelMapper();
-
     DTO toDTO(Entity entity);
 
     Entity toEntity(DTO dto);

@@ -1,14 +1,12 @@
 package com.example.bookreservation.controller;
 
 import com.example.bookreservation.dto.BookDTO;
+import com.example.bookreservation.dto.ReservDTO;
 import com.example.bookreservation.exception.ControllerExceptions;
 import com.example.bookreservation.service.ReservService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +16,11 @@ public class ReservController extends ControllerExceptions {
 
     @Autowired
     private ReservService reservService;
+
+    @GetMapping
+    public ResponseEntity<List<ReservDTO>> getListReservByClientId (@RequestParam Long id){
+        return null;
+    }
 
     @PostMapping("make")
     public ResponseEntity<List<BookDTO>> makeReservation(
@@ -34,6 +37,8 @@ public class ReservController extends ControllerExceptions {
     ) {
         return ResponseEntity.ok(null);
     }
+
+
 
 
 }

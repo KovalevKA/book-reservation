@@ -15,24 +15,22 @@ public class Book extends AbstractEntity {
 
     @Column(name = "name")
     private String name;
-    @Column(name = "publish_house")
+    @Column(name = "publishing_house")
     private String publishHouse;
-    @Column(name = "publish_year")
+    @Column(name = "publishing_year")
     private int publishYear;
-    @Column(name = "descriptiom")
+    @Column(name = "description")
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
     private List<Reserv> reservList;
 
-    @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Author> authorList;
 
-    @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Genre> genreList;
 
-    @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<Translator> translatorList;
-
-
 }

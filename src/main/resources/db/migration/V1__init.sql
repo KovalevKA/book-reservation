@@ -33,7 +33,7 @@ CREATE TABLE "book" (
                         "name" varchar,
                         "publishing_house" varchar,
                         "publishing_year" int,
-                        "descriptopn" text
+                        "description" text
 );
 
 CREATE TABLE "client" (

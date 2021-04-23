@@ -11,6 +11,8 @@ public interface AbstractService<Entity extends AbstractEntity, DTO extends Abst
 
     DTO getById(Long id);
 
+    DTO getByName(String name);
+
     void deleteById(Long id);
 
     DTO create(DTO dto);

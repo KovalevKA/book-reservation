@@ -1,9 +1,11 @@
 package com.example.bookreservation.exception;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -39,6 +41,20 @@ public class ControllerExceptions {
     public ResponseEntity<ErrorMessage> httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         return new ResponseEntity<>(
                 new ErrorMessage(e.getMessage() == null ? "Missimg parameter" : e.getMessage()),
+                HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorMessage> jsonProcessingException(JsonProcessingException e) {
+        return new ResponseEntity<>(
+                new ErrorMessage(e.getMessage() == null ? "Error input data" : e.getMessage()),
+                HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorMessage> httpMessageNotReadableException(HttpMessageNotReadableException e) {
+        return new ResponseEntity<>(
+                new ErrorMessage(e.getMessage() == null ? "Error input data" : e.getMessage()),
                 HttpStatus.BAD_REQUEST);
     }
 
