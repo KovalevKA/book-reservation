@@ -15,7 +15,7 @@ public class GenreService extends AbstractServiceImpl<Genre, GenreDTO, GenreRepo
     @Autowired
     private GenreRepository genreRepository;
 
-    public GenreDTO getByName(String name){
+    public GenreDTO getByName(String name) {
         return genreMapper.toDTO(genreRepository.getByName(name));
     }
 }

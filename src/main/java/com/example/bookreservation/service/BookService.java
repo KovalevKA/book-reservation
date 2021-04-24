@@ -44,18 +44,17 @@ public class BookService extends AbstractServiceImpl<Book, BookDTO, BookReposito
         return bookMapper.toDTOs(bookRepository.getAllFreeBooks());
     }
 
-    private List<?> getIdForNestedRecords (List<? extends AbstractDTO> dataList, AbstractService service){
+    private List<?> getIdForNestedRecords(List<? extends AbstractDTO> dataList, AbstractService service) {
         dataList.forEach(data -> {
             Long id = 0L;
             try {
                 Field field = data.getClass().getDeclaredField("name");
                 field.setAccessible(true);
-                id = service.getByName((String)field.get(data)).getId();
+                id = service.getByName((String) field.get(data)).getId();
                 field.setAccessible(false);
-            }catch ( Exception e){
+            } catch (Exception e) {
                 id = null;//service.create(data).getId();
-            }
-            finally {
+            } finally {
                 data.setId(id);
             }
         });

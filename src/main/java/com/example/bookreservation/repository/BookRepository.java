@@ -9,12 +9,12 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query("SELECT b FROM Book b LEFT JOIN Reserv r ON b.id = r.book.id " +
-            "WHERE r.reservationDateCancel < CURRENT_DATE "+
+            "WHERE r.reservationDateCancel < CURRENT_DATE " +
             "GROUP BY b.id")
-    List<Book> getAllFreeBooks ();
+    List<Book> getAllFreeBooks();
 
     @Query("SELECT b FROM Book b LEFT JOIN Reserv r ON b.id = r.book.id " +
-            "WHERE r.reservationDateCancel > CURRENT_DATE "+
+            "WHERE r.reservationDateCancel > CURRENT_DATE " +
             "GROUP BY b.id")
     List<Book> getAllReservedBooks();
 

@@ -1,6 +1,5 @@
 package com.example.bookreservation.service;
 
-import com.example.bookreservation.dto.AuthorDTO;
 import com.example.bookreservation.dto.TranslatorDTO;
 import com.example.bookreservation.entity.Translator;
 import com.example.bookreservation.mapper.TranslatorMapper;
@@ -16,7 +15,7 @@ public class TranslatorService extends AbstractServiceImpl<Translator, Translato
     @Autowired
     private TranslatorRepository translatorRepository;
 
-    public TranslatorDTO getByName(String name){
+    public TranslatorDTO getByName(String name) {
         return translatorMapper.toDTO(translatorRepository.getByName(name));
     }
 

@@ -18,7 +18,7 @@ public class ReservController extends ControllerExceptions {
     private ReservService reservService;
 
     @GetMapping
-    public ResponseEntity<List<ReservDTO>> getListReservByClientId (@RequestParam Long id){
+    public ResponseEntity<List<ReservDTO>> getListReservByClientId(@RequestParam Long id) {
         return null;
     }
 
@@ -37,8 +37,6 @@ public class ReservController extends ControllerExceptions {
     ) {
         return ResponseEntity.ok(null);
     }
-
-
 
 
 }

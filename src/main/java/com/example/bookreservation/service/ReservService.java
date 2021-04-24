@@ -7,5 +7,5 @@ import com.example.bookreservation.repository.ReservRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ReservService extends AbstractServiceImpl<Reserv, ReservDTO, ReservRepository, ReservMapper>{
+public class ReservService extends AbstractServiceImpl<Reserv, ReservDTO, ReservRepository, ReservMapper> {
 }
