@@ -1,12 +1,19 @@
 package com.example.bookreservation.entity;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
-@Data
+@Getter
+@Setter
+@ToString
 @NoArgsConstructor
 @Entity
 @AttributeOverride(name = "id", column = @Column(name = "book_id"))
@@ -25,12 +32,40 @@ public class Book extends AbstractEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
     private List<Reserv> reservList;
 
-    @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<Author> authorList;
+    @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Author> authorList = new HashSet<>();
 
-    @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<Genre> genreList;
+    @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Genre> genreList = new HashSet<>();
 
-    @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    private List<Translator> translatorList;
+    @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private Set<Translator> translatorList = new HashSet<>();
+
+    public void addAuthors(Set<Author> authors) {
+        this.authorList.addAll(authors);
+    }
+
+    public void addGenres(Set<Genre> genres) {
+        this.genreList.addAll(genres);
+    }
+
+    public void addTranslators(Set<Translator> translators) {
+        this.translatorList.addAll(translators);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return publishYear == book.publishYear &&
+                name.equals(book.name) &&
+                publishHouse.equals(book.publishHouse) &&
+                description.equals(book.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, publishHouse, publishYear, description);
+    }
 }

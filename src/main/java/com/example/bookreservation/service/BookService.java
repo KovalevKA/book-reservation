@@ -11,15 +11,17 @@ import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class BookService extends AbstractServiceImpl<Book, BookDTO, BookRepository, BookMapper> {
 
-    private final BookRepository bookRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Autowired
-    private final BookMapper bookMapper;
+    private BookRepository bookRepository;
+    @Autowired
+    private BookMapper bookMapper;
     @Autowired
     private AuthorService authorService;
     @Autowired
@@ -27,24 +29,23 @@ public class BookService extends AbstractServiceImpl<Book, BookDTO, BookReposito
     @Autowired
     private TranslatorService translatorService;
 
-    public BookService(BookRepository bookRepository, BookMapper bookMapper) {
-        this.bookRepository = bookRepository;
-        this.bookMapper = bookMapper;
-    }
 
     public BookDTO create(String data) throws JsonProcessingException {
+        Book book = bookRepository.save(new Book());
         BookDTO bookDTO = objectMapper.readValue(data, BookDTO.class);
-        bookDTO.setAuthors((List<AuthorDTO>) getIdForNestedRecords(bookDTO.getAuthors(), authorService));
-        bookDTO.setGenres((List<GenreDTO>) getIdForNestedRecords(bookDTO.getGenres(), genreService));
-        bookDTO.setTranslators((List<TranslatorDTO>) getIdForNestedRecords(bookDTO.getTranslators(), translatorService));
-        return bookMapper.toDTO(bookRepository.save(bookMapper.toEntity(bookDTO)));
+        bookDTO.setId(book.getId());
+        bookDTO.setAuthors((Set<AuthorDTO>) getIdForNestedRecords(bookDTO.getAuthors(), authorService));
+        bookDTO.setGenres((Set<GenreDTO>) getIdForNestedRecords(bookDTO.getGenres(), genreService));
+        bookDTO.setTranslators((Set<TranslatorDTO>) getIdForNestedRecords(bookDTO.getTranslators(), translatorService));
+        book = bookMapper.toEntity(bookDTO);
+        return bookMapper.toDTO(bookRepository.save(book));
     }
 
     public List<BookDTO> getFreeBooks() {
         return bookMapper.toDTOs(bookRepository.getAllFreeBooks());
     }
 
-    private List<?> getIdForNestedRecords(List<? extends AbstractDTO> dataList, AbstractService service) {
+    private Set<?> getIdForNestedRecords(Set<? extends AbstractDTO> dataList, AbstractService service) {
         dataList.forEach(data -> {
             Long id = 0L;
             try {
@@ -53,7 +54,7 @@ public class BookService extends AbstractServiceImpl<Book, BookDTO, BookReposito
                 id = service.getByName((String) field.get(data)).getId();
                 field.setAccessible(false);
             } catch (Exception e) {
-                id = null;//service.create(data).getId();
+                id = service.create(data).getId();
             } finally {
                 data.setId(id);
             }

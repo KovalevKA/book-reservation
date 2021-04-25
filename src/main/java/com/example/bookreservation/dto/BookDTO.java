@@ -2,7 +2,7 @@ package com.example.bookreservation.dto;
 
 import lombok.Data;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 public class BookDTO extends AbstractDTO {
@@ -11,7 +11,7 @@ public class BookDTO extends AbstractDTO {
     private String publishHouse;
     private int publishYear;
     private String description;
-    private List<AuthorDTO> authors;
-    private List<GenreDTO> genres;
-    private List<TranslatorDTO> translators;
+    private Set<AuthorDTO> authors;
+    private Set<GenreDTO> genres;
+    private Set<TranslatorDTO> translators;
 }

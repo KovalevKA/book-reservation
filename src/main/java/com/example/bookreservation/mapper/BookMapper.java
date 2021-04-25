@@ -1,9 +1,14 @@
 package com.example.bookreservation.mapper;
 
 import com.example.bookreservation.dto.BookDTO;
+import com.example.bookreservation.entity.Author;
 import com.example.bookreservation.entity.Book;
+import com.example.bookreservation.entity.Genre;
+import com.example.bookreservation.entity.Translator;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+
+import java.util.Set;
 
 @Component
 public class BookMapper implements AbstractMapper<Book, BookDTO> {
@@ -25,9 +30,13 @@ public class BookMapper implements AbstractMapper<Book, BookDTO> {
     @Override
     public Book toEntity(BookDTO bookDTO) {
         Book book = mapper.map(bookDTO, Book.class);
-        book.setAuthorList(authorMapper.toEntities(bookDTO.getAuthors()));
-        book.setGenreList(genreMapper.toEntities(bookDTO.getGenres()));
-        book.setTranslatorList(translatorMapper.toEntities(bookDTO.getTranslators()));
+        Set<Author> authors = authorMapper.toEntities(bookDTO.getAuthors());
+        authors.forEach(author -> author.addBook(book));
+        Set<Genre> genres = genreMapper.toEntities(bookDTO.getGenres());
+        genres.forEach(genre -> genre.addBook(book));
+        Set<Translator> translators = translatorMapper.toEntities(bookDTO.getTranslators());
+        translators.forEach(translator -> translator.addBook(book));
         return book;
     }
+
 }
