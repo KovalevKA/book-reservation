@@ -23,7 +23,6 @@ public class Genre extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, targetEntity = Book.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "genre_book",
             joinColumns = {@JoinColumn(name = "genre_id", referencedColumnName = "genre_id")},

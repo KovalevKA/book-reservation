@@ -24,7 +24,6 @@ public class Author extends AbstractEntity {
 
     private String name;
 
-    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, targetEntity = Book.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "author_book",
             joinColumns = {@JoinColumn(name = "author_id", referencedColumnName = "author_id")},

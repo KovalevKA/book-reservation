@@ -40,12 +40,13 @@ public class BookController extends ControllerExceptions {
     }
 
     @PostMapping("{id}")
-    public ResponseEntity<BookDTO> editBook(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(null);
+    public ResponseEntity<BookDTO> editBook(@PathVariable("id") Long id, @RequestBody String data) throws JsonProcessingException, IllegalAccessException {
+        return ResponseEntity.ok(bookService.editById(id, data));
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity deleteBook(@PathVariable Long id) {
+        bookService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }

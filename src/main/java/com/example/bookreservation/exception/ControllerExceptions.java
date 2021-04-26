@@ -58,6 +58,13 @@ public class ControllerExceptions {
                 HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler
+    public ResponseEntity<ErrorMessage> illegalAccessException (IllegalAccessException e){
+        return new ResponseEntity<>(
+                new ErrorMessage(e.getMessage() == null ? "Error access" : e.getMessage())
+                , HttpStatus.BAD_REQUEST);
+    }
+
     @Data
     @AllArgsConstructor
     class ErrorMessage {

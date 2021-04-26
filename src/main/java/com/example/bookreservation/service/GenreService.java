@@ -11,11 +11,9 @@ import org.springframework.stereotype.Service;
 public class GenreService extends AbstractServiceImpl<Genre, GenreDTO, GenreRepository, GenreMapper> {
 
     @Autowired
-    private GenreMapper genreMapper;
-    @Autowired
     private GenreRepository genreRepository;
 
-    public GenreDTO getByName(String name) {
-        return genreMapper.toDTO(genreRepository.getByName(name));
+    public Genre getByName(String name) {
+        return genreRepository.getByName(name);
     }
 }

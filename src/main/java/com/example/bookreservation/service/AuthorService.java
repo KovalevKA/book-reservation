@@ -15,8 +15,9 @@ public class AuthorService extends AbstractServiceImpl<Author, AuthorDTO, Author
     @Autowired
     private AuthorMapper authorMapper;
 
-    public AuthorDTO getByName(String name) {
-        return authorMapper.toDTO(authorRepository.getByName(name));
+    @Override
+    public Author getByName(String name) {
+        return authorRepository.getByName(name);
     }
 
 }

@@ -33,11 +33,6 @@ public class AbstractServiceImpl<Entity extends AbstractEntity, DTO extends Abst
     }
 
     @Override
-    public DTO getByName(String name) {
-        return null;
-    }
-
-    @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
     }

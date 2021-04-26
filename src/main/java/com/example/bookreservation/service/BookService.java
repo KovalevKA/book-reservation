@@ -1,6 +1,6 @@
 package com.example.bookreservation.service;
 
-import com.example.bookreservation.dto.*;
+import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.mapper.BookMapper;
 import com.example.bookreservation.repository.BookRepository;
@@ -8,10 +8,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Field;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class BookService extends AbstractServiceImpl<Book, BookDTO, BookRepository, BookMapper> {
@@ -22,43 +21,24 @@ public class BookService extends AbstractServiceImpl<Book, BookDTO, BookReposito
     private BookRepository bookRepository;
     @Autowired
     private BookMapper bookMapper;
-    @Autowired
-    private AuthorService authorService;
-    @Autowired
-    private GenreService genreService;
-    @Autowired
-    private TranslatorService translatorService;
 
-
+    @Transactional
     public BookDTO create(String data) throws JsonProcessingException {
-        Book book = bookRepository.save(new Book());
         BookDTO bookDTO = objectMapper.readValue(data, BookDTO.class);
-        bookDTO.setId(book.getId());
-        bookDTO.setAuthors((Set<AuthorDTO>) getIdForNestedRecords(bookDTO.getAuthors(), authorService));
-        bookDTO.setGenres((Set<GenreDTO>) getIdForNestedRecords(bookDTO.getGenres(), genreService));
-        bookDTO.setTranslators((Set<TranslatorDTO>) getIdForNestedRecords(bookDTO.getTranslators(), translatorService));
-        book = bookMapper.toEntity(bookDTO);
-        return bookMapper.toDTO(bookRepository.save(book));
+        return bookMapper.toDTO(bookRepository.saveAndFlush(bookMapper.toEntity(bookDTO)));
+    }
+
+    /**
+     * TODO : ''
+     * */
+    public BookDTO editById(Long id, String data) throws JsonProcessingException, IllegalAccessException {
+        //Book book = bookRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+        BookDTO bookDTO = objectMapper.readValue(data, BookDTO.class);
+        throw new IllegalAccessException("Don't work now");
     }
 
     public List<BookDTO> getFreeBooks() {
         return bookMapper.toDTOs(bookRepository.getAllFreeBooks());
     }
 
-    private Set<?> getIdForNestedRecords(Set<? extends AbstractDTO> dataList, AbstractService service) {
-        dataList.forEach(data -> {
-            Long id = 0L;
-            try {
-                Field field = data.getClass().getDeclaredField("name");
-                field.setAccessible(true);
-                id = service.getByName((String) field.get(data)).getId();
-                field.setAccessible(false);
-            } catch (Exception e) {
-                id = service.create(data).getId();
-            } finally {
-                data.setId(id);
-            }
-        });
-        return dataList;
-    }
 }

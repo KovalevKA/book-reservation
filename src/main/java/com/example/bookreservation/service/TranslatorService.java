@@ -11,12 +11,10 @@ import org.springframework.stereotype.Service;
 public class TranslatorService extends AbstractServiceImpl<Translator, TranslatorDTO, TranslatorRepository, TranslatorMapper> {
 
     @Autowired
-    private TranslatorMapper translatorMapper;
-    @Autowired
     private TranslatorRepository translatorRepository;
 
-    public TranslatorDTO getByName(String name) {
-        return translatorMapper.toDTO(translatorRepository.getByName(name));
+    public Translator getByName(String name) {
+        return translatorRepository.getByName(name);
     }
 
 }
