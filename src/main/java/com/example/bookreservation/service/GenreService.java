@@ -13,6 +13,7 @@ public class GenreService extends AbstractServiceImpl<Genre, GenreDTO, GenreRepo
     @Autowired
     private GenreRepository genreRepository;
 
+    @Override
     public Genre getByName(String name) {
         return genreRepository.getByName(name);
     }

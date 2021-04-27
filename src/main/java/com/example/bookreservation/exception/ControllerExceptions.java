@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.persistence.EntityNotFoundException;
+import java.text.ParseException;
 
 @ControllerAdvice
 public class ControllerExceptions {
@@ -59,10 +60,18 @@ public class ControllerExceptions {
     }
 
     @ExceptionHandler
-    public ResponseEntity<ErrorMessage> illegalAccessException (IllegalAccessException e){
+    public ResponseEntity<ErrorMessage> illegalAccessException(IllegalAccessException e) {
         return new ResponseEntity<>(
                 new ErrorMessage(e.getMessage() == null ? "Error access" : e.getMessage())
                 , HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorMessage> parseException(ParseException e) {
+        return new ResponseEntity<>(
+                new ErrorMessage(e.getMessage() == null ? "Error convert" : e.getMessage()),
+                HttpStatus.BAD_REQUEST
+        );
     }
 
     @Data

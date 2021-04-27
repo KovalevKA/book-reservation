@@ -6,10 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -30,7 +27,7 @@ public class Book extends AbstractEntity {
     private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
-    private List<Reserv> reservList;
+    private List<Reserv> reservList = new ArrayList<>();
 
     @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Author> authorList = new HashSet<>();
@@ -51,6 +48,10 @@ public class Book extends AbstractEntity {
 
     public void addTranslators(Set<Translator> translators) {
         this.translatorList.addAll(translators);
+    }
+
+    public void addReserv (Reserv reserv){
+        this.reservList.add(reserv);
     }
 
     @Override

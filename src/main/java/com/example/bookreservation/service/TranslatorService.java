@@ -13,6 +13,7 @@ public class TranslatorService extends AbstractServiceImpl<Translator, Translato
     @Autowired
     private TranslatorRepository translatorRepository;
 
+    @Override
     public Translator getByName(String name) {
         return translatorRepository.getByName(name);
     }

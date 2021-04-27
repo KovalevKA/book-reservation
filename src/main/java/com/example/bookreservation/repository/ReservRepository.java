@@ -13,7 +13,12 @@ public interface ReservRepository extends JpaRepository<Reserv, Long> {
     int getCountReservedBookByClientId(@Param("id") long id);
 */
 
-    @Query("SELECT r FROM Reserv r WHERE r.client.id = :id AND r.reservationDateCancel >= CURRENT_DATE")
+    @Query("SELECT r FROM Reserv r WHERE r.client.id = :id AND r.reservationDateCancel > CURRENT_DATE")
     List<Reserv> getReservationClientListById(@Param("id") Long id);
+
+    @Query("SELECT r FROM Reserv r WHERE " +
+            "r.reservationDateCancel > CURRENT_DATE AND " +
+            "r.id IN :ids")
+    List<Reserv> getReservByIds(@Param("ids") List<Long> ids);
 
 }

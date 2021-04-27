@@ -29,7 +29,7 @@ public class BookService extends AbstractServiceImpl<Book, BookDTO, BookReposito
     }
 
     /**
-     * TODO : ''
+     * TODO : Организовать изменение записи
      * */
     public BookDTO editById(Long id, String data) throws JsonProcessingException, IllegalAccessException {
         //Book book = bookRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());

@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,5 +18,9 @@ public class Client extends AbstractEntity {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
-    private List<Reserv> reservList;
+    private List<Reserv> reservList = new ArrayList<>();
+
+    public void addReserv (Reserv reserv){
+        this.reservList.add(reserv);
+    }
 }
