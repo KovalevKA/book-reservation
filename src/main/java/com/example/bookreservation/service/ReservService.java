@@ -19,7 +19,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
-public class ReservService extends AbstractServiceImpl<Reserv, ReservDTO, ReservRepository, ReservMapper> {
+public class ReservService
+        extends AbstractServiceImpl<Reserv, ReservDTO, ReservRepository, ReservMapper> {
 
     @Value("${books.forClient.count}")
     private Integer booksCountForClient;
@@ -36,9 +37,11 @@ public class ReservService extends AbstractServiceImpl<Reserv, ReservDTO, Reserv
     public List<ReservDTO> getReservationClientListById(Long id) {
         return reservMapper.toDTOs(reservRepository.getReservationClientListById(id));
     }
-/**
- * TODO : Описать действия по выводу инфо о закрытии резерва книг
- * */
+
+    public List<ReservDTO> checkReservedBooksByBookId(List<Long> ids) {
+        return reservMapper.toDTOs(reservRepository.getReservsByBookIds(ids));
+    }
+
     public List<ReservDTO> make(Long id, List<Long> bookIds, Date dateTo) {
 
         Integer count = reservRepository.getReservationClientListById(id).size();
@@ -47,16 +50,13 @@ public class ReservService extends AbstractServiceImpl<Reserv, ReservDTO, Reserv
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Client not found"));
         List<Book> books = bookRepository.getFreeBooksByListId(bookIds);
-        /*
-
-        */
         List<Reserv> reservs = new ArrayList<>();
         books.forEach(book -> reservs.add(new Reserv(client, book, dateTo)));
         reservs.forEach(reserv -> reservRepository.save(reserv));
         return reservMapper.toDTOs(reservs);
     }
 
-    public Integer cancel (Long id, List<Long> listReservId){
+    public Integer cancel(Long id, List<Long> listReservId) {
         List<Reserv> reservs = reservRepository.getReservByIds(listReservId);
         if (reservs.isEmpty()) throw new IllegalArgumentException("No reservations found");
         AtomicInteger count = new AtomicInteger();

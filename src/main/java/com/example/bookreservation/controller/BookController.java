@@ -17,19 +17,15 @@ public class BookController extends ControllerExceptions {
     @Autowired
     private BookService bookService;
 
-    /**
-     * TODO : Мегавыборка по книгам
-     * */
     @PostMapping("search")
     public ResponseEntity<List<BookDTO>> getBooksWhithParams(
-            @RequestParam(name = "isReserved", defaultValue = "true", required = false) boolean isReserved,
-            @RequestParam(name = "isFree", defaultValue = "true", required = false) boolean isFree,
+            @RequestParam(name = "isReserved", defaultValue = "false", required = false) boolean isReserved,
             @RequestParam(name = "bookName", defaultValue = "", required = false) String bookName,
             @RequestParam(name = "listGenreId", defaultValue = "", required = false) List<Long> listGenreId,
             @RequestParam(name = "listAuthorId", defaultValue = "", required = false) List<Long> listAuthorId,
             @RequestParam(name = "listTranslatorsId", defaultValue = "", required = false) List<Long> listTranslatorsId
     ) {
-        return ResponseEntity.ok(bookService.getFreeBooks());
+        return ResponseEntity.ok(bookService.finfBooksByParams(isReserved, bookName.toUpperCase(), listGenreId, listAuthorId, listTranslatorsId));
     }
 
     @PostMapping()
@@ -44,7 +40,7 @@ public class BookController extends ControllerExceptions {
 
     /**
      * TODO : Проверить
-     * */
+     */
     @PostMapping("{id}")
     public ResponseEntity<BookDTO> editBook(@PathVariable("id") Long id, @RequestBody String data) throws JsonProcessingException, IllegalAccessException {
         return ResponseEntity.ok(bookService.editById(id, data));
@@ -52,7 +48,7 @@ public class BookController extends ControllerExceptions {
 
     /**
      * TODO : Проверить
-     * */
+     */
     @DeleteMapping("{id}")
     public ResponseEntity deleteBook(@PathVariable Long id) {
         bookService.deleteById(id);

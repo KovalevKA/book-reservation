@@ -26,6 +26,12 @@ public class GenreController extends ControllerExceptions {
         return ResponseEntity.ok(genreService.create(genreDTO));
     }
 
+    @GetMapping("find-name-like")
+    public ResponseEntity<List<GenreDTO>> getGenresByNameLike (
+            @RequestParam (name = "name") String name){
+        return ResponseEntity.ok(genreService.getGenresByNameLike(name.toUpperCase()));
+    }
+
     @PatchMapping("{id}")
     public ResponseEntity<GenreDTO> editGenre(@PathVariable Long id, @RequestBody GenreDTO genreDTO) {
         return ResponseEntity.ok(genreService.editById(id, genreDTO));

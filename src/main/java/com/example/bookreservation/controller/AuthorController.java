@@ -21,6 +21,12 @@ public class AuthorController extends ControllerExceptions {
         return ResponseEntity.ok(authorService.getAll());
     }
 
+    @GetMapping("find-name-like")
+    public ResponseEntity<List<AuthorDTO>> getAuthorByNameLike (
+            @RequestParam (name = "name") String name){
+        return ResponseEntity.ok(authorService.getAuthorByNameLike(name.toUpperCase()));
+    }
+
     @PostMapping
     public ResponseEntity<AuthorDTO> addAuthor(@RequestBody AuthorDTO author) {
         return ResponseEntity.ok(authorService.create(author));

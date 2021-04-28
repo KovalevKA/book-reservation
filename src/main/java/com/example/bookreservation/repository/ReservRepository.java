@@ -9,10 +9,6 @@ import java.util.List;
 
 public interface ReservRepository extends JpaRepository<Reserv, Long> {
 
-    /*@Query("SELECT COUNT(Reserv.id) FROM Reserv WHERE Reserv.client.id = :id AND Reserv.reservationDateCancel > CURRENT_DATE")
-    int getCountReservedBookByClientId(@Param("id") long id);
-*/
-
     @Query("SELECT r FROM Reserv r WHERE r.client.id = :id AND r.reservationDateCancel > CURRENT_DATE")
     List<Reserv> getReservationClientListById(@Param("id") Long id);
 
@@ -21,4 +17,8 @@ public interface ReservRepository extends JpaRepository<Reserv, Long> {
             "r.id IN :ids")
     List<Reserv> getReservByIds(@Param("ids") List<Long> ids);
 
+    @Query("SELECT r FROM Reserv r " +
+            "WHERE r.reservationDateCancel >= CURRENT_DATE " +
+            "AND r.book.id IN :ids")
+    List<Reserv> getReservsByBookIds (@Param("ids") List<Long> ids);
 }

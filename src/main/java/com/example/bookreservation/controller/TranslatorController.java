@@ -26,6 +26,12 @@ public class TranslatorController extends ControllerExceptions {
         return ResponseEntity.ok(translatorService.create(translatorDTO));
     }
 
+    @GetMapping("find-name-like")
+    public ResponseEntity<List<TranslatorDTO>> getTranslatorsByNameLike (
+            @RequestParam (name = "name") String name){
+        return ResponseEntity.ok(translatorService.getTranslatorsByNameLike(name.toUpperCase()));
+    }
+
     @PatchMapping("{id}")
     public ResponseEntity<TranslatorDTO> editTranslator(
             @PathVariable Long id,

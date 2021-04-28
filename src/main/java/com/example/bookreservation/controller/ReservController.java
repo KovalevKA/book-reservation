@@ -24,8 +24,15 @@ public class ReservController extends ControllerExceptions {
     private ReservService reservService;
 
     @GetMapping()
-    public ResponseEntity<List<ReservDTO>> getListReservByClientId(@RequestParam(name = "clientId") Long clientId) {
+    public ResponseEntity<List<ReservDTO>> getListReservByClientId(
+            @RequestParam(name = "clientId") Long clientId) {
         return ResponseEntity.ok(reservService.getReservationClientListById(clientId));
+    }
+
+    @PostMapping("check")
+    public ResponseEntity<List<ReservDTO>> checkReservedBooksByBookId(
+            @RequestParam(name = "listBooksId") List<Long> listBooksId) {
+        return ResponseEntity.ok(reservService.checkReservedBooksByBookId(listBooksId));
     }
 
     @PostMapping("make")
