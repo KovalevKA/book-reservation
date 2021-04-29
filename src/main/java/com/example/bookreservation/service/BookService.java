@@ -51,12 +51,13 @@ public class BookService extends AbstractServiceImpl<Book, BookDTO, BookReposito
     public List<BookDTO> finfBooksByParams(Boolean isReserved, String bookName, List<Long> listGenreId,
                                            List<Long> listAuthorId, List<Long> listTranslatorsId) {
 
-        listAuthorId = listAuthorId.isEmpty() ? authorRepository.getAllIdAuthors() : listAuthorId ;
+        /*listAuthorId = listAuthorId.isEmpty() ? authorRepository.getAllIdAuthors() : listAuthorId ;
         listGenreId = listGenreId.isEmpty() ? genreRepository.geAllIdGenres() : listGenreId;
         listTranslatorsId = listTranslatorsId.isEmpty() ? translatorRepository.getAllIdTranslators() : listTranslatorsId;
         List<Book> books = bookRepository.getFreeBooksByParams(bookName, listAuthorId, listGenreId, listTranslatorsId);
         if (isReserved) books.addAll(bookRepository.getReservedBooksByParams(bookName, listAuthorId, listGenreId, listTranslatorsId));
-        return bookMapper.toDTOs(books);
+        return bookMapper.toDTOs(books);*/
+        return null;
     }
 
     public List<BookDTO> getFreeBooks() {
