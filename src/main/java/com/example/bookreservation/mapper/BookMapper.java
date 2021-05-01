@@ -7,7 +7,6 @@ import com.example.bookreservation.service.AbstractService;
 import com.example.bookreservation.service.AuthorService;
 import com.example.bookreservation.service.GenreService;
 import com.example.bookreservation.service.TranslatorService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +17,6 @@ import java.util.Set;
 @Component
 public class BookMapper implements AbstractMapper<Book, BookDTO> {
 
-    private ModelMapper mapper = new ModelMapper();
     private AuthorMapper authorMapper = new AuthorMapper();
     private GenreMapper genreMapper = new GenreMapper();
     private TranslatorMapper translatorMapper = new TranslatorMapper();
@@ -45,13 +43,22 @@ public class BookMapper implements AbstractMapper<Book, BookDTO> {
         Book book = mapper.map(bookDTO, Book.class);
 
         Set<Author> authors = (Set<Author>) getNestedRecords(bookDTO.getAuthors(), authorService);
-        authors.forEach(author -> author.addBook(book));
+        authors.forEach(author -> {
+            author.addBook(book);
+            book.addAuthor(author);
+        });
 
         Set<Genre> genres = (Set<Genre>) getNestedRecords(bookDTO.getGenres(), genreService);
-        genres.forEach(genre -> genre.addBook(book));
+        genres.forEach(genre -> {
+            genre.addBook(book);
+            book.addGenre(genre);
+        });
 
         Set<Translator> translators = (Set<Translator>) getNestedRecords(bookDTO.getTranslators(), translatorService);
-        translators.forEach(translator -> translator.addBook(book));
+        translators.forEach(translator -> {
+            translator.addBook(book);
+            book.addTranslator(translator);
+        });
 
         return book;
     }
@@ -63,12 +70,12 @@ public class BookMapper implements AbstractMapper<Book, BookDTO> {
             try {
                 Field field = data.getClass().getDeclaredField("name");
                 field.setAccessible(true);
-                if (service.getByName((String) field.get(data)) == null){
+                if (service.getByName((String) field.get(data)) == null) {
                     data.setId(service.create(data).getId());
                 }
                 outSet.add(service.getByName((String) field.get(data)));
                 field.setAccessible(false);
-            }catch (IllegalAccessException e){
+            } catch (IllegalAccessException e) {
                 new IllegalArgumentException("No access to field");
             } catch (NoSuchFieldException e) {
                 new NoSuchFieldException("No field available");

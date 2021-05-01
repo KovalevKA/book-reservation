@@ -1,19 +1,17 @@
 package com.example.bookreservation.controller;
 
 import com.example.bookreservation.dto.BookDTO;
-import com.example.bookreservation.exception.ControllerExceptions;
 import com.example.bookreservation.service.BookService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("books")
-public class BookController extends ControllerExceptions {
+public class BookController {
 
     @Autowired
     private BookService bookService;
@@ -39,17 +37,11 @@ public class BookController extends ControllerExceptions {
         return ResponseEntity.ok(bookService.getById(id));
     }
 
-    /**
-     * TODO : Проверить
-     */
     @PostMapping("{id}")
     public ResponseEntity<BookDTO> editBook(@PathVariable("id") Long id, @RequestBody String data) throws JsonProcessingException, IllegalAccessException {
         return ResponseEntity.ok(bookService.editById(id, data));
     }
 
-    /**
-     * TODO : Проверить
-     */
     @DeleteMapping("{id}")
     public ResponseEntity deleteBook(@PathVariable Long id) {
         bookService.deleteById(id);

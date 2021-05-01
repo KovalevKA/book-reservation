@@ -13,7 +13,7 @@ public interface GenreRepository extends JpaRepository<Genre, Long> {
     Genre getByName(@Param("name") String name);
 
     @Query("SELECT g FROM Genre g WHERE UPPER(g.name) LIKE %:name%")
-    List<Genre> getGenresByNameLike (@Param("name") String name);
+    List<Genre> getGenresByNameLike(@Param("name") String name);
 
     @Query("SELECT g.id FROM Genre g")
     List<Long> geAllIdGenres();

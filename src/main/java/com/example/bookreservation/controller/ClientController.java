@@ -1,7 +1,6 @@
 package com.example.bookreservation.controller;
 
 import com.example.bookreservation.dto.ClientDTO;
-import com.example.bookreservation.exception.ControllerExceptions;
 import com.example.bookreservation.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("clients")
-public class ClientController extends ControllerExceptions {
+public class ClientController {
 
     @Autowired
     private ClientService clientService;

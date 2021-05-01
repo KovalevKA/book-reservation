@@ -2,11 +2,9 @@ package com.example.bookreservation.service;
 
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.entity.Book;
+import com.example.bookreservation.mapper.AbstractMapper;
 import com.example.bookreservation.mapper.BookMapper;
-import com.example.bookreservation.repository.AuthorRepository;
 import com.example.bookreservation.repository.BookRepository;
-import com.example.bookreservation.repository.GenreRepository;
-import com.example.bookreservation.repository.TranslatorRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +22,7 @@ public class BookService extends AbstractServiceImpl<Book, BookDTO, BookReposito
     @Autowired
     private BookRepository bookRepository;
     @Autowired
-    private BookMapper bookMapper;
-    @Autowired
-    private AuthorRepository authorRepository;
-    @Autowired
-    private GenreRepository genreRepository;
-    @Autowired
-    private TranslatorRepository translatorRepository;
+    private AbstractMapper<Book, BookDTO> bookMapper;
 
     @Transactional
     public BookDTO create(String data) throws JsonProcessingException {
@@ -50,13 +42,6 @@ public class BookService extends AbstractServiceImpl<Book, BookDTO, BookReposito
 
     public List<BookDTO> finfBooksByParams(Boolean isReserved, String bookName, List<Long> listGenreId,
                                            List<Long> listAuthorId, List<Long> listTranslatorsId) {
-
-        /*listAuthorId = listAuthorId.isEmpty() ? authorRepository.getAllIdAuthors() : listAuthorId ;
-        listGenreId = listGenreId.isEmpty() ? genreRepository.geAllIdGenres() : listGenreId;
-        listTranslatorsId = listTranslatorsId.isEmpty() ? translatorRepository.getAllIdTranslators() : listTranslatorsId;
-        List<Book> books = bookRepository.getFreeBooksByParams(bookName, listAuthorId, listGenreId, listTranslatorsId);
-        if (isReserved) books.addAll(bookRepository.getReservedBooksByParams(bookName, listAuthorId, listGenreId, listTranslatorsId));
-        return bookMapper.toDTOs(books);*/
         return null;
     }
 

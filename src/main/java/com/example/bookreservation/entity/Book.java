@@ -38,19 +38,19 @@ public class Book extends AbstractEntity {
     @ManyToMany(mappedBy = "bookList", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Translator> translatorList = new HashSet<>();
 
-    public void addAuthors(Set<Author> authors) {
-        this.authorList.addAll(authors);
+    public void addAuthor(Author author) {
+        this.authorList.add(author);
     }
 
-    public void addGenres(Set<Genre> genres) {
-        this.genreList.addAll(genres);
+    public void addGenre(Genre genre) {
+        this.genreList.add(genre);
     }
 
-    public void addTranslators(Set<Translator> translators) {
-        this.translatorList.addAll(translators);
+    public void addTranslator(Translator translator) {
+        this.translatorList.add(translator);
     }
 
-    public void addReserv (Reserv reserv){
+    public void addReserv(Reserv reserv) {
         this.reservList.add(reserv);
     }
 

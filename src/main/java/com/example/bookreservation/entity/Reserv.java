@@ -26,7 +26,7 @@ public class Reserv extends AbstractEntity {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    public Reserv (Client client, Book book, Date reservationDateCancel){
+    public Reserv(Client client, Book book, Date reservationDateCancel) {
         this.book = book;
         book.addReserv(this);
         this.client = client;

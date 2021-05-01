@@ -4,6 +4,7 @@ import com.example.bookreservation.dto.ReservDTO;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.entity.Client;
 import com.example.bookreservation.entity.Reserv;
+import com.example.bookreservation.mapper.AbstractMapper;
 import com.example.bookreservation.mapper.ReservMapper;
 import com.example.bookreservation.repository.BookRepository;
 import com.example.bookreservation.repository.ClientRepository;
@@ -28,7 +29,7 @@ public class ReservService
     @Autowired
     private ReservRepository reservRepository;
     @Autowired
-    private ReservMapper reservMapper;
+    private AbstractMapper<Reserv, ReservDTO> reservMapper;
     @Autowired
     private BookRepository bookRepository;
     @Autowired

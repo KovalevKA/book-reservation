@@ -12,7 +12,7 @@ public interface AbstractService<Entity extends AbstractEntity, DTO extends Abst
 
     DTO getById(Long id);
 
-    default Entity getByName(String name){
+    default Entity getByName(String name) {
         throw new EntityExistsException("Can't found by name");
     }
 
