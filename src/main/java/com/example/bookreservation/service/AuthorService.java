@@ -2,6 +2,7 @@ package com.example.bookreservation.service;
 
 import com.example.bookreservation.dto.AuthorDTO;
 import com.example.bookreservation.entity.Author;
+import com.example.bookreservation.mapper.AbstractMapper;
 import com.example.bookreservation.mapper.AuthorMapper;
 import com.example.bookreservation.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class AuthorService extends AbstractServiceImpl<Author, AuthorDTO, Author
     @Autowired
     private AuthorRepository authorRepository;
     @Autowired
-    private AuthorMapper authorMapper;
+    private AbstractMapper<Author, AuthorDTO> authorMapper;
 
     public List<AuthorDTO> getAuthorByNameLike(String name) {
         return authorMapper.toDTOs(authorRepository.getAuthorByNameLike(name));
@@ -23,7 +24,7 @@ public class AuthorService extends AbstractServiceImpl<Author, AuthorDTO, Author
 
     @Override
     public Author getByName(String name) {
-        return authorRepository.getByName(name);
+        return authorRepository.findByNameIgnoreCase(name);
     }
 
 }

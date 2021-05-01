@@ -2,13 +2,10 @@ package com.example.bookreservation.mapper;
 
 import com.example.bookreservation.dto.ClientDTO;
 import com.example.bookreservation.entity.Client;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ClientMapper implements AbstractMapper<Client, ClientDTO> {
-
-    private ModelMapper mapper = new ModelMapper();
 
     @Override
     public ClientDTO toDTO(Client client) {

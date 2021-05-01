@@ -1,7 +1,6 @@
 package com.example.bookreservation.controller;
 
 import com.example.bookreservation.dto.ReservDTO;
-import com.example.bookreservation.exception.ControllerExceptions;
 import com.example.bookreservation.service.ReservService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("reservation")
-public class ReservController extends ControllerExceptions {
+public class ReservController {
 
     @Value("${books.forClient.count}")
     private Integer booksCountForClient;

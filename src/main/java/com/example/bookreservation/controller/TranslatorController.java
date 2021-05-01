@@ -1,7 +1,6 @@
 package com.example.bookreservation.controller;
 
 import com.example.bookreservation.dto.TranslatorDTO;
-import com.example.bookreservation.exception.ControllerExceptions;
 import com.example.bookreservation.service.TranslatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("translators")
-public class TranslatorController extends ControllerExceptions {
+public class TranslatorController {
 
     @Autowired
     private TranslatorService translatorService;
@@ -27,8 +26,8 @@ public class TranslatorController extends ControllerExceptions {
     }
 
     @GetMapping("find-name-like")
-    public ResponseEntity<List<TranslatorDTO>> getTranslatorsByNameLike (
-            @RequestParam (name = "name") String name){
+    public ResponseEntity<List<TranslatorDTO>> getTranslatorsByNameLike(
+            @RequestParam(name = "name") String name) {
         return ResponseEntity.ok(translatorService.getTranslatorsByNameLike(name.toUpperCase()));
     }
 

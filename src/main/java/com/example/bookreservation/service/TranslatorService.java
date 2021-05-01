@@ -2,6 +2,7 @@ package com.example.bookreservation.service;
 
 import com.example.bookreservation.dto.TranslatorDTO;
 import com.example.bookreservation.entity.Translator;
+import com.example.bookreservation.mapper.AbstractMapper;
 import com.example.bookreservation.mapper.TranslatorMapper;
 import com.example.bookreservation.repository.TranslatorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class TranslatorService extends AbstractServiceImpl<Translator, Translato
     @Autowired
     private TranslatorRepository translatorRepository;
     @Autowired
-    private TranslatorMapper translatorMapper;
+    private AbstractMapper<Translator, TranslatorDTO> translatorMapper;
 
     public List<TranslatorDTO> getTranslatorsByNameLike(String name) {
         return translatorMapper.toDTOs(translatorRepository.getTranslatorsByNameLike(name));

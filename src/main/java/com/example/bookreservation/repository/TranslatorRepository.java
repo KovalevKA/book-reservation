@@ -13,8 +13,8 @@ public interface TranslatorRepository extends JpaRepository<Translator, Long> {
     Translator getByName(@Param("name") String name);
 
     @Query("SELECT t FROM Translator t WHERE UPPER(t.name) LIKE %:name%")
-    List<Translator> getTranslatorsByNameLike (@Param("name") String name);
+    List<Translator> getTranslatorsByNameLike(@Param("name") String name);
 
     @Query("SELECT t.id FROM Translator t")
-    List<Long> getAllIdTranslators ();
+    List<Long> getAllIdTranslators();
 }

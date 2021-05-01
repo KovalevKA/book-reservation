@@ -1,5 +1,7 @@
 package com.example.bookreservation.mapper;
 
+import org.modelmapper.ModelMapper;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -7,6 +9,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public interface AbstractMapper<Entity, DTO> {
+
+    ModelMapper mapper = new ModelMapper();
 
     DTO toDTO(Entity entity);
 

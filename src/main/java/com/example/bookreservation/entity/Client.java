@@ -20,7 +20,7 @@ public class Client extends AbstractEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     private List<Reserv> reservList = new ArrayList<>();
 
-    public void addReserv (Reserv reserv){
+    public void addReserv(Reserv reserv) {
         this.reservList.add(reserv);
     }
 }

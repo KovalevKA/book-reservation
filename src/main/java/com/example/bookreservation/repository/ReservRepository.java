@@ -20,5 +20,5 @@ public interface ReservRepository extends JpaRepository<Reserv, Long> {
     @Query("SELECT r FROM Reserv r " +
             "WHERE r.reservationDateCancel >= CURRENT_DATE " +
             "AND r.book.id IN :ids")
-    List<Reserv> getReservsByBookIds (@Param("ids") List<Long> ids);
+    List<Reserv> getReservsByBookIds(@Param("ids") List<Long> ids);
 }

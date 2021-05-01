@@ -1,7 +1,6 @@
 package com.example.bookreservation.controller;
 
 import com.example.bookreservation.dto.AuthorDTO;
-import com.example.bookreservation.exception.ControllerExceptions;
 import com.example.bookreservation.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("authors")
-public class AuthorController extends ControllerExceptions {
+public class AuthorController {
 
     @Autowired
     private AuthorService authorService;
@@ -22,9 +21,9 @@ public class AuthorController extends ControllerExceptions {
     }
 
     @GetMapping("find-name-like")
-    public ResponseEntity<List<AuthorDTO>> getAuthorByNameLike (
-            @RequestParam (name = "name") String name){
-        return ResponseEntity.ok(authorService.getAuthorByNameLike(name.toUpperCase()));
+    public ResponseEntity<List<AuthorDTO>> getAuthorByNameLike(
+            @RequestParam(name = "name") String name) {
+        return ResponseEntity.ok(authorService.getAuthorByNameLike(name));
     }
 
     @PostMapping

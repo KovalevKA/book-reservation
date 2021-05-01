@@ -1,6 +1,5 @@
 package com.example.bookreservation.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,12 +30,10 @@ public class Genre extends AbstractEntity {
 
     public void addBook(Book book) {
         this.bookList.add(book);
-        book.getGenreList().add(this);
     }
 
     public void removeBook(Book book) {
         this.bookList.remove(book);
-        book.getGenreList().remove(this);
     }
 
     @Override
