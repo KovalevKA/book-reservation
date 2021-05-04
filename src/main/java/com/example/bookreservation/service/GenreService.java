@@ -19,11 +19,11 @@ public class GenreService extends AbstractServiceImpl<Genre, GenreDTO, GenreRepo
     private AbstractMapper<Genre, GenreDTO> genreMapper;
 
     public List<GenreDTO> getGenresByNameLike(String name) {
-        return genreMapper.toDTOs(genreRepository.getGenresByNameLike(name));
+        return genreMapper.toDTOs(genreRepository.findGenreByNameContainsIgnoreCase(name));
     }
 
     @Override
     public Genre getByName(String name) {
-        return genreRepository.getByName(name);
+        return genreRepository.findGenreByNameIgnoreCase(name);
     }
 }

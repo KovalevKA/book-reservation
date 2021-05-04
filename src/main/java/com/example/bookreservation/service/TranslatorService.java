@@ -19,11 +19,11 @@ public class TranslatorService extends AbstractServiceImpl<Translator, Translato
     private AbstractMapper<Translator, TranslatorDTO> translatorMapper;
 
     public List<TranslatorDTO> getTranslatorsByNameLike(String name) {
-        return translatorMapper.toDTOs(translatorRepository.getTranslatorsByNameLike(name));
+        return translatorMapper.toDTOs(translatorRepository.findTranslatorsByNameContainsIgnoreCase(name));
     }
 
     @Override
     public Translator getByName(String name) {
-        return translatorRepository.getByName(name);
+        return translatorRepository.findTranslatorByName(name);
     }
 }

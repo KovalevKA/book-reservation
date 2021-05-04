@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,29 +38,38 @@ public class ReservService
     private ClientRepository clientRepository;
 
     public List<ReservDTO> getReservationClientListById(Long id) {
-        return reservMapper.toDTOs(reservRepository.getReservationClientListById(id));
+        return reservMapper.toDTOs(reservRepository.findReservsByClientIdAndAndReservationDateCancelGreaterThan(id, new Date()));
     }
 
     public List<ReservDTO> checkReservedBooksByBookId(List<Long> ids) {
-        return reservMapper.toDTOs(reservRepository.getReservsByBookIds(ids));
+        return reservMapper.toDTOs(reservRepository.findReservsByBookIdInAndReservationDateCancelGreaterThanEqual(ids, new Date()));
     }
 
-    public List<ReservDTO> make(Long id, List<Long> bookIds, Date dateTo) {
-
-        Integer count = reservRepository.getReservationClientListById(id).size();
-        if ((count + bookIds.size()) > booksCountForClient)
-            throw new IllegalArgumentException("Too many books. U already have " + count + " books");
+    public List<ReservDTO> make(Long id, List<Long> bookIds, String dateTo) {
+        if (bookIds.isEmpty())
+            throw new IllegalArgumentException("No book to add");
+        if (bookIds.size() > booksCountForClient)
+            throw new IllegalArgumentException("Books too match");
+        Date date = null;
+        try {
+            date = new SimpleDateFormat("dd.MM.yyyy").parse(dateTo);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (date.compareTo(new Date()) <= 0)
+            throw new IllegalArgumentException("Date isn't correct");
         Client client = clientRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Client not found"));
         List<Book> books = bookRepository.getFreeBooksByListId(bookIds);
         List<Reserv> reservs = new ArrayList<>();
-        books.forEach(book -> reservs.add(new Reserv(client, book, dateTo)));
+        Date finalDate = date;
+        books.forEach(book -> reservs.add(new Reserv(client, book, finalDate)));
         reservs.forEach(reserv -> reservRepository.save(reserv));
         return reservMapper.toDTOs(reservs);
     }
 
     public Integer cancel(Long id, List<Long> listReservId) {
-        List<Reserv> reservs = reservRepository.getReservByIds(listReservId);
+        List<Reserv> reservs = reservRepository.findReservsByIdInAndReservationDateCancelGreaterThanEqual(listReservId, new Date());
         if (reservs.isEmpty()) throw new IllegalArgumentException("No reservations found");
         AtomicInteger count = new AtomicInteger();
         reservs.forEach(reserv -> {
