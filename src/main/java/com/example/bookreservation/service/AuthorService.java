@@ -19,7 +19,7 @@ public class AuthorService extends AbstractServiceImpl<Author, AuthorDTO, Author
     private AbstractMapper<Author, AuthorDTO> authorMapper;
 
     public List<AuthorDTO> getAuthorByNameLike(String name) {
-        return authorMapper.toDTOs(authorRepository.getAuthorByNameLike(name));
+        return authorMapper.toDTOs(authorRepository.findAuthorsByNameContainsIgnoreCase(name));
     }
 
     @Override
