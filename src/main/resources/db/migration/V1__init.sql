@@ -1,34 +1,35 @@
-CREATE TABLE "author" (
+CREATE SCHEMA IF NOT EXISTS "book-reservation";
+CREATE TABLE IF NOT EXISTS "author" (
                           "author_id" BIGSERIAL PRIMARY KEY,
                           "name" varchar
 );
 
-CREATE TABLE "author_book" (
+CREATE TABLE IF NOT EXISTS "author_book" (
                                "author_id" BIGINT,
                                "book_id" BIGINT
 );
 
-CREATE TABLE "translator" (
+CREATE TABLE IF NOT EXISTS "translator" (
                               "translator_id" BIGSERIAL PRIMARY KEY,
                               "name" varchar
 );
 
-CREATE TABLE "translator_book" (
+CREATE TABLE IF NOT EXISTS "translator_book" (
                                    "translator_id" BIGINT,
                                    "book_id" BIGINT
 );
 
-CREATE TABLE "genre" (
+CREATE TABLE IF NOT EXISTS "genre" (
                          "genre_id" BIGSERIAL PRIMARY KEY,
                          "name" varchar
 );
 
-CREATE TABLE "genre_book" (
+CREATE TABLE IF NOT EXISTS "genre_book" (
                               "genre_id" BIGINT,
                               "book_id" BIGINT
 );
 
-CREATE TABLE "book" (
+CREATE TABLE IF NOT EXISTS "book" (
                         "book_id" BIGSERIAL PRIMARY KEY,
                         "name" varchar,
                         "publishing_house" varchar,
@@ -36,12 +37,12 @@ CREATE TABLE "book" (
                         "description" text
 );
 
-CREATE TABLE "client" (
+CREATE TABLE IF NOT EXISTS "client" (
                           "client_id" BIGSERIAL PRIMARY KEY,
                           "name" varchar
 );
 
-CREATE TABLE "reserv" (
+CREATE TABLE IF NOT EXISTS "reserv" (
                           "reserv_id" BIGSERIAL PRIMARY KEY,
                           "client_id" BIGINT,
                           "book_id" BIGINT,
