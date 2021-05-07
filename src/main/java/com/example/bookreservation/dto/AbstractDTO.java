@@ -1,13 +1,12 @@
 package com.example.bookreservation.dto;
 
-import lombok.Data;
-
 import javax.persistence.MappedSuperclass;
+import lombok.Data;
 
 @MappedSuperclass
 @Data
 public class AbstractDTO {
 
-    private Long id;
+  private Long id;
 
 }

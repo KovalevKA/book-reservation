@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class ClientDTO extends AbstractDTO {
 
-    private String name;
+  private String name;
 
 }

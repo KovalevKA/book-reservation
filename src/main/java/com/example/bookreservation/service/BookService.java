@@ -3,50 +3,63 @@ package com.example.bookreservation.service;
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.mapper.AbstractMapper;
-import com.example.bookreservation.mapper.BookMapper;
+import com.example.bookreservation.repository.AuthorRepository;
 import com.example.bookreservation.repository.BookRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.bookreservation.repository.GenreRepository;
+import com.example.bookreservation.repository.TranslatorRepository;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
 
 @Service
-public class BookService extends AbstractServiceImpl<Book, BookDTO, BookRepository, BookMapper> {
+public class BookService extends
+    AbstractServiceImpl<Book, BookDTO, BookRepository, AbstractMapper<Book, BookDTO>> {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+  @Autowired
+  private BookRepository bookRepository;
+  @Autowired
+  private AuthorRepository authorRepository;
+  @Autowired
+  private GenreRepository genreRepository;
+  @Autowired
+  private TranslatorRepository translatorRepository;
+  @Autowired
+  private AbstractMapper<Book, BookDTO> bookMapper;
 
-    @Autowired
-    private BookRepository bookRepository;
-    @Autowired
-    private AbstractMapper<Book, BookDTO> bookMapper;
-
-    @Transactional
-    public BookDTO create(String data) throws JsonProcessingException {
-        BookDTO bookDTO = objectMapper.readValue(data, BookDTO.class);
-        return bookMapper.toDTO(bookRepository.saveAndFlush(bookMapper.toEntity(bookDTO)));
+  @Override
+  public BookDTO editById(Long id, BookDTO data) throws EntityNotFoundException {
+    Book book = bookRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
+    if (!data.getName().isEmpty()) {
+      book.setName(data.getName());
     }
-
-    public BookDTO editById(Long id, String data) throws JsonProcessingException {
-        Book book = bookRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
-        BookDTO bookDTO = objectMapper.readValue(data, BookDTO.class);
-        if (!bookDTO.getName().isEmpty()) book.setName(bookDTO.getName());
-        if (!bookDTO.getPublishHouse().isEmpty()) book.setPublishHouse(bookDTO.getPublishHouse());
-        if (bookDTO.getPublishYear() != 0) book.setPublishYear(bookDTO.getPublishYear());
-        if (!bookDTO.getDescription().isEmpty()) book.setDescription(bookDTO.getDescription());
-        return bookMapper.toDTO(bookRepository.saveAndFlush(book));
+    if (!data.getPublishHouse().isEmpty()) {
+      book.setPublishHouse(data.getPublishHouse());
     }
-
-    public List<BookDTO> finfBooksByParams(Boolean isReserved, String bookName, List<Long> listGenreId,
-                                           List<Long> listAuthorId, List<Long> listTranslatorsId) {
-        return null;
+    if (data.getPublishYear() != 0) {
+      book.setPublishYear(data.getPublishYear());
     }
-
-    public List<BookDTO> getFreeBooks() {
-        return bookMapper.toDTOs(bookRepository.getAllFreeBooks());
+    if (!data.getDescription().isEmpty()) {
+      book.setDescription(data.getDescription());
     }
+    return bookMapper.toDTO(bookRepository.saveAndFlush(book));
+  }
 
+  public List<BookDTO> findByParams(Boolean isReserved, String bookName,
+      List<Long> listGenreId, List<Long> listAuthorId, List<Long> listTranslatorsId) {
+    listAuthorId = listAuthorId.size() == 0 ? authorRepository.getAllIds() : listAuthorId;
+    listGenreId = listGenreId.size() == 0 ? genreRepository.getAllIds() : listGenreId;
+    listTranslatorsId =
+        listTranslatorsId.size() == 0 ? translatorRepository.getAllIds() : listTranslatorsId;
+    List<Book> books = bookRepository.getFreeByParams(bookName, listAuthorId, listGenreId,
+        listTranslatorsId, new Date());
+    if (!isReserved) {
+      return bookMapper.toDTOs(books);
+    }
+    List<Book> resBooks = bookRepository.getReservByParams(bookName.toUpperCase(), listAuthorId,
+        listGenreId, listTranslatorsId, new Date());
+    books.addAll(resBooks);
+    return bookMapper.toDTOs(books);
+  }
 }
