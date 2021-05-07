@@ -1,10 +1,14 @@
 package com.example.bookreservation.entity;
 
+import java.util.Date;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -13,25 +17,23 @@ import java.util.Date;
 @Table(name = "reserv")
 public class Reserv extends AbstractEntity {
 
-    @Column(name = "reservation_date")
-    private Date reservationDate;
-    @Column(name = "reservation_date_cancel")
-    private Date reservationDateCancel;
+  @ManyToOne
+  @JoinColumn(name = "client_id")
+  private Client client = new Client();
+  @ManyToOne()
+  @JoinColumn(name = "book_id")
+  private Book book = new Book();
+  @Column(name = "reservation_date")
+  private Date reservationDate = new Date();
+  @Column(name = "reservation_date_cancel")
+  private Date reservationDateCancel = new Date();
 
-    @ManyToOne
-    @JoinColumn(name = "client_id")
-    private Client client;
-
-    @ManyToOne()
-    @JoinColumn(name = "book_id")
-    private Book book;
-
-    public Reserv(Client client, Book book, Date reservationDateCancel) {
-        this.book = book;
-        book.addReserv(this);
-        this.client = client;
-        client.addReserv(this);
-        this.reservationDate = new Date();
-        this.reservationDateCancel = reservationDateCancel;
-    }
+  public Reserv(Client client, Book book, Date reservationDateCancel) {
+    this.book = book;
+    book.addReserv(this);
+    this.client = client;
+    client.addReserv(this);
+    this.reservationDate = new Date();
+    this.reservationDateCancel = reservationDateCancel;
+  }
 }

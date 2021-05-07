@@ -1,4 +1,3 @@
-CREATE SCHEMA IF NOT EXISTS "book-reservation";
 CREATE TABLE IF NOT EXISTS "author" (
                           "author_id" BIGSERIAL PRIMARY KEY,
                           "name" varchar

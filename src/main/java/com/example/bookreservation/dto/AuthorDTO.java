@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class AuthorDTO extends AbstractDTO {
 
-    private String name;
+  private String name;
 
 }
