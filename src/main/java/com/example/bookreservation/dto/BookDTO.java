@@ -13,16 +13,4 @@ public class BookDTO extends AbstractDTO {
   private Set<AuthorDTO> authors;
   private Set<GenreDTO> genres;
   private Set<TranslatorDTO> translators;
-
-  public Set<AuthorDTO> getAuthors() {
-    return authors;
-  }
-
-  public Set<GenreDTO> getGenres() {
-    return genres;
-  }
-
-  public Set<TranslatorDTO> getTranslators() {
-    return translators;
-  }
 }

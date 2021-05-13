@@ -1,6 +1,7 @@
 package com.example.bookreservation.controller;
 
 import com.example.bookreservation.dto.BookDTO;
+import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.service.BookService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookController {
 
   @Autowired
-  private BookService bookService;
+  private BookService<Book, BookDTO> bookService;
 
   @PostMapping("search")
   public List<BookDTO> getBooksWhithParams(

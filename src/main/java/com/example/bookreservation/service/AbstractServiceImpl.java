@@ -5,7 +5,6 @@ import com.example.bookreservation.entity.AbstractEntity;
 import com.example.bookreservation.mapper.AbstractMapper;
 import java.lang.reflect.Field;
 import java.util.List;
-import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -29,8 +28,8 @@ public class AbstractServiceImpl<Entity extends AbstractEntity,
   }
 
   @Override
-  public DTO getById(Long id) throws EntityNotFoundException {
-    return mapper.toDTO(repository.findById(id).orElseThrow(EntityNotFoundException::new));
+  public DTO getById(Long id) {
+    return mapper.toDTO(repository.findById(id).get());
   }
 
   @Override
@@ -46,8 +45,7 @@ public class AbstractServiceImpl<Entity extends AbstractEntity,
 
   @Override
   public DTO editById(Long id, DTO dto) {
-    Entity saveEntity = repository.findById(id)
-        .orElseThrow(() -> new EntityNotFoundException());
+    Entity saveEntity = repository.findById(id).get();
 
     for (Field field : dto.getClass().getDeclaredFields()) {
       field.setAccessible(true);
