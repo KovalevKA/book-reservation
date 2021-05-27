@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 @EnableKafka
 public class BookKafkaListener {
 
-  private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-  @Autowired
-  private BookService bookService;
+    @Autowired
+    private BookService bookService;
 
-  @KafkaListener(topics = {"book-add-topic"})
-  public void getTopics(@RequestBody BookDTO data) {
-    System.out.println("Kafka event consumed is: " + bookService.create(data));
-  }
+    @KafkaListener(topics = {"book-add-topic"})
+    public void getTopics(@RequestBody BookDTO data) {
+        System.out.println("Kafka event consumed is: " + bookService.create(data));
+    }
 }

@@ -2,28 +2,27 @@ package com.example.bookreservation.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.AttributeOverride;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @NoArgsConstructor
-@Entity
-@AttributeOverride(name = "id", column = @Column(name = "client_id"))
-@Table(name = "client")
+@Table(value = "client")
 public class Client extends AbstractEntity {
 
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
-  private final List<Reserv> reservList = new ArrayList<>();
-  @Column(name = "name")
-  private String name;
+    @Transient
+    private final List<Reserv> reservList = new ArrayList<>();
+    @Id
+    @Column(name = "client_id")
+    private Long clientId;
+    @Column
+    private String name;
 
-  public void addReserv(Reserv reserv) {
-    this.reservList.add(reserv);
-  }
+    public void addReserv(Reserv reserv) {
+        this.reservList.add(reserv);
+    }
 }

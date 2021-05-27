@@ -6,23 +6,23 @@ import lombok.Data;
 @Data
 public class BookDTO extends AbstractDTO {
 
-  private String name;
-  private String publishHouse;
-  private int publishYear;
-  private String description;
-  private Set<AuthorDTO> authors;
-  private Set<GenreDTO> genres;
-  private Set<TranslatorDTO> translators;
+    private String name;
+    private String publishHouse;
+    private int publishYear;
+    private String description;
+    private Set<AuthorDTO> authors;
+    private Set<GenreDTO> genres;
+    private Set<TranslatorDTO> translators;
 
-  public Set<AuthorDTO> getAuthors() {
-    return authors;
-  }
+    public Set<AuthorDTO> getAuthors() {
+        return authors;
+    }
 
-  public Set<GenreDTO> getGenres() {
-    return genres;
-  }
+    public Set<GenreDTO> getGenres() {
+        return genres;
+    }
 
-  public Set<TranslatorDTO> getTranslators() {
-    return translators;
-  }
+    public Set<TranslatorDTO> getTranslators() {
+        return translators;
+    }
 }

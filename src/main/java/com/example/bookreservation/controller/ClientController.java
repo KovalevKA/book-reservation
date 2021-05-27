@@ -12,32 +12,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("clients")
 public class ClientController {
 
-  @Autowired
-  private ClientService clientService;
+    @Autowired
+    private ClientService clientService;
 
-  @GetMapping
-  public ClientDTO getClientByParams(@RequestParam String name) {
-    return null;
-  }
+    @GetMapping
+    public ClientDTO getClientByParams(@RequestParam String name) {
+        return null;
+    }
 
-  @PostMapping
-  public ClientDTO addClient(@RequestBody ClientDTO clientDTO) {
-    return clientService.create(clientDTO);
-  }
+    @PostMapping
+    public Mono<ClientDTO> addClient(@RequestBody ClientDTO clientDTO) {
+        return clientService.create(clientDTO);
+    }
 
-  @PatchMapping("{id}")
-  public ClientDTO editClient(@PathVariable Long id,
-      @RequestBody ClientDTO clientDTO) {
-    return clientService.editById(id, clientDTO);
-  }
+    @PatchMapping("{id}")
+    public Mono<ClientDTO> editClient(@PathVariable Long id,
+        @RequestBody ClientDTO clientDTO) {
+        return clientService.editById(id, clientDTO);
+    }
 
-  @DeleteMapping("{id}")
-  public void deleteClient(@PathVariable Long id) {
-    clientService.deleteById(id);
-  }
+    @DeleteMapping("{id}")
+    public void deleteClient(@PathVariable Long id) {
+        clientService.deleteById(id);
+    }
 }

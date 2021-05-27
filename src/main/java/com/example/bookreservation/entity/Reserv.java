@@ -1,39 +1,40 @@
 package com.example.bookreservation.entity;
 
-import java.util.Date;
-import javax.persistence.AttributeOverride;
+import static java.time.LocalDate.now;
+
+import java.time.LocalDate;
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.relational.core.mapping.Table;
 
 @Data
 @NoArgsConstructor
-@Entity
-@AttributeOverride(name = "id", column = @Column(name = "reserv_id"))
-@Table(name = "reserv")
+@Table(value = "reserv")
 public class Reserv extends AbstractEntity {
 
-  @ManyToOne
-  @JoinColumn(name = "client_id")
-  private Client client = new Client();
-  @ManyToOne()
-  @JoinColumn(name = "book_id")
-  private Book book = new Book();
-  @Column(name = "reservation_date")
-  private Date reservationDate = new Date();
-  @Column(name = "reservation_date_cancel")
-  private Date reservationDateCancel = new Date();
+    @Id
+    @Column(name = "reserv_id")
+    private Long reservId;
+    @Column(name = "reservation_date")
+    private final LocalDate reservationDate;
+    @Column(name = "reservation_date_cancel")
+    private final LocalDate reservationDateCancel;
+    @Column(name = "client_id")
+    private final Long clientId;
+    @Column(name = "book_id")
+    private final Long bookId;
+    @Transient
+    private final Client client = new Client();
+    @Transient
+    private final Book book = new Book();
 
-  public Reserv(Client client, Book book, Date reservationDateCancel) {
-    this.book = book;
-    book.addReserv(this);
-    this.client = client;
-    client.addReserv(this);
-    this.reservationDate = new Date();
-    this.reservationDateCancel = reservationDateCancel;
-  }
+    public Reserv(Long clientId, Long bookId, LocalDate reservationDateCancel) {
+        this.clientId = clientId;
+        this.bookId = bookId;
+        this.reservationDate = now();
+        this.reservationDateCancel = reservationDateCancel;
+    }
 }
