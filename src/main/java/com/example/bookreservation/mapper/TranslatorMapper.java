@@ -7,15 +7,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class TranslatorMapper implements AbstractMapper<Translator, TranslatorDTO> {
 
-  @Override
-  public TranslatorDTO toDTO(Translator translator) {
-    TranslatorDTO translatorDTO = mapper.map(translator, TranslatorDTO.class);
-    return translatorDTO;
-  }
+    @Override
+    public TranslatorDTO toDTO(Translator translator) {
+        TranslatorDTO translatorDTO = mapper.map(translator, TranslatorDTO.class);
+        return translatorDTO;
+    }
 
-  @Override
-  public Translator toEntity(TranslatorDTO translatorDTO) {
-    Translator translator = mapper.map(translatorDTO, Translator.class);
-    return translator;
-  }
+    @Override
+    public Translator toEntity(TranslatorDTO translatorDTO) {
+        Translator translator = mapper.map(translatorDTO, Translator.class);
+        return translator;
+    }
 }

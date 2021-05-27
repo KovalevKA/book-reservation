@@ -1,16 +1,17 @@
 package com.example.bookreservation.repository;
 
 import com.example.bookreservation.entity.Translator;
-import java.util.List;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.r2dbc.repository.Query;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-public interface TranslatorRepository extends JpaRepository<Translator, Long> {
+public interface TranslatorRepository extends ReactiveCrudRepository<Translator, Long> {
 
-  Translator findByName(String name);
+    Mono<Translator> findByName(String name);
 
-  List<Translator> findByNameContainsIgnoreCase(String name);
+    Flux<Translator> findByNameContainsIgnoreCase(String name);
 
-  @Query("SELECT t.id FROM Translator t")
-  List<Long> getAllIds();
+    @Query("SELECT t.translator_id FROM translator t")
+    Flux<Long> getAllIds();
 }
