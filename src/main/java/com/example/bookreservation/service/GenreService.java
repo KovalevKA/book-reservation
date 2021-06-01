@@ -20,9 +20,8 @@ public class GenreService extends
 
     @Override
     public Flux<GenreDTO> getByNameLike(String name) {
-        //return genreMapper.toDTOs(genreRepository.findByNameContainsIgnoreCase(name));
         return genreRepository.findByNameContainsIgnoreCase(name)
-            .map(genre -> new GenreDTO(genreMapper.toDTO(genre)));
+            .map(genre -> genreMapper.toDTO(genre));
     }
 
     @Override

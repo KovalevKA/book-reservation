@@ -1,8 +1,10 @@
 package com.example.bookreservation.controller;
 
+import com.example.bookreservation.controller.requestEntity.GetBooksWhithParamsRequestEntity;
 import com.example.bookreservation.dto.BookDTO;
+import com.example.bookreservation.entity.Book;
+import com.example.bookreservation.repository.BookRepository;
 import com.example.bookreservation.service.BookService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -21,18 +22,19 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
+    @Autowired
+    private BookRepository bookRepository;
+
+    @GetMapping
+    public Flux<Book> getAll(){return bookRepository.findAll();}
 
     @PostMapping("search")
     public Flux<BookDTO> getBooksWhithParams(
-        @RequestParam(name = "isReserved", defaultValue = "false", required = false) boolean isReserved,
-        @RequestParam(name = "bookName", defaultValue = "", required = false) String bookName,
-        @RequestParam(name = "listGenreId", defaultValue = "", required = false) List<Long> listGenreId,
-        @RequestParam(name = "listAuthorId", defaultValue = "", required = false) List<Long> listAuthorId,
-        @RequestParam(name = "listTranslatorsId", defaultValue = "", required = false) List<Long> listTranslatorsId
-    ) {
+        @RequestBody GetBooksWhithParamsRequestEntity requestParams) {
         return bookService
-            .findByParams(isReserved, bookName.toUpperCase(), listGenreId, listAuthorId,
-                listTranslatorsId);
+            .findByParams(requestParams.getIsReserved(), requestParams.getBookName(),
+                requestParams.getListGenreId(), requestParams.getListAuthorId(),
+                requestParams.getListTranslatorsId());
     }
 
     @PostMapping()

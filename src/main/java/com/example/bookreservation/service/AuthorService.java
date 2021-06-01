@@ -21,7 +21,7 @@ public class AuthorService extends
     @Override
     public Flux<AuthorDTO> getByNameLike(String name) {
         return authorRepository.findByNameContainsIgnoreCase(name)
-            .map(author -> new AuthorDTO(authorMapper.toDTO(author)));
+            .map(author -> authorMapper.toDTO(author));
     }
 
     @Override
