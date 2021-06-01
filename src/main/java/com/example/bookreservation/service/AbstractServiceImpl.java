@@ -3,6 +3,8 @@ package com.example.bookreservation.service;
 import com.example.bookreservation.dto.AbstractDTO;
 import com.example.bookreservation.entity.AbstractEntity;
 import com.example.bookreservation.mapper.AbstractMapper;
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
@@ -26,14 +28,12 @@ public class AbstractServiceImpl<Entity extends AbstractEntity,
 
     @Override
     public Flux<DTO> getAll() {
-        //return mapper.toDTOs(repository.findAll());
-        return null;
+        return repository.findAll().map(mapper::toDTO);
     }
 
     @Override
     public Mono<DTO> getById(Long id) throws EntityNotFoundException {
-        //return mapper.toDTO(repository.findById(id).orElseThrow(EntityNotFoundException::new));
-        return null;
+        return repository.findById(id).map(mapper::toDTO);
     }
 
     @Override
@@ -43,30 +43,27 @@ public class AbstractServiceImpl<Entity extends AbstractEntity,
 
     @Override
     public Mono<DTO> create(DTO dto) {
-        Entity entity = mapper.toEntity(dto);
-        //return mapper.toDTO(repository.save(entity));
-        return null;
+        return repository.save(mapper.toEntity(dto)).map(mapper::toDTO);
     }
 
+    /*TODO: переписать/исправить*/
     @Override
     public Mono<DTO> editById(Long id, DTO dto) {
-        /*Entity saveEntity = repository.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException());
-
-        for (Field field : dto.getClass().getDeclaredFields()) {
-            field.setAccessible(true);
-            Field saveField;
-            try {
-                saveField = saveEntity.getClass().getDeclaredField(field.getName());
-                saveField.setAccessible(true);
-                saveField.set(saveEntity, field.get(dto));
-                saveField.setAccessible(false);
-            } catch (Exception e) {
-                throw new IllegalArgumentException("Field not found");
-            }
-            field.setAccessible(false);
-        }
-        return mapper.toDTO(repository.saveAndFlush(saveEntity));*/
+        /*return repository.save(
+            repository.findById(id)
+                .map(entity -> {
+                    Arrays.stream(dto.getClass().getDeclaredFields()).forEach(
+                        field -> {
+                            field.setAccessible(true);
+                            Field saveField = entity.getClass().getDeclaredField(field.getName());
+                            saveField.setAccessible(true);
+                            saveField.set(entity, field.get(dto));
+                            saveField.setAccessible(false);
+                        }
+                    );
+                    return entity;
+                })
+        );*/
         return null;
     }
 }

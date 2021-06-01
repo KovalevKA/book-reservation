@@ -21,7 +21,7 @@ public class TranslatorService extends
     @Override
     public Flux<TranslatorDTO> getByNameLike(String name) {
         return translatorRepository.findByNameContainsIgnoreCase(name)
-            .map(translator -> new TranslatorDTO(translatorMapper.toDTO(translator)));
+            .map(translator -> translatorMapper.toDTO(translator));
     }
 
     @Override

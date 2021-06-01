@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AuthorDTO extends AbstractDTO {
 
-    private final String name;
+    private String name;
 
     public AuthorDTO(AuthorDTO authorDTO) {
         this.name = authorDTO.name;

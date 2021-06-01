@@ -3,40 +3,32 @@ package com.example.bookreservation.entity;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Transient;
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(value = "book")
 public class Book extends AbstractEntity {
 
-    @Transient
-    private final List<Reserv> reservList = new ArrayList<>();
-    @Transient
-    private final Set<Author> authorList = new HashSet<>();
-    @Transient
-    private final Set<Genre> genreList = new HashSet<>();
-    @Transient
-    private final Set<Translator> translatorList = new HashSet<>();
+    private List<Reserv> reservList = new ArrayList<>();
+    private Set<Author> authorList = new HashSet<>();
+    private Set<Genre> genreList = new HashSet<>();
+    private Set<Translator> translatorList = new HashSet<>();
     @Id
-    @Column(name = "book_id")
+    @Column("book_id")
     private Long bookId;
     @Column
     private String name;
-    @Column
+    @Column("publishing_house")
     private String publishHouse;
-    @Column
+    @Column("publishing_year")
     private int publishYear;
     @Column
     private String description;
@@ -55,25 +47,5 @@ public class Book extends AbstractEntity {
 
     public void addReserv(Reserv reserv) {
         this.reservList.add(reserv);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Book)) {
-            return false;
-        }
-        Book book = (Book) o;
-        return publishYear == book.publishYear &&
-            name.equals(book.name) &&
-            publishHouse.equals(book.publishHouse) &&
-            description.equals(book.description);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, publishHouse, publishYear, description);
     }
 }

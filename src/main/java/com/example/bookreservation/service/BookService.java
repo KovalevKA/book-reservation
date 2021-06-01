@@ -1,5 +1,7 @@
 package com.example.bookreservation.service;
 
+import static java.time.LocalDate.now;
+
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.mapper.AbstractMapper;
@@ -31,39 +33,30 @@ public class BookService extends
 
     @Override
     public Mono<BookDTO> editById(Long id, BookDTO data) throws EntityNotFoundException {
-        /*Mono<Book> book = bookRepository.findById(id);
 
-        if (!data.getName().isEmpty()) {
-            book.setName(data.getName());
-        }
-        if (!data.getPublishHouse().isEmpty()) {
-            book.setPublishHouse(data.getPublishHouse());
-        }
-        if (data.getPublishYear() != 0) {
-            book.setPublishYear(data.getPublishYear());
-        }
-        if (!data.getDescription().isEmpty()) {
-            book.setDescription(data.getDescription());
-        }
-        return bookRepository.save(book).cast(BookDTO.class);*/
-        return null;
+        return bookRepository.findById(id)
+            .map(book -> {
+                book.setName(data.getName());
+                book.setPublishHouse(data.getPublishHouse());
+                book.setPublishYear(data.getPublishYear());
+                book.setDescription(data.getDescription());
+                return book;
+            })
+            .flatMap(bookRepository::save)
+            .map(bookMapper::toDTO);
     }
 
     public Flux<BookDTO> findByParams(Boolean isReserved, String bookName,
         List<Long> listGenreId, List<Long> listAuthorId, List<Long> listTranslatorsId) {
-    /*listAuthorId = listAuthorId.size() == 0 ? authorRepository.getAllIds() : listAuthorId;
-    listGenreId = listGenreId.size() == 0 ? genreRepository.getAllIds() : listGenreId;
-    listTranslatorsId =
-        listTranslatorsId.size() == 0 ? translatorRepository.getAllIds() : listTranslatorsId;
-    List<Book> books = bookRepository.getFreeByParams(bookName, listAuthorId, listGenreId,
-        listTranslatorsId, new Date());
-    if (!isReserved) {
-      return bookMapper.toDTOs(books);
-    }
-    List<Book> resBooks = bookRepository.getReservByParams(bookName.toUpperCase(), listAuthorId,
-        listGenreId, listTranslatorsId, new Date());
-    books.addAll(resBooks);
-    return bookMapper.toDTOs(books);*/
-        return null;
+
+        Flux<Book> bookFlux = bookRepository
+            .getFreeByParams(bookName, listAuthorId, listGenreId, listTranslatorsId, now());
+        if (isReserved) {
+            return bookFlux.concat(bookRepository
+                .getReservByParams(bookName, listAuthorId, listGenreId, listTranslatorsId, now())
+            )
+                .map(bookMapper::toDTO);
+        }
+        return bookFlux.map(bookMapper::toDTO);
     }
 }

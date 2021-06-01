@@ -1,15 +1,17 @@
 package com.example.bookreservation.dto;
 
 import java.time.LocalDate;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ReservDTO extends AbstractDTO {
 
-    private final LocalDate reservationDate;
-    private final LocalDate reservationDateCancel;
+    private LocalDate reservationDate;
+    private LocalDate reservationDateCancel;
     //private BookDTO book;
 
     public ReservDTO(ReservDTO reservDTO) {
