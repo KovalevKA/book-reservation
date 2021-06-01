@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BookDTO extends AbstractDTO {
 
+    private Long book_id;
     private String name;
     private String publishHouse;
     private int publishYear;

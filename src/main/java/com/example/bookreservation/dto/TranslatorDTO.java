@@ -9,10 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class TranslatorDTO extends AbstractDTO {
 
+    private Long translator_id;
     private String name;
 
-    public TranslatorDTO(TranslatorDTO translatorDTO) {
-        this.name = translatorDTO.name;
-        this.setId(translatorDTO.getId());
-    }
 }

@@ -10,10 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class GenreDTO extends AbstractDTO {
 
+    private Long genre_id;
     private String name;
 
-    public GenreDTO(GenreDTO genreDTO) {
-        this.name = genreDTO.name;
-        this.setId(genreDTO.getId());
-    }
 }

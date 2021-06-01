@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ClientDTO extends AbstractDTO {
 
+    private Long client_id;
     private String name;
 
 }

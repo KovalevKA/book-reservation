@@ -10,14 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ReservDTO extends AbstractDTO {
 
+    private Long reserv_id;
     private LocalDate reservationDate;
     private LocalDate reservationDateCancel;
-    //private BookDTO book;
+    private BookDTO book;
 
-    public ReservDTO(ReservDTO reservDTO) {
-        this.setId(reservDTO.getId());
-        this.reservationDate = reservDTO.reservationDate;
-        this.reservationDateCancel = reservDTO.reservationDateCancel;
-        //this.book = reservDTO.book;
-    }
 }
