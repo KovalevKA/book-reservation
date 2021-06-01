@@ -5,10 +5,7 @@ import static java.time.LocalDate.now;
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.mapper.AbstractMapper;
-import com.example.bookreservation.repository.AuthorRepository;
 import com.example.bookreservation.repository.BookRepository;
-import com.example.bookreservation.repository.GenreRepository;
-import com.example.bookreservation.repository.TranslatorRepository;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +19,6 @@ public class BookService extends
 
     @Autowired
     private BookRepository bookRepository;
-    @Autowired
-    private AuthorRepository authorRepository;
-    @Autowired
-    private GenreRepository genreRepository;
-    @Autowired
-    private TranslatorRepository translatorRepository;
     @Autowired
     private AbstractMapper<Book, BookDTO> bookMapper;
 

@@ -32,7 +32,7 @@ public class BookController {
     public Flux<BookDTO> getBooksWhithParams(
         @RequestBody GetBooksWhithParamsRequestEntity requestParams) {
         return bookService
-            .findByParams(requestParams.isReserved(), requestParams.getBookName(),
+            .findByParams(requestParams.getIsReserved(), requestParams.getBookName(),
                 requestParams.getListGenreId(), requestParams.getListAuthorId(),
                 requestParams.getListTranslatorsId());
     }

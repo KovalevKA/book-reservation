@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class GetBooksWhithParamsRequestEntity {
 
-    private boolean isReserved = false;
+    private Boolean isReserved = false;
     private String bookName = "";
     private List<Long> listGenreId = new ArrayList<>();
     private List<Long> listAuthorId = new ArrayList<>();
@@ -20,7 +20,7 @@ public class GetBooksWhithParamsRequestEntity {
     public String getBookName() {
         return bookName.toUpperCase();
     }
-
+    
     public List<Long> getListGenreId() {
         listGenreId.add(0L);
         return listGenreId;

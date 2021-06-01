@@ -7,5 +7,4 @@ import lombok.Data;
 @Data
 public class AbstractDTO {
 
-    //private Long id;
 }

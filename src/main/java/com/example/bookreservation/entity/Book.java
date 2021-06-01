@@ -7,6 +7,7 @@ import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.With;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -17,9 +18,13 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table(value = "book")
 public class Book extends AbstractEntity {
 
+    @With
     private List<Reserv> reservList = new ArrayList<>();
+    @With
     private Set<Author> authorList = new HashSet<>();
+    @With
     private Set<Genre> genreList = new HashSet<>();
+    @With
     private Set<Translator> translatorList = new HashSet<>();
     @Id
     @Column("book_id")
