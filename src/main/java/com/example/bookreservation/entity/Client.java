@@ -11,7 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(value = "client")
-public class Client extends AbstractEntity {
+public class Client {
 
     private List<Reserv> reservList = new ArrayList<>();
     @Id

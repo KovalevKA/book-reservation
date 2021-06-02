@@ -13,7 +13,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(value = "translator")
-public class Translator extends AbstractEntity {
+public class Translator {
 
     private List<Book> bookList = new ArrayList<>();
     @Id

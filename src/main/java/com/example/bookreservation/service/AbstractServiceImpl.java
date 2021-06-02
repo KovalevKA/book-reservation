@@ -1,10 +1,6 @@
 package com.example.bookreservation.service;
 
-import com.example.bookreservation.dto.AbstractDTO;
-import com.example.bookreservation.entity.AbstractEntity;
 import com.example.bookreservation.mapper.AbstractMapper;
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
@@ -15,8 +11,8 @@ import reactor.core.publisher.Mono;
 @Service
 @Lazy
 */
-public class AbstractServiceImpl<Entity extends AbstractEntity,
-    DTO extends AbstractDTO, Repository extends ReactiveCrudRepository<Entity, Long>,
+public class AbstractServiceImpl<Entity, DTO,
+    Repository extends ReactiveCrudRepository<Entity, Long>,
     Mapper extends AbstractMapper<Entity, DTO>>
     implements AbstractService<Entity, DTO> {
 

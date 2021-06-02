@@ -1,12 +1,10 @@
 package com.example.bookreservation.service;
 
-import com.example.bookreservation.dto.AbstractDTO;
-import com.example.bookreservation.entity.AbstractEntity;
 import javax.persistence.EntityExistsException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface AbstractService<Entity extends AbstractEntity, DTO extends AbstractDTO> {
+public interface AbstractService<Entity, DTO> {
 
     Flux<DTO> getAll();
 

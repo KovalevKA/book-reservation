@@ -15,7 +15,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(value = "reserv")
-public class Reserv extends AbstractEntity {
+public class Reserv {
 
     @Id
     @Column(value = "reserv_id")

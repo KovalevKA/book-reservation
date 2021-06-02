@@ -1,8 +1,6 @@
 package com.example.bookreservation.mapper;
 
-import com.example.bookreservation.dto.AbstractDTO;
 import com.example.bookreservation.dto.BookDTO;
-import com.example.bookreservation.entity.AbstractEntity;
 import com.example.bookreservation.entity.Author;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.entity.Genre;
@@ -67,8 +65,8 @@ public class BookMapper implements AbstractMapper<Book, BookDTO> {
     }
 
 
-    private Set<?> getNestedRecords(Set<? extends AbstractDTO> dataList, AbstractService service) {
-        Set<? super AbstractEntity> outSet = new HashSet<>();
+    private Set<?> getNestedRecords(Set<?> dataList, AbstractService service) {
+        Set<?> outSet = new HashSet<>();
         /*dataList.forEach(data -> {
             try {
                 Field field = data.getClass().getDeclaredField("name");
