@@ -4,6 +4,7 @@ import com.example.bookreservation.dto.AuthorDTO;
 import com.example.bookreservation.entity.Author;
 import com.example.bookreservation.mapper.AbstractMapper;
 import com.example.bookreservation.repository.AuthorRepository;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -27,5 +28,18 @@ public class AuthorService extends
     @Override
     public Mono<Author> getByName(String name) {
         return authorRepository.findByNameIgnoreCase(name);
+    }
+
+    @Transactional
+    @Override
+    public Mono<AuthorDTO> editById(Long id, final AuthorDTO authorDTO) {
+        return authorRepository.findByAuthorId(id)
+            .map(author -> {
+                author.setName(authorDTO.getName());
+                return author;
+            })
+            .flatMap(author -> this.authorRepository.save(author))
+            .map(authorMapper::toDTO)
+            ;
     }
 }

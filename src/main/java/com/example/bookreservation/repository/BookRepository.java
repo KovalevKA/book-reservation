@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface BookRepository extends R2dbcRepository<Book, Long> {
 
@@ -52,5 +52,6 @@ public interface BookRepository extends R2dbcRepository<Book, Long> {
     Flux<Book> getFreeByParams(String name, List<Long> aids, List<Long> gids, List<Long> tids,
         LocalDate date);
 
+    Mono<Book> findByBookId(Long id);
 
 }

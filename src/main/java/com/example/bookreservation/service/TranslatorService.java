@@ -28,4 +28,15 @@ public class TranslatorService extends
     public Mono<Translator> getByName(String name) {
         return translatorRepository.findByName(name);
     }
+
+    @Override
+    public Mono<TranslatorDTO> editById(Long id, TranslatorDTO translatorDTO) {
+        return translatorRepository.findByTranslatorId(id)
+            .map(translator -> {
+                translator.setName(translatorDTO.getName());
+                return translator;
+            })
+            .flatMap(translatorRepository::save)
+            .map(translatorMapper::toDTO);
+    }
 }

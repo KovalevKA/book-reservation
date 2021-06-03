@@ -52,25 +52,4 @@ public class AbstractServiceImpl<Entity, DTO,
             .map(mapper::toDTO)
             ;
     }
-
-    /*TODO: переписать/исправить*/
-    @Override
-    public Mono<DTO> editById(Long id, DTO dto) {
-        /*return repository.save(
-            repository.findById(id)
-                .map(entity -> {
-                    Arrays.stream(dto.getClass().getDeclaredFields()).forEach(
-                        field -> {
-                            field.setAccessible(true);
-                            Field saveField = entity.getClass().getDeclaredField(field.getName());
-                            saveField.setAccessible(true);
-                            saveField.set(entity, field.get(dto));
-                            saveField.setAccessible(false);
-                        }
-                    );
-                    return entity;
-                })
-        );*/
-        return null;
-    }
 }

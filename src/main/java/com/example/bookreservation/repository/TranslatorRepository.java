@@ -10,4 +10,6 @@ public interface TranslatorRepository extends ReactiveCrudRepository<Translator,
     Mono<Translator> findByName(String name);
 
     Flux<Translator> findByNameContainsIgnoreCase(String name);
+
+    Mono<Translator> findByTranslatorId(Long id);
 }

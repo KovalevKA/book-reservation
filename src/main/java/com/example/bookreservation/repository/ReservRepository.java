@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.r2dbc.repository.Query;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 public interface ReservRepository extends ReactiveCrudRepository<Reserv, Long> {
 
@@ -24,4 +25,6 @@ public interface ReservRepository extends ReactiveCrudRepository<Reserv, Long> {
         + "AND reserv.reservation_date_cancel >= :date")
     Flux<Reserv> findByBookIdInAndReservationDateCancelGreaterThanEqual(List<Long> ids,
         LocalDate date);
+
+    Mono<Reserv> findByReservId (Long id);
 }

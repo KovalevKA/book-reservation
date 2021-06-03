@@ -6,12 +6,10 @@ import com.example.bookreservation.dto.ReservDTO;
 import com.example.bookreservation.entity.Reserv;
 import com.example.bookreservation.mapper.AbstractMapper;
 import com.example.bookreservation.repository.BookRepository;
-import com.example.bookreservation.repository.ClientRepository;
 import com.example.bookreservation.repository.ReservRepository;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -19,17 +17,12 @@ import reactor.core.publisher.Mono;
 @Service
 public class ReservService {
 
-    @Value("${books.forClient.count}")
-    private Integer booksCountForClient;
-
     @Autowired
     private ReservRepository reservRepository;
     @Autowired
     private AbstractMapper<Reserv, ReservDTO> reservMapper;
     @Autowired
     private BookRepository bookRepository;
-    @Autowired
-    private ClientRepository clientRepository;
 
     public Flux<ReservDTO> getReservationClientListById(Long id) {
         return reservRepository.findByClientIdAndAndReservationDateCancelGreaterThan(id, now())
