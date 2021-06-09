@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReservDTO extends AbstractDTO {
+public class ReservDTO {
 
-    private Long reserv_id;
+    private Long reservId;
     private LocalDate reservationDate;
     private LocalDate reservationDateCancel;
     private BookDTO book;

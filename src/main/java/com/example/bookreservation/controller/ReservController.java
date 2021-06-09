@@ -1,9 +1,10 @@
 package com.example.bookreservation.controller;
 
-import com.example.bookreservation.controller.requestEntity.MakeReservetionRequestParamEntity;
 import com.example.bookreservation.dto.ReservDTO;
+import com.example.bookreservation.dto.requestBodyParams.RequestParamForCancelReservation;
+import com.example.bookreservation.dto.requestBodyParams.RequestParamForCheckReservedBooksByBookId;
+import com.example.bookreservation.dto.requestBodyParams.RequestParamForMakeReservetion;
 import com.example.bookreservation.service.ReservService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,13 +30,13 @@ public class ReservController {
 
     @PostMapping("check")
     public Flux<ReservDTO> checkReservedBooksByBookId(
-        @RequestParam(name = "listBooksId") List<Long> listBooksId) {
-        return reservService.checkReservedBooksByBookId(listBooksId);
+        @RequestBody RequestParamForCheckReservedBooksByBookId requestParam) {
+        return reservService.checkReservedBooksByBookId(requestParam.getListBooksId());
     }
 
     @PostMapping("make")
     public Flux<ReservDTO> makeReservation(
-        @RequestBody MakeReservetionRequestParamEntity requestParam) {
+        @RequestBody RequestParamForMakeReservetion requestParam) {
         return reservService
             .make(requestParam.getClientId(), requestParam.getListBooksId(),
                 requestParam.getDateTo());
@@ -43,8 +44,7 @@ public class ReservController {
 
     @PostMapping("cancel")
     public Mono<Long> cancelReservation(
-        @RequestParam(name = "clientId") Long clientId,
-        @RequestParam(name = "reservId") List<Long> listReservId) {
-        return reservService.cancel(clientId, listReservId);
+        @RequestBody RequestParamForCancelReservation requestParam) {
+        return reservService.cancel(requestParam.getClientId(), requestParam.getListReservId());
     }
 }

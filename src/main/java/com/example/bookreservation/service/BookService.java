@@ -6,6 +6,7 @@ import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.mapper.AbstractMapper;
 import com.example.bookreservation.repository.BookRepository;
+import com.example.bookreservation.repository.BookRepositoryQueries;
 import java.util.List;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,15 @@ public class BookService extends
     AbstractServiceImpl<Book, BookDTO, BookRepository, AbstractMapper<Book, BookDTO>> {
 
     @Autowired
-    private BookRepository bookRepository;
+    private BookRepositoryQueries bookRepository;
+
     @Autowired
     private AbstractMapper<Book, BookDTO> bookMapper;
 
     @Override
     public Mono<BookDTO> editById(Long id, BookDTO data) throws EntityNotFoundException {
 
-        return bookRepository.findById(id)
+        return bookRepository.findByBookId(id)
             .map(book -> {
                 book.setName(data.getName());
                 book.setPublishHouse(data.getPublishHouse());
@@ -39,15 +41,14 @@ public class BookService extends
 
     public Flux<BookDTO> findByParams(Boolean isReserved, String bookName,
         List<Long> listGenreId, List<Long> listAuthorId, List<Long> listTranslatorsId) {
-
-        Flux<Book> bookFlux = bookRepository
-            .getFreeByParams(bookName, listAuthorId, listGenreId, listTranslatorsId, now());
-        if (isReserved) {
-            return bookFlux.concat(bookRepository
-                .getReservByParams(bookName, listAuthorId, listGenreId, listTranslatorsId, now())
-            )
-                .map(bookMapper::toDTO);
-        }
-        return bookFlux.map(bookMapper::toDTO);
+        return bookRepository
+            .findByParams(
+                isReserved,
+                bookName,
+                listAuthorId,
+                listGenreId,
+                listTranslatorsId,
+                now()
+            ).map(bookMapper::toDTO);
     }
 }

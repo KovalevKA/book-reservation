@@ -10,4 +10,6 @@ public interface GenreRepository extends ReactiveCrudRepository<Genre, Long> {
     Mono<Genre> findByNameIgnoreCase(String name);
 
     Flux<Genre> findByNameContainsIgnoreCase(String name);
+
+    Mono<Genre> findByGenreId(Long id);
 }

@@ -1,12 +1,9 @@
 package com.example.bookreservation.service;
 
-import com.example.bookreservation.dto.AbstractDTO;
-import com.example.bookreservation.entity.AbstractEntity;
-import javax.persistence.EntityExistsException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface AbstractService<Entity extends AbstractEntity, DTO extends AbstractDTO> {
+public interface AbstractService<Entity, DTO> {
 
     Flux<DTO> getAll();
 
@@ -16,13 +13,15 @@ public interface AbstractService<Entity extends AbstractEntity, DTO extends Abst
 
     Mono<DTO> create(DTO dto);
 
-    Mono<DTO> editById(Long id, DTO dto);
+    default Mono<DTO> editById(Long id, DTO dto) {
+        throw new AbstractMethodError("Must be override");
+    }
 
     default Mono<Entity> getByName(String name) {
-        throw new EntityExistsException("Can't found by name");
+        throw new AbstractMethodError("Must be override");
     }
 
     default Flux<DTO> getByNameLike(String string) {
-        throw new EntityExistsException("Can't found by name like");
+        throw new AbstractMethodError("Must be override");
     }
 }

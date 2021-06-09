@@ -1,6 +1,6 @@
 package com.example.bookreservation.controller;
 
-import com.example.bookreservation.controller.requestEntity.GetBooksWhithParamsRequestEntity;
+import com.example.bookreservation.dto.requestBodyParams.RequestParamsForSearchBooks;
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.repository.BookRepository;
@@ -30,7 +30,7 @@ public class BookController {
 
     @PostMapping("search")
     public Flux<BookDTO> getBooksWhithParams(
-        @RequestBody GetBooksWhithParamsRequestEntity requestParams) {
+        @RequestBody RequestParamsForSearchBooks requestParams) {
         return bookService
             .findByParams(requestParams.getIsReserved(), requestParams.getBookName(),
                 requestParams.getListGenreId(), requestParams.getListAuthorId(),

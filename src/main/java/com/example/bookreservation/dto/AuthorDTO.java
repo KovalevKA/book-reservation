@@ -7,9 +7,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthorDTO extends AbstractDTO {
+public class AuthorDTO {
 
-    private Long author_id;
+    private Long authorId;
     private String name;
 
 }

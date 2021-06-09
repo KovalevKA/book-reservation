@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookDTO extends AbstractDTO {
+public class BookDTO {
 
-    private Long book_id;
+    private Long bookId;
     private String name;
     private String publishHouse;
     private int publishYear;

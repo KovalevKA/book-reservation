@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class GenreDTO extends AbstractDTO {
+public class GenreDTO {
 
-    private Long genre_id;
+    private Long genreId;
     private String name;
 
 }

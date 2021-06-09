@@ -1,4 +1,4 @@
-package com.example.bookreservation.controller.requestEntity;
+package com.example.bookreservation.dto.requestBodyParams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetBooksWhithParamsRequestEntity {
+public class RequestParamsForSearchBooks {
 
     private Boolean isReserved = false;
     private String bookName = "";
@@ -20,19 +20,5 @@ public class GetBooksWhithParamsRequestEntity {
     public String getBookName() {
         return bookName.toUpperCase();
     }
-    
-    public List<Long> getListGenreId() {
-        listGenreId.add(0L);
-        return listGenreId;
-    }
 
-    public List<Long> getListAuthorId() {
-        listAuthorId.add(0L);
-        return listAuthorId;
-    }
-
-    public List<Long> getListTranslatorsId() {
-        listTranslatorsId.add(0L);
-        return listTranslatorsId;
-    }
 }

@@ -28,4 +28,15 @@ public class GenreService extends
     public Mono<Genre> getByName(String name) {
         return genreRepository.findByNameIgnoreCase(name);
     }
+
+    @Override
+    public Mono<GenreDTO> editById(Long id, GenreDTO genreDTO) {
+        return genreRepository.findByGenreId(id)
+            .map(genre -> {
+                genre.setName(genreDTO.getName());
+                return genre;
+            })
+            .flatMap(genreRepository::save)
+            .map(genreMapper::toDTO);
+    }
 }
