@@ -40,6 +40,7 @@ public class AbstractServiceImpl<Entity, DTO,
 
     @Override
     public Mono<DTO> create(DTO dto) {
+        //можно использовать R2dbcRepository.exist
         return repository.findAll()
             .switchOnFirst((signal, entityFlux) -> {
                 if (signal.hasValue()) {

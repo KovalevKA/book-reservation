@@ -38,7 +38,9 @@ public class ReservService {
     public Flux<ReservDTO> make(Long id, List<Long> bookIds, LocalDate dateTo)
         throws IllegalArgumentException {
         return bookRepository.getFreeBooksByListId(bookIds)
-            .map(book -> new Reserv(id, book.getBookId(), dateTo))
+            .switchOnFirst((signal, bookFlux) ->
+                bookFlux.map(book -> new Reserv(id, book.getBookId(), dateTo))
+            )
             .flatMap(reserv -> reservRepository.save(reserv))
             .map(reservMapper::toDTO)
             ;
