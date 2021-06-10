@@ -9,13 +9,11 @@ public class GenreMapper implements AbstractMapper<Genre, GenreDTO> {
 
     @Override
     public GenreDTO toDTO(Genre genre) {
-        GenreDTO genreDTO = mapper.map(genre, GenreDTO.class);
-        return genreDTO;
+        return mapper.map(genre, GenreDTO.class);
     }
 
     @Override
     public Genre toEntity(GenreDTO genreDTO) {
-        Genre genre = mapper.map(genreDTO, Genre.class);
-        return genre;
+        return mapper.map(genreDTO, Genre.class);
     }
 }

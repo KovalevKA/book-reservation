@@ -14,6 +14,6 @@ public class ReservMapper implements AbstractMapper<Reserv, ReservDTO> {
 
     @Override
     public Reserv toEntity(ReservDTO reservDTO) {
-        return null;
+        return mapper.map(reservDTO, Reserv.class);
     }
 }
