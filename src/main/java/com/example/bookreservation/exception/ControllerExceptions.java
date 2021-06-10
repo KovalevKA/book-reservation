@@ -2,6 +2,7 @@ package com.example.bookreservation.exception;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.text.ParseException;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,8 @@ public class ControllerExceptions {
         HttpMessageNotReadableException.class,
         IllegalAccessException.class,
         ParseException.class,
-        InvalidDataAccessApiUsageException.class
+        InvalidDataAccessApiUsageException.class,
+        EntityExistsException.class
     })
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String exceptionHandler(Exception e) {
