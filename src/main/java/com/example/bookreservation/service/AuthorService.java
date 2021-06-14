@@ -42,4 +42,9 @@ public class AuthorService extends
             .map(authorMapper::toDTO)
             ;
     }
+
+    @Override
+    public Flux<AuthorDTO> getByBookId(Long id) {
+        return authorRepository.findByBookId(id).map(authorMapper::toDTO);
+    }
 }
