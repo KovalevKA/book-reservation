@@ -9,14 +9,12 @@ public class ClientMapper implements AbstractMapper<Client, ClientDTO> {
 
     @Override
     public ClientDTO toDTO(Client client) {
-        ClientDTO clientDTO = mapper.map(client, ClientDTO.class);
-        return clientDTO;
+        return mapper.map(client, ClientDTO.class);
     }
 
     @Override
     public Client toEntity(ClientDTO clientDTO) {
-        Client client = mapper.map(clientDTO, Client.class);
-        return client;
+        return mapper.map(clientDTO, Client.class);
     }
 
 }

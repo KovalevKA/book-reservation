@@ -4,11 +4,11 @@ import com.example.bookreservation.entity.Reserv;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.data.r2dbc.repository.Query;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface ReservRepository extends ReactiveCrudRepository<Reserv, Long> {
+public interface ReservRepository extends R2dbcRepository<Reserv, Long> {
 
 
     @Query("SELECT reserv.* FROM reserv WHERE reserv.client_id = :id AND "

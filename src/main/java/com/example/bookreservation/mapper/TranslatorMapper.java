@@ -9,13 +9,11 @@ public class TranslatorMapper implements AbstractMapper<Translator, TranslatorDT
 
     @Override
     public TranslatorDTO toDTO(Translator translator) {
-        TranslatorDTO translatorDTO = mapper.map(translator, TranslatorDTO.class);
-        return translatorDTO;
+        return mapper.map(translator, TranslatorDTO.class);
     }
 
     @Override
     public Translator toEntity(TranslatorDTO translatorDTO) {
-        Translator translator = mapper.map(translatorDTO, Translator.class);
-        return translator;
+        return mapper.map(translatorDTO, Translator.class);
     }
 }

@@ -1,11 +1,9 @@
 package com.example.bookreservation.repository;
 
 import com.example.bookreservation.entity.Book;
-import io.r2dbc.spi.ConnectionFactory;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.r2dbc.core.DatabaseClient;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
@@ -16,10 +14,8 @@ public class BookRepositoryQueries {
 
     @Autowired
     private BookRepository bookRepository;
-    @Qualifier("connectionFactory")
     @Autowired
-    private ConnectionFactory connectionFactory;
-
+    private DatabaseClient databaseClient;
 
     private final String baseSql = "SELECT b.* FROM book b "
         + "%s %s %s %s"
@@ -62,7 +58,7 @@ public class BookRepositoryQueries {
                 : getCondition(genreCondition, listGenreId),
             listTranslatorsId.isEmpty() ? ""
                 : getCondition(translatorCondition, listTranslatorsId),
-            isReserved ? "" : "AND " + String.format(reservCondition, date.toString())
+            isReserved ? "AND " + String.format(reservCondition, date.toString()) : ""
         );
 
         return executeQuery(sql);
@@ -76,7 +72,6 @@ public class BookRepositoryQueries {
     }
 
     private Flux<Book> executeQuery(String sql) {
-        DatabaseClient databaseClient = DatabaseClient.create(connectionFactory);
         return databaseClient
             .sql(sql)
             .fetch()

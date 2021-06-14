@@ -3,10 +3,10 @@ package com.example.bookreservation.entity;
 import static java.time.LocalDate.now;
 
 import java.time.LocalDate;
-import javax.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
