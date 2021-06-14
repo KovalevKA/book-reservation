@@ -2336,3 +2336,19 @@ Caused by: io.r2dbc.postgresql.ExceptionFactory$PostgresqlBadGrammarException: s
 [main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - Started BookReservationApplication in 5.474 seconds (JVM running for 6.776) 
 [main] [34mINFO [0;39m [36mo.s.b.a.ApplicationAvailabilityBean[0;39m - Application availability state LivenessState changed to CORRECT 
 [main] [34mINFO [0;39m [36mo.s.b.a.ApplicationAvailabilityBean[0;39m - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC 
+[main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - Starting BookReservationApplication using Java 1.8.0_292 on wolter-pc with PID 7634 (/home/wolter/IdeaProjects/book-reservation/target/classes started by root in /home/wolter/IdeaProjects/book-reservation) 
+[main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - No active profile set, falling back to default profiles: default 
+[background-preinit] [31mWARN [0;39m [36mo.s.h.c.j.Jackson2ObjectMapperBuilder[0;39m - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Multiple Spring Data modules found, entering strict repository configuration mode! 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data R2DBC repositories in DEFAULT mode. 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 119 ms. Found 6 R2DBC repository interfaces. 
+[main] [34mINFO [0;39m [36mo.f.c.i.l.VersionPrinter[0;39m - Flyway Community Edition 7.7.3 by Redgate 
+[main] [34mINFO [0;39m [36mo.f.c.i.d.b.DatabaseType[0;39m - Database: jdbc:postgresql://localhost:5432/book-reservation (PostgreSQL 13.2) 
+[main] [34mINFO [0;39m [36mo.f.c.i.c.DbValidate[0;39m - Successfully validated 2 migrations (execution time 00:00.043s) 
+[main] [34mINFO [0;39m [36mo.f.c.i.c.DbMigrate[0;39m - Current version of schema "public": 2 
+[main] [34mINFO [0;39m [36mo.f.c.i.c.DbMigrate[0;39m - Schema "public" is up to date. No migration necessary. 
+[main] [34mINFO [0;39m [36mo.s.b.w.e.n.NettyWebServer[0;39m - Netty started on port 8081 
+[main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - Started BookReservationApplication in 6.543 seconds (JVM running for 8.167) 
+[main] [34mINFO [0;39m [36mo.s.b.a.ApplicationAvailabilityBean[0;39m - Application availability state LivenessState changed to CORRECT 
+[main] [34mINFO [0;39m [36mo.s.b.a.ApplicationAvailabilityBean[0;39m - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC 
+[reactor-http-epoll-4] [34mINFO [0;39m [36mo.s.a.AbstractOpenApiResource[0;39m - Init duration for springdoc-openapi is: 835 ms 
