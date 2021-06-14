@@ -16,12 +16,12 @@ public interface ReservRepository extends R2dbcRepository<Reserv, Long> {
     Flux<Reserv> findByClientIdAndAndReservationDateCancelGreaterThan(Long id, LocalDate date);
 
     @Query("SELECT reserv.* FROM reserv WHERE client_id = :id AND "
-        + "reserv_id IN :ids AND "
+        + "reserv_id IN (:ids) AND "
         + "reserv.reservation_date_cancel >= :date")
     Flux<Reserv> findByIdInAndReservationDateCancelGreaterThanEqual(Long id, List<Long> ids,
         LocalDate date);
 
-    @Query("SELECT reserv.* FROM reserv WHERE reserv.book_id IN :ids "
+    @Query("SELECT reserv.* FROM reserv WHERE reserv.book_id IN (:ids) "
         + "AND reserv.reservation_date_cancel >= :date")
     Flux<Reserv> findByBookIdInAndReservationDateCancelGreaterThanEqual(List<Long> ids,
         LocalDate date);

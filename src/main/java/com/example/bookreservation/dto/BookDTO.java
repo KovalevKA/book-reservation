@@ -1,6 +1,7 @@
 package com.example.bookreservation.dto;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,19 +16,22 @@ public class BookDTO {
     private String publishHouse;
     private int publishYear;
     private String description;
-    private Set<AuthorDTO> authors;
-    private Set<GenreDTO> genres;
-    private Set<TranslatorDTO> translators;
+    private List<AuthorDTO> authors = new ArrayList<>();
+    private List<GenreDTO> genres = new ArrayList<>();
+    private List<TranslatorDTO> translators = new ArrayList<>();
 
-    public Set<AuthorDTO> getAuthors() {
-        return authors;
+    public List<AuthorDTO> addAuthor(AuthorDTO authorDTO){
+        authors.add(authorDTO);
+        return this.authors;
     }
 
-    public Set<GenreDTO> getGenres() {
-        return genres;
+    public List<GenreDTO> addGenre(GenreDTO genreDTO){
+        genres.add(genreDTO);
+        return this.genres;
     }
 
-    public Set<TranslatorDTO> getTranslators() {
-        return translators;
+    public List<TranslatorDTO> addTranslator(TranslatorDTO translatorDTO){
+        translators.add(translatorDTO);
+        return this.translators;
     }
 }

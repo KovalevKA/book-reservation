@@ -24,4 +24,8 @@ public interface AbstractService<Entity, DTO> {
     default Flux<DTO> getByNameLike(String string) {
         throw new AbstractMethodError("Must be override");
     }
+
+    default Flux<DTO> getByBookId (Long id){
+        throw new AbstractMethodError("Must be override");
+    }
 }
