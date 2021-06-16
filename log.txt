@@ -591,3 +591,139 @@ Stack trace:
 [main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - Started BookReservationApplication in 5.233 seconds (JVM running for 6.14) 
 [main] [34mINFO [0;39m [36mo.s.b.a.ApplicationAvailabilityBean[0;39m - Application availability state LivenessState changed to CORRECT 
 [main] [34mINFO [0;39m [36mo.s.b.a.ApplicationAvailabilityBean[0;39m - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC 
+[main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - Starting BookReservationApplication using Java 1.8.0_292 on wolter-pc with PID 15038 (/home/wolter/IdeaProjects/book-reservation/target/classes started by root in /home/wolter/IdeaProjects/book-reservation) 
+[main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - No active profile set, falling back to default profiles: default 
+[background-preinit] [31mWARN [0;39m [36mo.s.h.c.j.Jackson2ObjectMapperBuilder[0;39m - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Multiple Spring Data modules found, entering strict repository configuration mode! 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data R2DBC repositories in DEFAULT mode. 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 92 ms. Found 6 R2DBC repository interfaces. 
+[main] [34mINFO [0;39m [36mo.f.c.i.l.VersionPrinter[0;39m - Flyway Community Edition 7.7.3 by Redgate 
+[main] [34mINFO [0;39m [36mo.f.c.i.d.b.DatabaseType[0;39m - Database: jdbc:postgresql://localhost:5432/book-reservation (PostgreSQL 13.2) 
+[main] [34mINFO [0;39m [36mo.f.c.i.c.DbValidate[0;39m - Successfully validated 2 migrations (execution time 00:00.047s) 
+[main] [34mINFO [0;39m [36mo.f.c.i.c.DbMigrate[0;39m - Current version of schema "public": 2 
+[main] [34mINFO [0;39m [36mo.f.c.i.c.DbMigrate[0;39m - Schema "public" is up to date. No migration necessary. 
+[main] [34mINFO [0;39m [36mo.s.b.w.e.n.NettyWebServer[0;39m - Netty started on port 8081 
+[main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - Started BookReservationApplication in 5.783 seconds (JVM running for 6.883) 
+[main] [34mINFO [0;39m [36mo.s.b.a.ApplicationAvailabilityBean[0;39m - Application availability state LivenessState changed to CORRECT 
+[main] [34mINFO [0;39m [36mo.s.b.a.ApplicationAvailabilityBean[0;39m - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC 
+[main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - Starting BookReservationApplication using Java 1.8.0_292 on wolter-pc with PID 15220 (/home/wolter/IdeaProjects/book-reservation/target/classes started by root in /home/wolter/IdeaProjects/book-reservation) 
+[main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - No active profile set, falling back to default profiles: default 
+[background-preinit] [31mWARN [0;39m [36mo.s.h.c.j.Jackson2ObjectMapperBuilder[0;39m - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Multiple Spring Data modules found, entering strict repository configuration mode! 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data R2DBC repositories in DEFAULT mode. 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 134 ms. Found 6 R2DBC repository interfaces. 
+[main] [34mINFO [0;39m [36mo.f.c.i.l.VersionPrinter[0;39m - Flyway Community Edition 7.7.3 by Redgate 
+[main] [34mINFO [0;39m [36mo.f.c.i.d.b.DatabaseType[0;39m - Database: jdbc:postgresql://localhost:5432/book-reservation (PostgreSQL 13.2) 
+[main] [34mINFO [0;39m [36mo.f.c.i.c.DbValidate[0;39m - Successfully validated 2 migrations (execution time 00:00.030s) 
+[main] [34mINFO [0;39m [36mo.f.c.i.c.DbMigrate[0;39m - Current version of schema "public": 2 
+[main] [34mINFO [0;39m [36mo.f.c.i.c.DbMigrate[0;39m - Schema "public" is up to date. No migration necessary. 
+[main] [34mINFO [0;39m [36mo.s.b.w.e.n.NettyWebServer[0;39m - Netty started on port 8081 
+[main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - Started BookReservationApplication in 6.393 seconds (JVM running for 7.792) 
+[main] [34mINFO [0;39m [36mo.s.b.a.ApplicationAvailabilityBean[0;39m - Application availability state LivenessState changed to CORRECT 
+[main] [34mINFO [0;39m [36mo.s.b.a.ApplicationAvailabilityBean[0;39m - Application availability state ReadinessState changed to ACCEPTING_TRAFFIC 
+[main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - Starting BookReservationApplication using Java 1.8.0_292 on wolter-pc with PID 15835 (/home/wolter/IdeaProjects/book-reservation/target/classes started by root in /home/wolter/IdeaProjects/book-reservation) 
+[main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - No active profile set, falling back to default profiles: default 
+[background-preinit] [31mWARN [0;39m [36mo.s.h.c.j.Jackson2ObjectMapperBuilder[0;39m - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Multiple Spring Data modules found, entering strict repository configuration mode! 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data R2DBC repositories in DEFAULT mode. 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 115 ms. Found 6 R2DBC repository interfaces. 
+[main] [31mWARN [0;39m [36mo.s.b.w.r.c.AnnotationConfigReactiveWebServerApplicationContext[0;39m - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flyway' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.flywaydb.core.Flyway]: Factory method 'flyway' threw exception; nested exception is java.lang.IllegalArgumentException: Name must not be null 
+[main] [34mINFO [0;39m [36mo.s.b.a.l.ConditionEvaluationReportLoggingListener[0;39m - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled. 
+[main] [1;31mERROR[0;39m [36mo.s.b.SpringApplication[0;39m - Application run failed 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flyway' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.flywaydb.core.Flyway]: Factory method 'flyway' threw exception; nested exception is java.lang.IllegalArgumentException: Name must not be null
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:658)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:638)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:64)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:438)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:337)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1336)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1325)
+	at com.example.bookreservation.BookReservationApplication.main(BookReservationApplication.java:10)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.flywaydb.core.Flyway]: Factory method 'flyway' threw exception; nested exception is java.lang.IllegalArgumentException: Name must not be null
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 19 common frames omitted
+Caused by: java.lang.IllegalArgumentException: Name must not be null
+	at org.springframework.util.Assert.notNull(Assert.java:201)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:248)
+	at org.springframework.util.ClassUtils.resolveClassName(ClassUtils.java:324)
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperty.convertFromString(DataSourceBuilder.java:455)
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperty.set(DataSourceBuilder.java:431)
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.set(DataSourceBuilder.java:333)
+	at org.springframework.boot.jdbc.DataSourceBuilder.build(DataSourceBuilder.java:195)
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration.getMigrationDataSource(FlywayAutoConfiguration.java:143)
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration.configureDataSource(FlywayAutoConfiguration.java:130)
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration.flyway(FlywayAutoConfiguration.java:116)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	... 20 common frames omitted
+[main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - Starting BookReservationApplication using Java 1.8.0_292 on wolter-pc with PID 4474 (/home/wolter/IdeaProjects/book-reservation/target/classes started by root in /home/wolter/IdeaProjects/book-reservation) 
+[main] [34mINFO [0;39m [36mc.e.b.BookReservationApplication[0;39m - No active profile set, falling back to default profiles: default 
+[background-preinit] [31mWARN [0;39m [36mo.s.h.c.j.Jackson2ObjectMapperBuilder[0;39m - For Jackson Kotlin classes support please add "com.fasterxml.jackson.module:jackson-module-kotlin" to the classpath 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Multiple Spring Data modules found, entering strict repository configuration mode! 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data R2DBC repositories in DEFAULT mode. 
+[main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 96 ms. Found 6 R2DBC repository interfaces. 
+[main] [31mWARN [0;39m [36mo.s.b.w.r.c.AnnotationConfigReactiveWebServerApplicationContext[0;39m - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flyway' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.flywaydb.core.Flyway]: Factory method 'flyway' threw exception; nested exception is java.lang.IllegalArgumentException: Name must not be null 
+[main] [34mINFO [0;39m [36mo.s.b.a.l.ConditionEvaluationReportLoggingListener[0;39m - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled. 
+[main] [1;31mERROR[0;39m [36mo.s.b.SpringApplication[0;39m - Application run failed 
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flyway' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.flywaydb.core.Flyway]: Factory method 'flyway' threw exception; nested exception is java.lang.IllegalArgumentException: Name must not be null
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:658)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:638)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1334)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:944)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583)
+	at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:64)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:758)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:438)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:337)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1336)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1325)
+	at com.example.bookreservation.BookReservationApplication.main(BookReservationApplication.java:10)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.flywaydb.core.Flyway]: Factory method 'flyway' threw exception; nested exception is java.lang.IllegalArgumentException: Name must not be null
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:185)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653)
+	... 19 common frames omitted
+Caused by: java.lang.IllegalArgumentException: Name must not be null
+	at org.springframework.util.Assert.notNull(Assert.java:201)
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:248)
+	at org.springframework.util.ClassUtils.resolveClassName(ClassUtils.java:324)
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperty.convertFromString(DataSourceBuilder.java:455)
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperty.set(DataSourceBuilder.java:431)
+	at org.springframework.boot.jdbc.DataSourceBuilder$MappedDataSourceProperties.set(DataSourceBuilder.java:333)
+	at org.springframework.boot.jdbc.DataSourceBuilder.build(DataSourceBuilder.java:195)
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration.getMigrationDataSource(FlywayAutoConfiguration.java:143)
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration.configureDataSource(FlywayAutoConfiguration.java:130)
+	at org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration$FlywayConfiguration.flyway(FlywayAutoConfiguration.java:116)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:154)
+	... 20 common frames omitted
