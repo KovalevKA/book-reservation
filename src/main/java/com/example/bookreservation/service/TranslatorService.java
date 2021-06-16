@@ -39,4 +39,9 @@ public class TranslatorService extends
             .flatMap(translatorRepository::save)
             .map(translatorMapper::toDTO);
     }
+
+    @Override
+    public Flux<TranslatorDTO> getByBookId(Long id) {
+        return translatorRepository.findByBookId(id).map(translatorMapper::toDTO);
+    }
 }

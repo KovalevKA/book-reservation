@@ -39,4 +39,9 @@ public class GenreService extends
             .flatMap(genreRepository::save)
             .map(genreMapper::toDTO);
     }
+
+    @Override
+    public Flux<GenreDTO> getByBookId(Long id) {
+        return genreRepository.findByBookId(id).map(genreMapper::toDTO);
+    }
 }

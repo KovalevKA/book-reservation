@@ -20,18 +20,4 @@ public class BookDTO {
     private List<GenreDTO> genres = new ArrayList<>();
     private List<TranslatorDTO> translators = new ArrayList<>();
 
-    public List<AuthorDTO> addAuthor(AuthorDTO authorDTO){
-        authors.add(authorDTO);
-        return this.authors;
-    }
-
-    public List<GenreDTO> addGenre(GenreDTO genreDTO){
-        genres.add(genreDTO);
-        return this.genres;
-    }
-
-    public List<TranslatorDTO> addTranslator(TranslatorDTO translatorDTO){
-        translators.add(translatorDTO);
-        return this.translators;
-    }
 }

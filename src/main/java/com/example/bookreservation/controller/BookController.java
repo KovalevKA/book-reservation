@@ -1,9 +1,7 @@
 package com.example.bookreservation.controller;
 
-import com.example.bookreservation.dto.requestBodyParams.RequestParamsForSearchBooks;
 import com.example.bookreservation.dto.BookDTO;
-import com.example.bookreservation.entity.Book;
-import com.example.bookreservation.repository.BookRepository;
+import com.example.bookreservation.dto.requestBodyParams.RequestParamsForSearchBooks;
 import com.example.bookreservation.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +22,6 @@ public class BookController {
 
     @Autowired
     private BookService bookService;
-    @Autowired
-    private BookRepository bookRepository;
-
-    @GetMapping
-    public Flux<Book> getAll(){return bookRepository.findAll();}
 
     @PostMapping("search")
     public Flux<BookDTO> getBooksWhithParams(

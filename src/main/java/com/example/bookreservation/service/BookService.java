@@ -20,9 +20,14 @@ public class BookService extends
 
     @Autowired
     private BookRepositoryQueries bookRepository;
-
     @Autowired
     private AbstractMapper<Book, BookDTO> bookMapper;
+    @Autowired
+    private AuthorService authorService;
+    @Autowired
+    private GenreService genreService;
+    @Autowired
+    private TranslatorService translatorService;
 
     @Override
     public Mono<BookDTO> editById(Long id, BookDTO data) throws EntityNotFoundException {
@@ -41,6 +46,7 @@ public class BookService extends
 
     public Flux<BookDTO> findByParams(Boolean isReserved, String bookName,
         List<Long> listGenreId, List<Long> listAuthorId, List<Long> listTranslatorsId) {
+
         return bookRepository
             .findByParams(
                 isReserved,
@@ -49,6 +55,37 @@ public class BookService extends
                 listGenreId,
                 listTranslatorsId,
                 now()
-            ).map(bookMapper::toDTO);
+            )
+            .map(bookMapper::toDTO)
+            .flatMap(bookDTO ->
+                Mono.just(bookDTO)
+                    .zipWith(authorService.getByBookId(bookDTO.getBookId())
+                        .collectList()
+                    )
+                    .map(tupla -> {
+                        tupla.getT1().setAuthors(tupla.getT2());
+                        return tupla.getT1();
+                    })
+            ).flatMap(bookDTO ->
+                Mono.just(bookDTO)
+                    .zipWith(genreService.getByBookId(bookDTO.getBookId())
+                        .collectList()
+                    )
+                    .map(tupla -> {
+                        tupla.getT1().setGenres(tupla.getT2());
+                        return tupla.getT1();
+                    })
+            ).flatMap(bookDTO ->
+                Mono.just(bookDTO)
+                    .zipWith(translatorService.getByBookId(bookDTO.getBookId())
+                        .collectList()
+                    )
+                    .map(tupla -> {
+                        tupla.getT1().setTranslators(tupla.getT2());
+                        return tupla.getT1();
+                    })
+            );
+
     }
+
 }
