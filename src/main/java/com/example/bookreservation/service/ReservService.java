@@ -34,7 +34,7 @@ public class ReservService {
             .findByBookIdInAndReservationDateCancelGreaterThanEqual(ids, now())
             .map(reserv -> reservMapper.toDTO(reserv));
     }
-/*TODO:sdsd*/
+
     public Flux<ReservDTO> make(Long id, List<Long> bookIds, LocalDate dateTo)
         throws IllegalArgumentException {
         return bookRepository.getFreeBooksByListId(bookIds)
