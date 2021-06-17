@@ -3,5 +3,5 @@ databaseChangeLog:
       # schema
       file: db/changelog/V1__init.sql
   - include:
-      file: db/changelog/V2__addSome.sql
       # data
+      file: db/changelog/V2__addSome.sql
