@@ -20,8 +20,19 @@
 		<org.springdoc.version>1.2.32</org.springdoc.version>
 		<modelmapper.version>2.3.9</modelmapper.version>
 		<mockMvc.version>3.0.0</mockMvc.version>
+		<elasticsearch.version>7.12.0</elasticsearch.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>elasticsearch-rest-high-level-client</artifactId>
+			<version>${elasticsearch.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>elasticsearch</artifactId>
+			<version>${elasticsearch.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>io.rest-assured</groupId>
 			<artifactId>spring-mock-mvc</artifactId>
