@@ -7,8 +7,6 @@ target/
 .mvn
 mvnw
 mvnw.cmd
-*.txt
-*.gz
 
 ### STS ###
 .apt_generated
@@ -37,4 +35,5 @@ build/
 
 ### VS Code ###
 .vscode/
-log.txt.2021-06-13.0.gz
+*.gz
+*.txt
