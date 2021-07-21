@@ -1,6 +1,8 @@
 package com.example.bookreservation.controller;
 
 import com.example.bookreservation.dto.BookDTO;
+import com.example.bookreservation.dto.requestBodyParams.AbstractRequestParams;
+import com.example.bookreservation.dto.requestBodyParams.RequestParamsForSearchBooks;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.service.BookService;
 import java.util.List;
@@ -18,39 +20,43 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("books")
 public class BookController {
 
-  @Autowired
-  private BookService<Book, BookDTO> bookService;
+    @Autowired
+    private BookService<Book, BookDTO> bookService;
 
-  @PostMapping("search")
-  public List<BookDTO> getBooksWhithParams(
-      @RequestParam(name = "isReserved", defaultValue = "false", required = false) boolean isReserved,
-      @RequestParam(name = "bookName", defaultValue = "", required = false) String bookName,
-      @RequestParam(name = "listGenreId", defaultValue = "", required = false) List<Long> listGenreId,
-      @RequestParam(name = "listAuthorId", defaultValue = "", required = false) List<Long> listAuthorId,
-      @RequestParam(name = "listTranslatorsId", defaultValue = "", required = false) List<Long> listTranslatorsId
-  ) {
-    return bookService
-        .findByParams(isReserved, bookName.toUpperCase(), listGenreId, listAuthorId,
-            listTranslatorsId);
-  }
+    @GetMapping("test")
+    public void ggg (){
+    }
 
-  @PostMapping()
-  public BookDTO addBook(@RequestBody BookDTO data) {
-    return bookService.create(data);
-  }
+    @PostMapping("search")
+    public List<BookDTO> getBooksWhithParams(
+        @RequestParam(name = "isReserved", defaultValue = "false", required = false) boolean isReserved,
+        @RequestParam(name = "bookName", defaultValue = "", required = false) String bookName,
+        @RequestParam(name = "listGenreId", defaultValue = "", required = false) List<Long> listGenreId,
+        @RequestParam(name = "listAuthorId", defaultValue = "", required = false) List<Long> listAuthorId,
+        @RequestParam(name = "listTranslatorsId", defaultValue = "", required = false) List<Long> listTranslatorsId
+    ) {
+        return bookService
+            .findByParams(isReserved, bookName.toUpperCase(), listGenreId, listAuthorId,
+                listTranslatorsId);
+    }
 
-  @GetMapping("{id}")
-  public BookDTO getInfoAboutBookByBookId(@PathVariable("id") Long id) {
-    return bookService.getById(id);
-  }
+    @PostMapping()
+    public BookDTO addBook(@RequestBody BookDTO data) {
+        return bookService.create(data);
+    }
 
-  @PostMapping("{id}")
-  public BookDTO editBook(@PathVariable("id") Long id, @RequestBody BookDTO data) {
-    return bookService.editById(id, data);
-  }
+    @GetMapping("{id}")
+    public BookDTO getInfoAboutBookByBookId(@PathVariable("id") Long id) {
+        return bookService.getById(id);
+    }
 
-  @DeleteMapping("{id}")
-  public void deleteBook(@PathVariable Long id) {
-    bookService.deleteById(id);
-  }
+    @PostMapping("{id}")
+    public BookDTO editBook(@PathVariable("id") Long id, @RequestBody BookDTO data) {
+        return bookService.editById(id, data);
+    }
+
+    @DeleteMapping("{id}")
+    public void deleteBook(@PathVariable Long id) {
+        bookService.deleteById(id);
+    }
 }

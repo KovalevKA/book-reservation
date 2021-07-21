@@ -1,23 +1,21 @@
 package com.example.bookreservation.service;
 
 import com.example.bookreservation.dto.AbstractDTO;
-import com.example.bookreservation.entity.AbstractEntity;
+import com.example.bookreservation.dto.requestBodyParams.AbstractRequestParams;
 import java.util.List;
 import java.util.Map;
+import org.elasticsearch.rest.RestStatus;
+import org.elasticsearch.search.SearchHit;
 
 public interface AbstractElasticSearchService
-    <Entity extends AbstractEntity, DTO extends AbstractDTO> {
+    <Params extends AbstractRequestParams, DTO extends AbstractDTO> {
 
-    List<DTO> getAll();
+    RestStatus add(Params params, DTO dto) throws Exception;
 
-    DTO getById(Long id);
+    RestStatus update(Params params, DTO dto) throws Exception;
 
-    boolean deleteById(Long id);
+    RestStatus delete(Params params, DTO dto) throws Exception;
 
-    DTO create(DTO dto);
-
-    DTO editById(Long id, DTO dto);
-
-    List<DTO> search(String title, Map<String, ?> params) throws Exception;
+    List<DTO> search(Params params, DTO dto) throws Exception;
 
 }
