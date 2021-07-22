@@ -14,8 +14,8 @@ public interface AbstractElasticSearchService
 
     RestStatus update(Params params, DTO dto) throws Exception;
 
-    RestStatus delete(Params params, DTO dto) throws Exception;
+    RestStatus delete(Params params) throws Exception;
 
-    List<DTO> search(Params params, DTO dto) throws Exception;
+    List<DTO> search(Params params) throws Exception;
 
 }

@@ -2,10 +2,11 @@ package com.example.bookreservation.controller;
 
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.dto.requestBodyParams.AbstractRequestParams;
-import com.example.bookreservation.dto.requestBodyParams.RequestParamsForSearchBooks;
+import com.example.bookreservation.dto.requestBodyParams.RequestBookSearchParam;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.service.BookService;
 import java.util.List;
+import org.elasticsearch.rest.RestStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +24,24 @@ public class BookController {
     @Autowired
     private BookService<Book, BookDTO> bookService;
 
-    @GetMapping("test")
-    public void ggg (){
+    @PostMapping("es/search")
+    public List<BookDTO> search(@RequestBody RequestBookSearchParam params) throws Exception {
+        return bookService.search(params);
+    }
+
+    @PostMapping("es/add")
+    public RestStatus elAdd(
+        @RequestBody BookDTO dto) throws Exception {
+        AbstractRequestParams params = new AbstractRequestParams();
+        params.setElIndex("books");
+        return bookService.add((RequestBookSearchParam) params, dto);
+    }
+    @PostMapping("es/delete/{id}")
+    public RestStatus delete(@PathVariable String id) throws Exception{
+        AbstractRequestParams params = new AbstractRequestParams();
+        params.setElIndex("books");
+        params.setElId(id);
+        return bookService.delete((RequestBookSearchParam) params);
     }
 
     @PostMapping("search")
