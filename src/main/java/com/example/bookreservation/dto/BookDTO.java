@@ -1,37 +1,16 @@
 package com.example.bookreservation.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-import lombok.AllArgsConstructor;
+import java.util.Set;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class BookDTO {
+public class BookDTO extends AbstractDTO {
 
-    private Long bookId;
-    private String name;
-    private String publishHouse;
-    private int publishYear;
-    private String description;
-    private List<AuthorDTO> authors = new ArrayList<>();
-    private List<GenreDTO> genres = new ArrayList<>();
-    private List<TranslatorDTO> translators = new ArrayList<>();
-
-    public List<AuthorDTO> addAuthor(AuthorDTO authorDTO){
-        authors.add(authorDTO);
-        return this.authors;
-    }
-
-    public List<GenreDTO> addGenre(GenreDTO genreDTO){
-        genres.add(genreDTO);
-        return this.genres;
-    }
-
-    public List<TranslatorDTO> addTranslator(TranslatorDTO translatorDTO){
-        translators.add(translatorDTO);
-        return this.translators;
-    }
+  private String name;
+  private String publishHouse;
+  private int publishYear;
+  private String description;
+  private Set<AuthorDTO> authors;
+  private Set<GenreDTO> genres;
+  private Set<TranslatorDTO> translators;
 }

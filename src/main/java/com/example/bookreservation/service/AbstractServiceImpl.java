@@ -1,55 +1,65 @@
 package com.example.bookreservation.service;
 
+import com.example.bookreservation.dto.AbstractDTO;
+import com.example.bookreservation.entity.AbstractEntity;
 import com.example.bookreservation.mapper.AbstractMapper;
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
+import java.lang.reflect.Field;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.data.domain.Example;
-import org.springframework.data.r2dbc.repository.R2dbcRepository;
-import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-
+/*
 @Service
 @Lazy
-public class AbstractServiceImpl<Entity, DTO,
-    Repository extends R2dbcRepository<Entity, Long>,
+*/
+public class AbstractServiceImpl<Entity extends AbstractEntity,
+    DTO extends AbstractDTO, Repository extends JpaRepository<Entity, Long>,
     Mapper extends AbstractMapper<Entity, DTO>>
     implements AbstractService<Entity, DTO> {
 
-    @Autowired
-    private Repository repository;
-    @Autowired
-    private Mapper mapper;
+  @Autowired
+  private Repository repository;
+  @Autowired
+  private Mapper mapper;
 
+  @Override
+  public List<DTO> getAll() {
+    return mapper.toDTOs(repository.findAll());
+  }
 
-    @Override
-    public Flux<DTO> getAll() {
-        return repository.findAll().map(mapper::toDTO);
+  @Override
+  public DTO getById(Long id) {
+    return mapper.toDTO(repository.findById(id).get());
+  }
+
+  @Override
+  public void deleteById(Long id) {
+    repository.deleteById(id);
+  }
+
+  @Override
+  public DTO create(DTO dto) {
+    Entity entity = mapper.toEntity(dto);
+    return mapper.toDTO(repository.saveAndFlush(entity));
+  }
+
+  @Override
+  public DTO editById(Long id, DTO dto) {
+    Entity saveEntity = repository.findById(id).get();
+
+    for (Field field : dto.getClass().getDeclaredFields()) {
+      field.setAccessible(true);
+      Field saveField;
+      try {
+        saveField = saveEntity.getClass().getDeclaredField(field.getName());
+        saveField.setAccessible(true);
+        saveField.set(saveEntity, field.get(dto));
+        saveField.setAccessible(false);
+      } catch (Exception e) {
+        throw new IllegalArgumentException("Field not found");
+      }
+      field.setAccessible(false);
     }
-
-    @Override
-    public Mono<DTO> getById(Long id) throws EntityNotFoundException {
-        return repository.findById(id).map(mapper::toDTO);
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        repository.deleteById(id);
-    }
-
-    @Override
-    public Mono<DTO> create(DTO dto) {
-        Entity entity = mapper.toEntity(dto);
-        return repository.exists(
-            Example.of(entity)
-        )
-            .flatMap(aBoolean ->
-                aBoolean ? Mono.error(new EntityExistsException("Entity is exist"))
-                    : repository.save(entity))
-            .map(mapper::toDTO)
-            ;
-    }
+    return mapper.toDTO(repository.saveAndFlush(saveEntity));
+  }
 }
