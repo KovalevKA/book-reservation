@@ -1,4 +1,4 @@
-package com.example.bookreservation.service;
+package com.example.bookreservation.service.elasticSearch;
 
 import com.example.bookreservation.dto.AbstractDTO;
 import com.example.bookreservation.dto.requestBodyParams.AbstractRequestParams;

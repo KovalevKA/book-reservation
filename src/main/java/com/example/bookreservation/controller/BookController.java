@@ -26,36 +26,6 @@ public class BookController {
     @Autowired
     private BookService<Book, BookDTO> bookService;
 
-    @PostMapping("es/search")
-    public List<BookDTO> search(@RequestBody RequestBookSearchParam params) throws Exception {
-        return bookService.search(params);
-    }
-
-    @PostMapping("es/add")
-    public RestStatus elAdd(
-        @RequestBody BookDTO dto) throws Exception {
-        AbstractRequestParams params = new AbstractRequestParams();
-        params.setElIndex("books");
-        return bookService.add((RequestBookSearchParam) params, dto);
-    }
-
-    @PostMapping("es/delete/{id}")
-    public RestStatus delete(@PathVariable String id) throws Exception {
-        AbstractRequestParams params = new AbstractRequestParams();
-        params.setElIndex("books");
-        params.setElId(id);
-        return bookService.delete((RequestBookSearchParam) params);
-    }
-
-    @PostMapping(value = "es/update/{id}")
-    public RestStatus update(@PathVariable String id,
-        @RequestBody BookDTO dto) throws Exception {
-        RequestBookSearchParam params = new RequestBookSearchParam();
-        params.setElIndex("books");
-        params.setElId(id);
-        return bookService.update(params, dto);
-    }
-
     @PostMapping("search")
     public List<BookDTO> getBooksWhithParams(
         @RequestParam(name = "isReserved", defaultValue = "false", required = false) boolean isReserved,
