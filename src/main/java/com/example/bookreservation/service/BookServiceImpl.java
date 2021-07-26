@@ -20,13 +20,12 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
-import org.elasticsearch.search.aggregations.AggregationBuilder;
-import org.elasticsearch.search.aggregations.AggregationBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,9 +58,12 @@ public class BookServiceImpl
     @Override
     public List<BookDTO> search(RequestBookSearchParam params) throws Exception {
         List<BookDTO> result = new ArrayList<>();
-        SearchRequest searchRequest = new SearchRequest(params.getElIndex());
+        SearchRequest searchRequest = new SearchRequest();
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(QueryBuilders.matchAllQuery());
+        searchSourceBuilder.query(QueryBuilders.boolQuery()
+            .filter(QueryBuilders.matchPhraseQuery("authors.name", params.getAuthors()))
+            .filter(QueryBuilders.matchPhraseQuery("name", params.getName()))
+        );
         searchRequest.source(searchSourceBuilder);
         SearchHits searchHits = client.search(searchRequest, RequestOptions.DEFAULT).getHits();
         for (SearchHit searchHit : searchHits) {

@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RequestBookSearchParam extends AbstractRequestParams {
 
-    private List<String> name = new ArrayList<>();
-    private List<String> publishHouse = new ArrayList<>();
-    private List<Integer> publishYear = new ArrayList<>();
-    private List<String> authors = new ArrayList<>();
-    private List<String> genres = new ArrayList<>();
-    private List<String> translators = new ArrayList<>();
+    private String name =  "";
+    private String publishHouse =  "";
+    private Integer publishYear;
+    private String authors =  "";
+    private String genres =  "";
+    private String translators =  "";
 
 }

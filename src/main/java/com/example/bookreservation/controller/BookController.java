@@ -8,6 +8,7 @@ import com.example.bookreservation.service.BookService;
 import java.util.List;
 import org.elasticsearch.rest.RestStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -36,12 +38,22 @@ public class BookController {
         params.setElIndex("books");
         return bookService.add((RequestBookSearchParam) params, dto);
     }
+
     @PostMapping("es/delete/{id}")
-    public RestStatus delete(@PathVariable String id) throws Exception{
+    public RestStatus delete(@PathVariable String id) throws Exception {
         AbstractRequestParams params = new AbstractRequestParams();
         params.setElIndex("books");
         params.setElId(id);
         return bookService.delete((RequestBookSearchParam) params);
+    }
+
+    @PostMapping(value = "es/update/{id}")
+    public RestStatus update(@PathVariable String id,
+        @RequestBody BookDTO dto) throws Exception {
+        RequestBookSearchParam params = new RequestBookSearchParam();
+        params.setElIndex("books");
+        params.setElId(id);
+        return bookService.update(params, dto);
     }
 
     @PostMapping("search")
