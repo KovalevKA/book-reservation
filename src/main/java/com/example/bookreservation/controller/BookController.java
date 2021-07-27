@@ -1,9 +1,10 @@
 package com.example.bookreservation.controller;
 
 import com.example.bookreservation.dto.BookDTO;
+import com.example.bookreservation.dto.requestBodyParams.RequestBookSearchParam;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.service.BookService;
-import com.example.bookreservation.service.elasticSearch.BookElasticSearchService;
+import com.example.bookreservation.service.elasticSearch.AbstractElasticSearchService;
 import java.io.IOException;
 import java.util.List;
 import org.elasticsearch.rest.RestStatus;
@@ -24,13 +25,13 @@ public class BookController {
     @Autowired
     private BookService<Book, BookDTO> bookService;
     @Autowired
-    private BookElasticSearchService bookBookDTOAbstractElasticSearchService;
+    private AbstractElasticSearchService<RequestBookSearchParam, BookDTO> elasticSearchService;
 
     @GetMapping
     public List<BookDTO> getBooksWithPagination(
         @RequestParam(defaultValue = "10") Integer countInPage,
         @RequestParam(defaultValue = "1") Integer page) throws IOException {
-        return bookBookDTOAbstractElasticSearchService.getWithPagination(countInPage, page);
+        return elasticSearchService.getWithPagination(countInPage, page);
     }
 
     @PostMapping("search")
@@ -50,7 +51,7 @@ public class BookController {
     public BookDTO addBook(@RequestBody BookDTO data) throws Exception {
         String id = bookService.create(data).getId();
         data.setId(id);
-        bookBookDTOAbstractElasticSearchService.add(data);
+        elasticSearchService.add(data);
         return data;
     }
 
@@ -62,13 +63,13 @@ public class BookController {
     @PostMapping("{id}")
     public BookDTO editBook(@PathVariable("id") Long id, @RequestBody BookDTO data)
         throws Exception {
-        bookBookDTOAbstractElasticSearchService.update(id.toString(), data);
+        elasticSearchService.update(id.toString(), data);
         return bookService.editById(id, data);
     }
 
     @DeleteMapping("{id}")
     public RestStatus deleteBook(@PathVariable Long id) throws Exception {
         bookService.deleteById(id);
-        return bookBookDTOAbstractElasticSearchService.delete(id.toString());
+        return elasticSearchService.delete(id.toString());
     }
 }

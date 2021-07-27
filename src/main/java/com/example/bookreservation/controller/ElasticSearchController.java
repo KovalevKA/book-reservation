@@ -27,21 +27,4 @@ public class ElasticSearchController {
         return elasticSearchService.search(params);
     }
 
-    @PostMapping("add")
-    public RestStatus add(
-        @RequestBody BookDTO dto) throws Exception {
-        return elasticSearchService.add(dto);
-    }
-
-    @PostMapping("delete/{id}")
-    public RestStatus delete(@PathVariable String id) throws Exception {
-        return elasticSearchService.delete(id);
-    }
-
-    @PostMapping(value = "update/{id}")
-    public RestStatus update(@PathVariable String id,
-        @RequestBody BookDTO dto) throws Exception {
-        return elasticSearchService.update(new String(), dto);
-    }
-
 }
