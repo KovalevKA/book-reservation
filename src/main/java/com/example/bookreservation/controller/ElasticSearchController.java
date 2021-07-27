@@ -30,26 +30,18 @@ public class ElasticSearchController {
     @PostMapping("add")
     public RestStatus add(
         @RequestBody BookDTO dto) throws Exception {
-        RequestBookSearchParam params = new RequestBookSearchParam();
-        params.setElIndex("books");
-        return elasticSearchService.add(params, dto);
+        return elasticSearchService.add(dto);
     }
 
     @PostMapping("delete/{id}")
     public RestStatus delete(@PathVariable String id) throws Exception {
-        RequestBookSearchParam params = new RequestBookSearchParam();
-        params.setElIndex("books");
-        params.setElId(id);
-        return elasticSearchService.delete(params);
+        return elasticSearchService.delete(id);
     }
 
     @PostMapping(value = "update/{id}")
     public RestStatus update(@PathVariable String id,
         @RequestBody BookDTO dto) throws Exception {
-        RequestBookSearchParam params = new RequestBookSearchParam();
-        params.setElIndex("books");
-        params.setElId(id);
-        return elasticSearchService.update(params, dto);
+        return elasticSearchService.update(new String(), dto);
     }
 
 }

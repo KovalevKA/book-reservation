@@ -2,6 +2,7 @@ package com.example.bookreservation.service.elasticSearch;
 
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.dto.requestBodyParams.RequestBookSearchParam;
+import com.example.bookreservation.entity.Book;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,26 +50,24 @@ public class BookElasticSearchService implements
     }
 
     @Override
-    public RestStatus add(RequestBookSearchParam params, BookDTO BookDTO)
+    public RestStatus add(BookDTO BookDTO)
         throws Exception {
-        IndexRequest indexRequest = new IndexRequest(params.getElIndex());
+        IndexRequest indexRequest = new IndexRequest(Book.INDEX);
         indexRequest.source(gson.toJson(BookDTO), XContentType.JSON);
         return client.index(indexRequest, RequestOptions.DEFAULT).status();
     }
 
     @Override
-    public RestStatus update(RequestBookSearchParam params, BookDTO BookDTO)
+    public RestStatus update(String id, BookDTO BookDTO)
         throws Exception {
-        UpdateRequest updateRequest = new UpdateRequest(params.getElIndex(),
-            params.getElId());
+        UpdateRequest updateRequest = new UpdateRequest(Book.INDEX, id);
         updateRequest.doc(gson.toJson(BookDTO), XContentType.JSON);
         return client.update(updateRequest, RequestOptions.DEFAULT).status();
     }
 
     @Override
-    public RestStatus delete(RequestBookSearchParam params) throws Exception {
-        DeleteRequest deleteRequest = new DeleteRequest(params.getElIndex())
-            .id(params.getElId());
+    public RestStatus delete(String id) throws Exception {
+        DeleteRequest deleteRequest = new DeleteRequest(Book.INDEX).id(id);
         return client.delete(deleteRequest, RequestOptions.DEFAULT).status();
     }
 

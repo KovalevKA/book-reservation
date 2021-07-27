@@ -9,11 +9,11 @@ import org.elasticsearch.rest.RestStatus;
 public interface AbstractElasticSearchService
     <Params extends AbstractRequestParams, DTO extends AbstractDTO> {
 
-    RestStatus add(Params params, DTO dto) throws Exception;
+    RestStatus add(DTO dto) throws Exception;
 
-    RestStatus update(Params params, DTO dto) throws Exception;
+    RestStatus update(String id, DTO dto) throws Exception;
 
-    RestStatus delete(Params params) throws Exception;
+    RestStatus delete(String id) throws Exception;
 
     List<DTO> search(Params params) throws Exception;
 

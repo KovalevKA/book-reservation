@@ -27,6 +27,8 @@ import lombok.ToString;
 @Table(name = "book")
 public class Book extends AbstractEntity {
 
+  public static final String INDEX = "books";
+
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
   private final List<Reserv> reservList = new ArrayList<>();
   @ManyToMany(mappedBy = "bookList",
