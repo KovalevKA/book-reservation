@@ -2,10 +2,9 @@ package com.example.bookreservation.service.elasticSearch;
 
 import com.example.bookreservation.dto.AbstractDTO;
 import com.example.bookreservation.dto.requestBodyParams.AbstractRequestParams;
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import org.elasticsearch.rest.RestStatus;
-import org.elasticsearch.search.SearchHit;
 
 public interface AbstractElasticSearchService
     <Params extends AbstractRequestParams, DTO extends AbstractDTO> {
@@ -17,5 +16,7 @@ public interface AbstractElasticSearchService
     RestStatus delete(Params params) throws Exception;
 
     List<DTO> search(Params params) throws Exception;
+
+    List<DTO> getWithPagination(Integer countInPage, Integer page) throws IOException;
 
 }
