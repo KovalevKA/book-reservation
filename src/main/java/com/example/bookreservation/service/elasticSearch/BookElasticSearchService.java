@@ -1,7 +1,6 @@
 package com.example.bookreservation.service.elasticSearch;
 
 import com.example.bookreservation.dto.BookDTO;
-import com.example.bookreservation.dto.requestBodyParams.RequestBookSearchParam;
 import com.example.bookreservation.entity.Book;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -14,6 +13,7 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.unit.Fuzziness;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.rest.RestStatus;
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BookElasticSearchService implements
-    AbstractElasticSearchService<RequestBookSearchParam, BookDTO> {
+    AbstractElasticSearchService<BookDTO> {
 
     private final Gson gson = new Gson();
 
@@ -72,12 +72,17 @@ public class BookElasticSearchService implements
     }
 
     @Override
-    public List<BookDTO> search(RequestBookSearchParam params) throws Exception {
-        SearchRequest searchRequest = new SearchRequest();
+    public List<BookDTO> search(String keyWords) throws Exception {
+        SearchRequest searchRequest = new SearchRequest(Book.INDEX);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-        searchSourceBuilder.query(QueryBuilders.boolQuery()
-            .filter(QueryBuilders.matchPhraseQuery("authors.name", params.getAuthors()))
-            .filter(QueryBuilders.matchPhraseQuery("name", params.getName()))
+        searchSourceBuilder.query(
+            QueryBuilders
+                .multiMatchQuery(
+                    keyWords,
+                    "name", "publishHouse", "description",
+                    "authors.*", "genres.*", "translators.*")
+                .fuzziness(Fuzziness.AUTO)
+                .maxExpansions(2)
         );
         searchRequest.source(searchSourceBuilder);
         return mapping(client.search(searchRequest, RequestOptions.DEFAULT).getHits());
