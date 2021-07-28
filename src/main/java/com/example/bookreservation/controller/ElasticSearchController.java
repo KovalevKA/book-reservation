@@ -1,30 +1,31 @@
 package com.example.bookreservation.controller;
 
 import com.example.bookreservation.dto.BookDTO;
-import com.example.bookreservation.dto.requestBodyParams.RequestBookSearchParam;
 import com.example.bookreservation.service.elasticSearch.AbstractElasticSearchService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import java.util.List;
-import org.elasticsearch.rest.RestStatus;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("es")
 public class ElasticSearchController {
 
-    private AbstractElasticSearchService<RequestBookSearchParam, BookDTO> elasticSearchService;
+    @Autowired
+    private AbstractElasticSearchService<BookDTO> elasticSearchService;
 
-    public ElasticSearchController(
-        AbstractElasticSearchService<RequestBookSearchParam, BookDTO> elasticSearchService) {
-        this.elasticSearchService = elasticSearchService;
-    }
-
+    @Operation(summary = "Search books", description = "search books in elastichsearch by keywords")
     @PostMapping("search")
-    public List<BookDTO> search(@RequestBody RequestBookSearchParam params) throws Exception {
-        return elasticSearchService.search(params);
+    public List<BookDTO> search(
+        @RequestParam
+        @Parameter(description = "Key words for search books. Not be null")
+            String keyWords
+    ) throws Exception {
+        return elasticSearchService.search(keyWords);
     }
 
 }
