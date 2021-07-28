@@ -20,10 +20,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 @NoArgsConstructor
 @Entity
 @AttributeOverride(name = "id", column = @Column(name = "user_id"))
-@Table(name = "user")
+@Table(name = "users")
 public class User extends AbstractEntity implements UserDetails {
 
-    public static final String INDEX = "user";
+    public static final String INDEX = "users";
 
     @Column(name = "user_login")
     private String username;
@@ -33,6 +33,11 @@ public class User extends AbstractEntity implements UserDetails {
         fetch = FetchType.LAZY,
         cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Set<Role> roles;
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

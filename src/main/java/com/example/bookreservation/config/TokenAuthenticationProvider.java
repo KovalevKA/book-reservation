@@ -1,6 +1,6 @@
 package com.example.bookreservation.config;
 
-import com.example.bookreservation.service.security.UserService;
+import com.example.bookreservation.service.security.UserAuthenticationService;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class TokenAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
     @Autowired
-    private UserService userService;
+    private UserAuthenticationService userService;
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails,
@@ -32,7 +32,7 @@ public class TokenAuthenticationProvider extends AbstractUserDetailsAuthenticati
         final Object token = usernamePasswordAuthenticationToken.getCredentials();
         return Optional.ofNullable(token)
             .map(String::valueOf)
-            .flatMap(userService::getByToken)
+            .flatMap(userService::findByToken)
             .orElseThrow(() -> new UsernameNotFoundException("Bad token " + token))
             ;
     }
