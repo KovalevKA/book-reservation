@@ -2,6 +2,7 @@ package com.example.bookreservation.service.security;
 
 import com.example.bookreservation.dto.security.AuthRequestDTO;
 import com.example.bookreservation.dto.security.RoleDTO;
+import com.example.bookreservation.dto.security.UpdateUserDTO;
 import com.example.bookreservation.dto.security.UserDTO;
 import com.example.bookreservation.entity.Status;
 import com.example.bookreservation.entity.security.Role;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -45,6 +47,20 @@ public class UserServiceImpl implements UserService {
         this.roleRepository = roleRepository;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.jwtTokenProvider = jwtTokenProvider;
+    }
+
+    /**
+     * TODO: Think about how make it beautiful. - ModelMapper
+     */
+    @Override
+    public UpdateUserDTO getUserInfo(String header) {
+        String token = header.substring(7);
+        if (!jwtTokenProvider.validateToken(token)) {
+            throw new IllegalArgumentException("Invalid token");
+        }
+        User user = getByName(jwtTokenProvider.getUserName(token));
+        ModelMapper mapper = new ModelMapper();
+        return mapper.map(user, UpdateUserDTO.class);
     }
 
     @Override
