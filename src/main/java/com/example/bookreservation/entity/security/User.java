@@ -53,4 +53,8 @@ public class User extends AbstractEntity {
     @Column(name = "updated")
     private Date updated;
 
+    /**
+     * TODO: Think about how automatically add time. EnableJpaAuditing doesn't work
+     * */
+
 }

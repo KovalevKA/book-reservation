@@ -1,5 +1,6 @@
 package com.example.bookreservation.security.jwt;
 
+import com.example.bookreservation.dto.security.RoleDTO;
 import com.example.bookreservation.entity.security.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
