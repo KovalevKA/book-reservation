@@ -4,6 +4,7 @@ import com.example.bookreservation.dto.security.AuthRequestDTO;
 import com.example.bookreservation.entity.security.User;
 import com.example.bookreservation.security.jwt.JwtTokenProvider;
 import com.example.bookreservation.service.security.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,11 @@ public class AuthentificationController {
     @Autowired
     private UserService userService;
 
-    @PostMapping
-    public ResponseEntity login(@RequestBody AuthRequestDTO dto) {
+    @Operation(summary = "Login", description = "Authorization for getting token")
+    @PostMapping("login")
+    public ResponseEntity login(
+        @RequestBody AuthRequestDTO dto
+    ) {
         try {
             String userName = dto.getUsername();
             authenticationManager
