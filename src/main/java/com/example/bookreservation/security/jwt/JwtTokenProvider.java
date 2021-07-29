@@ -1,7 +1,17 @@
 package com.example.bookreservation.security.jwt;
 
 import com.example.bookreservation.entity.security.Role;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.Date;
+import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -11,13 +21,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
 
 @Component
 public class JwtTokenProvider {
@@ -47,28 +50,29 @@ public class JwtTokenProvider {
         Date now = new Date();
         Date valid = new Date(now.getTime() + timeToLife);
         return Jwts
-                .builder()
-                .setClaims(claims)
-                .setIssuedAt(now)
-                .setExpiration(valid)
-                .signWith(SignatureAlgorithm.ES256, secret)
-                .compact()
-                ;
+            .builder()
+            .setClaims(claims)
+            .setIssuedAt(now)
+            .setExpiration(valid)
+            .signWith(SignatureAlgorithm.HS256, secret)
+            .compact()
+            ;
     }
 
     public Authentication getAuthentication(String token) {
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUserName(token));
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(userDetails, "",
+            userDetails.getAuthorities());
     }
 
     public String getUserName(String token) {
         return Jwts
-                .parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(token)
-                .getBody()
-                .getSubject()
-                ;
+            .parser()
+            .setSigningKey(secret)
+            .parseClaimsJws(token)
+            .getBody()
+            .getSubject()
+            ;
     }
 
     public String resolveToken(HttpServletRequest request) {

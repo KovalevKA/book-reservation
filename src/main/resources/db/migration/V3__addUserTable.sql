@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS "users" (
                                         "user_id" BIGSERIAL PRIMARY KEY,
-                                        "user_login" varchar,
-                                        "user_pass" varchar,
+                                        "username" varchar,
+                                        "password" varchar,
                                         "first_name" varchar,
                                         "last_name" varchar,
                                         "status" varchar,

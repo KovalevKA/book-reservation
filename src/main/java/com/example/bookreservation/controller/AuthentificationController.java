@@ -4,6 +4,8 @@ import com.example.bookreservation.dto.security.AuthRequestDTO;
 import com.example.bookreservation.entity.security.User;
 import com.example.bookreservation.security.jwt.JwtTokenProvider;
 import com.example.bookreservation.service.security.UserService;
+import java.util.HashMap;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,9 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("auth")
@@ -34,9 +33,13 @@ public class AuthentificationController {
     public ResponseEntity login(@RequestBody AuthRequestDTO dto) {
         try {
             String userName = dto.getUsername();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName, dto.getPassword()));
+            authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(userName, dto.getPassword()));
             User user = userService.getByName(userName);
-            if (user == null) throw new UsernameNotFoundException("User with username " + userName + " not found");
+            if (user == null) {
+                throw new UsernameNotFoundException(
+                    "User with username " + userName + " not found");
+            }
             String token = jwtTokenProvider.createToken(userName, user.getRoles());
             Map<Object, Object> response = new HashMap<>();
             response.put("username", userName);
