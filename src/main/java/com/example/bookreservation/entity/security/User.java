@@ -2,15 +2,23 @@ package com.example.bookreservation.entity.security;
 
 import com.example.bookreservation.entity.AbstractEntity;
 import com.example.bookreservation.entity.Status;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.AttributeOverride;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-
-import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,19 +29,19 @@ public class User extends AbstractEntity {
 
     public static final String INDEX = "users";
 
-    @Column(name = "user_login")
+    @Column(name = "username")
     private String username;
-    @Column(name = "user_pass")
+    @Column(name = "password")
     private String password;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
     @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+        cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "user_role",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")})
+        joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
+        inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "role_id")})
     private List<Role> roles;
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
