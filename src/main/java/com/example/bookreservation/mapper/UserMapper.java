@@ -1,6 +1,6 @@
 package com.example.bookreservation.mapper;
 
-import com.example.bookreservation.dto.UserDTO;
+import com.example.bookreservation.dto.security.UserDTO;
 import com.example.bookreservation.entity.security.User;
 import java.lang.reflect.Type;
 import org.springframework.stereotype.Component;

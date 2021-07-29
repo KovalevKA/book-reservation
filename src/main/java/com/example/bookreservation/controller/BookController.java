@@ -45,7 +45,7 @@ public class BookController {
     }
 
     @PostMapping("{id}")
-    public BookDTO editBook(@PathVariable("id") Long id, @RequestBody BookDTO data) {
+    public BookDTO editBook(@PathVariable("id") Long id, @RequestBody BookDTO data) throws Exception{
         return bookService.editById(id, data);
     }
 

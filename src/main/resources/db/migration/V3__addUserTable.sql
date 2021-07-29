@@ -2,7 +2,10 @@ CREATE TABLE IF NOT EXISTS "users" (
                                         "user_id" BIGSERIAL PRIMARY KEY,
                                         "user_login" varchar,
                                         "user_pass" varchar,
-                                        "user_role" varchar
+                                        "user_role" varchar,
+                                        "first_name" varchar,
+                                        "last_name" varchar,
+                                        "status" varchar
 );
 CREATE TABLE IF NOT EXISTS "roles" (
                                       "role_id" BIGSERIAL PRIMARY KEY,

@@ -15,7 +15,7 @@ public interface AbstractService<Entity extends AbstractEntity, DTO extends Abst
 
   DTO create(DTO dto);
 
-  DTO editById(Long id, DTO dto);
+  DTO editById(Long id, DTO dto) throws IllegalAccessException;
 
   default Entity getByName(String name) {
     throw new EntityExistsException("Can't found by name");
