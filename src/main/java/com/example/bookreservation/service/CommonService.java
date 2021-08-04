@@ -5,7 +5,7 @@ import com.example.bookreservation.entity.AbstractEntity;
 import java.util.List;
 import javax.persistence.EntityExistsException;
 
-public interface AbstractService<Entity extends AbstractEntity, DTO extends AbstractDTO> {
+public interface CommonService<Entity extends AbstractEntity, DTO extends AbstractDTO> {
 
   List<DTO> getAll();
 

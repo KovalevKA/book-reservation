@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GenreService extends
-    AbstractServiceImpl<Genre, GenreDTO, GenreRepository, AbstractMapper<Genre, GenreDTO>> {
+    CommonServiceImpl<Genre, GenreDTO, GenreRepository, AbstractMapper<Genre, GenreDTO>> {
 
   @Autowired
   private GenreRepository genreRepository;

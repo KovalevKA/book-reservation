@@ -17,13 +17,14 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor //understand, will use it
 public class UserServiceImpl implements UserService {
 
     private final AbstractMapper<Role, RoleDTO> roleMapper;
@@ -32,22 +33,6 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
-
-    @Autowired
-    public UserServiceImpl(
-        AbstractMapper<Role, RoleDTO> roleMapper,
-        AbstractMapper<User, UserDTO> mapper,
-        UserRepository userRepository,
-        RoleRepository roleRepository,
-        BCryptPasswordEncoder bCryptPasswordEncoder,
-        JwtTokenProvider jwtTokenProvider) {
-        this.roleMapper = roleMapper;
-        this.mapper = mapper;
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.jwtTokenProvider = jwtTokenProvider;
-    }
 
     /**
      * TODO: Think about how make it beautiful. - ModelMapper

@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BookElasticSearchService implements
-    AbstractElasticSearchService<RequestBookSearchParam, BookDTO> {
+    CommonElasticSearchService<RequestBookSearchParam, BookDTO> {
 
     private final Gson gson = new Gson();
 

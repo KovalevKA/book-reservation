@@ -1,6 +1,5 @@
 package com.example.bookreservation.security.jwt;
 
-import com.example.bookreservation.dto.security.RoleDTO;
 import com.example.bookreservation.entity.security.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
@@ -11,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,21 +76,18 @@ public class JwtTokenProvider {
             ;
     }
 
-    public String resolveToken(HttpServletRequest request) {
+    public Optional<String> resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7, bearerToken.length());
+            return Optional.of(bearerToken.substring(7, bearerToken.length()));
         }
-        return null;
+        return Optional.empty();
     }
 
     public Boolean validateToken(String token) {
         try {
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
-            if (claimsJws.getBody().getExpiration().before(new Date())) {
-                return false;
-            }
-            return true;
+            return claimsJws.getBody().getExpiration().before(new Date());
         } catch (JwtException | IllegalArgumentException e) {
             throw new JwtAuthentificationException("Token not valid");
         }

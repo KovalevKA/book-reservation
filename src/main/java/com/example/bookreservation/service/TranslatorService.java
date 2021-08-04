@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TranslatorService extends
-    AbstractServiceImpl<Translator, TranslatorDTO, TranslatorRepository, AbstractMapper<Translator, TranslatorDTO>> {
+    CommonServiceImpl<Translator, TranslatorDTO, TranslatorRepository, AbstractMapper<Translator, TranslatorDTO>> {
 
   @Autowired
   private TranslatorRepository translatorRepository;

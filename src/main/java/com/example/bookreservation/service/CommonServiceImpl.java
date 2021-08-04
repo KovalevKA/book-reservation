@@ -12,10 +12,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Service
 @Lazy
 */
-public class AbstractServiceImpl<Entity extends AbstractEntity,
+public class CommonServiceImpl<Entity extends AbstractEntity,
     DTO extends AbstractDTO, Repository extends JpaRepository<Entity, Long>,
     Mapper extends AbstractMapper<Entity, DTO>>
-    implements AbstractService<Entity, DTO> {
+    implements CommonService<Entity, DTO> {
 
   @Autowired
   private Repository repository;

@@ -23,13 +23,13 @@ public class AuthenticationController {
     }
 
     @Operation(summary = "Login", description = "Authorization for getting token")
-    @PostMapping("login")
+    @PostMapping("token")
     public ResponseEntity login(@RequestBody AuthRequestDTO dto) {
         return ResponseEntity.ok(userService.login(dto));
     }
 
-    @Operation(summary = "Registration", description = "Registartion for create new user")
-    @PostMapping("registation")
+    @Operation(summary = "Registration", description = "Registration for create new user")
+    @PostMapping("registration")
     public ResponseEntity registration(@RequestBody AuthRequestDTO dto) {
         return ResponseEntity.ok(userService.registation(dto));
     }

@@ -2,7 +2,7 @@ package com.example.bookreservation.controller;
 
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.dto.requestBodyParams.RequestBookSearchParam;
-import com.example.bookreservation.service.elasticSearch.AbstractElasticSearchService;
+import com.example.bookreservation.service.elasticSearch.CommonElasticSearchService;
 import java.util.List;
 import org.elasticsearch.rest.RestStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("es")
 public class ElasticSearchController {
 
-    private AbstractElasticSearchService<RequestBookSearchParam, BookDTO> elasticSearchService;
+    private CommonElasticSearchService<RequestBookSearchParam, BookDTO> elasticSearchService;
 
     public ElasticSearchController(
-        AbstractElasticSearchService<RequestBookSearchParam, BookDTO> elasticSearchService) {
+        CommonElasticSearchService<RequestBookSearchParam, BookDTO> elasticSearchService) {
         this.elasticSearchService = elasticSearchService;
     }
 

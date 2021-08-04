@@ -7,7 +7,7 @@ import java.util.Map;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
 
-public interface AbstractElasticSearchService
+public interface CommonElasticSearchService
     <Params extends AbstractRequestParams, DTO extends AbstractDTO> {
 
     RestStatus add(Params params, DTO dto) throws Exception;

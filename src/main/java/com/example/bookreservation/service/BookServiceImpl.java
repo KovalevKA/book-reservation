@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BookServiceImpl
-    extends AbstractServiceImpl<Book, BookDTO, BookRepository, AbstractMapper<Book, BookDTO>>
+    extends CommonServiceImpl<Book, BookDTO, BookRepository, AbstractMapper<Book, BookDTO>>
     implements BookService<Book, BookDTO> {
 
     @Autowired

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthorService extends
-    AbstractServiceImpl<Author, AuthorDTO, AuthorRepository, AbstractMapper<Author, AuthorDTO>> {
+    CommonServiceImpl<Author, AuthorDTO, AuthorRepository, AbstractMapper<Author, AuthorDTO>> {
 
     @Autowired
     private AuthorRepository authorRepository;
