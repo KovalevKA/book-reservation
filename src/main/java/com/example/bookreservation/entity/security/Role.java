@@ -1,11 +1,14 @@
 package com.example.bookreservation.entity.security;
 
 import com.example.bookreservation.entity.AbstractEntity;
+import javax.persistence.AttributeOverride;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,10 +19,8 @@ public class Role extends AbstractEntity {
 
     public static final String INDEX = "role";
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "name")
     private String name;
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles", cascade = {CascadeType.PERSIST,
-            CascadeType.MERGE})
-    private List<User> users;
 
 }
