@@ -1,18 +1,7 @@
 package com.example.bookreservation.security.jwt;
 
 import com.example.bookreservation.entity.security.Role;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
+import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +11,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 @Component
 public class JwtTokenProvider {
@@ -87,7 +80,8 @@ public class JwtTokenProvider {
     public Boolean validateToken(String token) {
         try {
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
-            return claimsJws.getBody().getExpiration().before(new Date());
+            Boolean aBoolean = claimsJws.getBody().getExpiration().after(new Date());
+            return aBoolean;
         } catch (JwtException | IllegalArgumentException e) {
             throw new JwtAuthentificationException("Token not valid");
         }
@@ -95,7 +89,7 @@ public class JwtTokenProvider {
 
     public List<String> getRoleNames(List<Role> userRoles) {
         List<String> result = new ArrayList<>();
-        userRoles.forEach(role -> result.add(role.getName()));
+        userRoles.forEach(role -> result.add(role.getName().name()));
         return result;
     }
 }

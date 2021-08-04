@@ -3,11 +3,12 @@ package com.example.bookreservation.security.jwt;
 import com.example.bookreservation.entity.Status;
 import com.example.bookreservation.entity.security.Role;
 import com.example.bookreservation.entity.security.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public final class JwtUserFactory {
 
@@ -29,7 +30,7 @@ public final class JwtUserFactory {
 
     private static List<GrantedAuthority> mapToGrantedAuthority(List<Role> roles) {
         return roles.stream()
-            .map(role -> new SimpleGrantedAuthority(role.getName()))
+                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
             .collect(Collectors.toList())
             ;
     }
