@@ -17,6 +17,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String ADMIN_ENDPOINT = "/admin/**";
     private static final String LOGIN_ENDPOINT = "/auth/**";
+    private static final String SWAGGER_DOX_ENDPOINT = "/swagger-ui/**";
+    private static final String SWAGGER_VERSION_ENDPOINT = "/v3/**";
 
 
     @Autowired
@@ -33,16 +35,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-            .httpBasic().disable()
-            .csrf().disable()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .authorizeRequests()
-            .antMatchers(LOGIN_ENDPOINT).permitAll()
-            .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
-            .anyRequest().authenticated() //
-            .and()
-            .apply(new JwtConfigurer(jwtTokenProvider))
+                .httpBasic().disable()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers(LOGIN_ENDPOINT, SWAGGER_DOX_ENDPOINT, SWAGGER_VERSION_ENDPOINT).permitAll()
+                .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
+                .anyRequest().authenticated() //
+                .and()
+                .apply(new JwtConfigurer(jwtTokenProvider))
         ;
     }
 }
