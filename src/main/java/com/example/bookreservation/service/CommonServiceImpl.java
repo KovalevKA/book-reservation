@@ -3,19 +3,20 @@ package com.example.bookreservation.service;
 import com.example.bookreservation.dto.AbstractDTO;
 import com.example.bookreservation.entity.AbstractEntity;
 import com.example.bookreservation.mapper.AbstractMapper;
-import java.lang.reflect.Field;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.lang.reflect.Field;
+import java.util.List;
 
 /*
 @Service
 @Lazy
 */
-public class AbstractServiceImpl<Entity extends AbstractEntity,
-    DTO extends AbstractDTO, Repository extends JpaRepository<Entity, Long>,
-    Mapper extends AbstractMapper<Entity, DTO>>
-    implements AbstractService<Entity, DTO> {
+public class CommonServiceImpl<Entity extends AbstractEntity,
+        DTO extends AbstractDTO, Repository extends JpaRepository<Entity, Long>,
+        Mapper extends AbstractMapper<Entity, DTO>>
+        implements CommonService<Entity, DTO> {
 
   @Autowired
   private Repository repository;

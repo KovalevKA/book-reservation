@@ -3,25 +3,19 @@ package com.example.bookreservation.controller;
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.service.BookService;
-import com.example.bookreservation.service.elasticSearch.AbstractElasticSearchService;
+import com.example.bookreservation.service.elasticSearch.CommonElasticSearchService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import java.io.IOException;
-import java.util.List;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import org.elasticsearch.rest.RestStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.io.IOException;
+import java.util.List;
 
 @Validated
 @RestController
@@ -31,7 +25,7 @@ public class BookController {
     @Autowired
     private BookService<Book, BookDTO> bookService;
     @Autowired
-    private AbstractElasticSearchService<BookDTO> elasticSearchService;
+    private CommonElasticSearchService<BookDTO> elasticSearchService;
 
     @Operation(summary = "Paginated output of all books", description = "Paginated output of all books")
     @GetMapping

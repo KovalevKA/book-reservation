@@ -7,16 +7,17 @@ import com.example.bookreservation.repository.AuthorRepository;
 import com.example.bookreservation.repository.BookRepository;
 import com.example.bookreservation.repository.GenreRepository;
 import com.example.bookreservation.repository.TranslatorRepository;
-import java.util.Date;
-import java.util.List;
-import javax.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+import java.util.Date;
+import java.util.List;
+
 @Service
 public class BookServiceImpl
-    extends AbstractServiceImpl<Book, BookDTO, BookRepository, AbstractMapper<Book, BookDTO>>
-    implements BookService<Book, BookDTO> {
+        extends CommonServiceImpl<Book, BookDTO, BookRepository, AbstractMapper<Book, BookDTO>>
+        implements BookService<Book, BookDTO> {
 
     @Autowired
     private BookRepository bookRepository;

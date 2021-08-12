@@ -4,13 +4,14 @@ import com.example.bookreservation.dto.GenreDTO;
 import com.example.bookreservation.entity.Genre;
 import com.example.bookreservation.mapper.AbstractMapper;
 import com.example.bookreservation.repository.GenreRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GenreService extends
-    AbstractServiceImpl<Genre, GenreDTO, GenreRepository, AbstractMapper<Genre, GenreDTO>> {
+        CommonServiceImpl<Genre, GenreDTO, GenreRepository, AbstractMapper<Genre, GenreDTO>> {
 
   @Autowired
   private GenreRepository genreRepository;

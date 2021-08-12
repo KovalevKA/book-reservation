@@ -3,10 +3,6 @@ package com.example.bookreservation.service.elasticSearch;
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.entity.Book;
 import com.google.gson.Gson;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.search.SearchRequest;
@@ -22,9 +18,14 @@ import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class BookElasticSearchService implements
-    AbstractElasticSearchService<BookDTO> {
+        CommonElasticSearchService<BookDTO> {
 
     private final Gson gson = new Gson();
 

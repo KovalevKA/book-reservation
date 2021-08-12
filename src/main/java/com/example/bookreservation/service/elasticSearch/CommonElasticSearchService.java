@@ -1,12 +1,13 @@
 package com.example.bookreservation.service.elasticSearch;
 
 import com.example.bookreservation.dto.AbstractDTO;
-import java.io.IOException;
-import java.util.List;
 import org.elasticsearch.rest.RestStatus;
 
-public interface AbstractElasticSearchService
-    <DTO extends AbstractDTO> {
+import java.io.IOException;
+import java.util.List;
+
+public interface CommonElasticSearchService
+        <DTO extends AbstractDTO> {
 
     RestStatus add(DTO dto) throws Exception;
 

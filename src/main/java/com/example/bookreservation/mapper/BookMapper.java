@@ -2,20 +2,17 @@ package com.example.bookreservation.mapper;
 
 import com.example.bookreservation.dto.AbstractDTO;
 import com.example.bookreservation.dto.BookDTO;
-import com.example.bookreservation.entity.AbstractEntity;
-import com.example.bookreservation.entity.Author;
-import com.example.bookreservation.entity.Book;
-import com.example.bookreservation.entity.Genre;
-import com.example.bookreservation.entity.Translator;
-import com.example.bookreservation.service.AbstractService;
+import com.example.bookreservation.entity.*;
 import com.example.bookreservation.service.AuthorService;
+import com.example.bookreservation.service.CommonService;
 import com.example.bookreservation.service.GenreService;
 import com.example.bookreservation.service.TranslatorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.Set;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 @Component
 public class BookMapper implements AbstractMapper<Book, BookDTO> {
@@ -68,7 +65,7 @@ public class BookMapper implements AbstractMapper<Book, BookDTO> {
   }
 
 
-  private Set<?> getNestedRecords(Set<? extends AbstractDTO> dataList, AbstractService service) {
+  private Set<?> getNestedRecords(Set<? extends AbstractDTO> dataList, CommonService service) {
     Set<? super AbstractEntity> outSet = new HashSet<>();
     dataList.forEach(data -> {
       try {

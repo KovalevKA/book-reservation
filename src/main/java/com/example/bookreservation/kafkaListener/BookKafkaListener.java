@@ -2,7 +2,7 @@ package com.example.bookreservation.kafkaListener;
 
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.service.BookService;
-import com.example.bookreservation.service.elasticSearch.AbstractElasticSearchService;
+import com.example.bookreservation.service.elasticSearch.CommonElasticSearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -15,7 +15,7 @@ public class BookKafkaListener {
     private BookService bookService;
 
     @Autowired
-    private AbstractElasticSearchService<BookDTO> elasticSearchService;
+    private CommonElasticSearchService<BookDTO> elasticSearchService;
 
     @KafkaListener(topics = {"book-add-topic"})
     public void getTopics(@RequestBody BookDTO data) throws Exception {

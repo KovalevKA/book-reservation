@@ -8,6 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ClientService extends
-    AbstractServiceImpl<Client, ClientDTO, ClientRepository, AbstractMapper<Client, ClientDTO>> {
+        CommonServiceImpl<Client, ClientDTO, ClientRepository, AbstractMapper<Client, ClientDTO>> {
 
 }

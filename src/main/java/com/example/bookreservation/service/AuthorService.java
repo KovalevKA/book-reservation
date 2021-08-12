@@ -4,13 +4,14 @@ import com.example.bookreservation.dto.AuthorDTO;
 import com.example.bookreservation.entity.Author;
 import com.example.bookreservation.mapper.AbstractMapper;
 import com.example.bookreservation.repository.AuthorRepository;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AuthorService extends
-    AbstractServiceImpl<Author, AuthorDTO, AuthorRepository, AbstractMapper<Author, AuthorDTO>> {
+        CommonServiceImpl<Author, AuthorDTO, AuthorRepository, AbstractMapper<Author, AuthorDTO>> {
 
     @Autowired
     private AuthorRepository authorRepository;
