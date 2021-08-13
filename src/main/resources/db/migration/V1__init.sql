@@ -30,7 +30,6 @@ CREATE TABLE IF NOT EXISTS "genre_book" (
 
 CREATE TABLE IF NOT EXISTS "book" (
                         "book_id" BIGSERIAL PRIMARY KEY,
-                        "isbn" varchar,
                         "name" varchar,
                         "publishing_house" varchar,
                         "publishing_year" int,

@@ -15,9 +15,9 @@ INSERT INTO client (name) VALUES ('client2');
 INSERT INTO client (name) VALUES ('client3');
 
 
-INSERT INTO book(isbn, name, description, publishing_house, publishing_year) VALUES ('f4d5df4ds5f4ds54fsd54fs', 'book1', 'bookDiscr1', 'pubHouse1', 1987);
-INSERT INTO book(isbn, name, description, publishing_house, publishing_year) VALUES ('m7n8m7n8m7n8m7n87mm78n7','book2', 'bookDiscr2', 'pubHouse2', 1997);
-INSERT INTO book(isbn, name, description, publishing_house, publishing_year) VALUES ('2z3x2z3x2z32xz32x3z2z32','book3', 'bookDiscr3', 'pubHouse3', 2007);
+INSERT INTO book(name, description, publishing_house, publishing_year) VALUES ('book1', 'bookDiscr1', 'pubHouse1', 1987);
+INSERT INTO book(name, description, publishing_house, publishing_year) VALUES ('book2', 'bookDiscr2', 'pubHouse2', 1997);
+INSERT INTO book(name, description, publishing_house, publishing_year) VALUES ('book3', 'bookDiscr3', 'pubHouse3', 2007);
 
 INSERT INTO  author_book(book_id, author_id) VALUES (
                                                         (SELECT book_id FROM book WHERE name = 'book1'),
