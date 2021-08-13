@@ -45,6 +45,7 @@ public class BookServiceImpl
         if (!data.getDescription().isEmpty()) {
             book.setDescription(data.getDescription());
         }
+
         return bookMapper.toDTO(bookRepository.saveAndFlush(book));
     }
 

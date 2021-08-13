@@ -1,54 +1,62 @@
 package com.example.bookreservation.entity;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import javax.persistence.AttributeOverride;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
+
+import javax.persistence.*;
+import java.util.*;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
+@Indexed
 @Entity
-@AttributeOverride(name = "id", column = @Column(name = "book_id"))
 @Table(name = "book")
+@AttributeOverride(name = "id", column = @Column(name = "book_id"))
 public class Book extends AbstractEntity {
 
   public static final String INDEX = "books";
 
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "book")
   private final List<Reserv> reservList = new ArrayList<>();
+
+  @IndexedEmbedded
   @ManyToMany(mappedBy = "bookList",
-      fetch = FetchType.LAZY,
-      cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+          fetch = FetchType.LAZY,
+          cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   private final Set<Author> authorList = new HashSet<>();
+
+  @IndexedEmbedded
   @ManyToMany(mappedBy = "bookList",
-      fetch = FetchType.LAZY,
-      cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+          fetch = FetchType.LAZY,
+          cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   private final Set<Genre> genreList = new HashSet<>();
+
+  @IndexedEmbedded
   @ManyToMany(mappedBy = "bookList",
-      fetch = FetchType.LAZY,
-      cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+          fetch = FetchType.LAZY,
+          cascade = {CascadeType.PERSIST, CascadeType.MERGE})
   private final Set<Translator> translatorList = new HashSet<>();
+
+  @FullTextField
   @Column(name = "name")
   private String name;
+
+  @FullTextField
   @Column(name = "publishing_house")
   private String publishHouse;
+
+  @GenericField
   @Column(name = "publishing_year")
   private int publishYear;
+
   @Column(name = "description")
   private String description;
 

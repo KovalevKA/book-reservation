@@ -3,18 +3,17 @@ package com.example.bookreservation.controller;
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.service.BookService;
-import com.example.bookreservation.service.elasticSearch.CommonElasticSearchService;
+import com.example.bookreservation.service.elasticSearch.BookElasticSerachServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import org.elasticsearch.rest.RestStatus;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.io.IOException;
 import java.util.List;
 
 @Validated
@@ -25,16 +24,7 @@ public class BookController {
     @Autowired
     private BookService<Book, BookDTO> bookService;
     @Autowired
-    private CommonElasticSearchService<BookDTO> elasticSearchService;
-
-    @Operation(summary = "Paginated output of all books", description = "Paginated output of all books")
-    @GetMapping
-    public List<BookDTO> getBooksWithPagination(
-        @RequestParam(defaultValue = "10") @Parameter(description = "Number of books per page") Integer countInPage,
-        @RequestParam(defaultValue = "1") @Parameter(description = "Number of page") Integer page)
-        throws IOException {
-        return elasticSearchService.getWithPagination(countInPage, page);
-    }
+    private BookElasticSerachServiceImpl service;
 
     @PostMapping("search")
     public List<BookDTO> getBooksWhithParams(
@@ -44,19 +34,19 @@ public class BookController {
         @RequestParam(name = "listAuthorId", defaultValue = "", required = false) List<Long> listAuthorId,
         @RequestParam(name = "listTranslatorsId", defaultValue = "", required = false) List<Long> listTranslatorsId
     ) {
-        return bookService
+        /*return bookService
             .findByParams(isReserved, bookName.toUpperCase(), listGenreId, listAuthorId,
-                listTranslatorsId);
+                listTranslatorsId);*/
+        return service.search("");
     }
 
     @Operation(summary = "Addating a book", description = "The book is added to both the database and elasticsearch")
     @PostMapping()
     public BookDTO addBook(
-        @RequestBody @Parameter(description = "Description book") BookDTO data
-    ) throws Exception {
-        String id = bookService.create(data).getId();
-        data.setId(id);
-        elasticSearchService.add(data);
+            @RequestBody @Parameter(description = "Description book") BookDTO data) throws Exception {
+        /*String id = bookService.create(data).getId();
+        data.setId(id);*/
+        service.add(data);
         return data;
     }
 
@@ -68,20 +58,16 @@ public class BookController {
     @Operation(summary = "Updating a book", description = "The book is updated to both the database and elasticsearch")
     @PostMapping("{id}")
     public BookDTO editBook(
-        @Valid @PathVariable("id") @NotNull @NotBlank @Parameter(description = "Id book for updating") Long id,
-        @RequestBody @Parameter(description = "Description book") BookDTO data
-    )
-        throws Exception {
-        elasticSearchService.update(id.toString(), data);
+            @Valid @PathVariable("id") @NotNull @NotBlank @Parameter(description = "Id book for updating") Long id,
+            @RequestBody @Parameter(description = "Description book") BookDTO data) {
         return bookService.editById(id, data);
     }
 
     @Operation(summary = "Delete a book", description = "The book is deleted to both the database and elasticsearch")
     @DeleteMapping("{id}")
-    public RestStatus deleteBook(
-        @PathVariable @Parameter(description = "Id book for delete") Long id
-    ) throws Exception {
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteBook(
+            @PathVariable @Parameter(description = "Id book for delete") Long id) {
         bookService.deleteById(id);
-        return elasticSearchService.delete(id.toString());
     }
 }
