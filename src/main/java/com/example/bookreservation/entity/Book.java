@@ -4,10 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
-import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
+import org.hibernate.annotations.NaturalId;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
 
 import javax.persistence.*;
 import java.util.*;
@@ -48,6 +46,10 @@ public class Book extends AbstractEntity {
   @FullTextField
   @Column(name = "name")
   private String name;
+
+  @NaturalId
+  @DocumentId
+  private String isbn;
 
   @FullTextField
   @Column(name = "publishing_house")

@@ -1,11 +1,13 @@
 package com.example.bookreservation.dto;
 
-import java.util.Set;
 import lombok.Data;
+
+import java.util.Set;
 
 @Data
 public class BookDTO extends AbstractDTO {
 
+  private String isbn;
   private String name;
   private String publishHouse;
   private int publishYear;

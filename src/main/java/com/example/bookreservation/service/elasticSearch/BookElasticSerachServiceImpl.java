@@ -23,7 +23,7 @@ public class BookElasticSerachServiceImpl implements CommonElasticSearchService<
 
     @Autowired
     private AbstractMapper<Book, BookDTO> mapper;
-   
+
     private final EntityManager entityManager;
 
     @Autowired
@@ -65,10 +65,8 @@ public class BookElasticSerachServiceImpl implements CommonElasticSearchService<
         SearchSession searchSession = Search.session(entityManager);
         SearchResult<Book> result = searchSession.search(Book.class)
                 .where(searchPredicateFactory ->
-                        searchPredicateFactory.match()
-                                .field("name")
-                                .matching("book124")
-                ).fetchAll();
+                        searchPredicateFactory.matchAll())
+                .fetchAll();
         return mapper.toDTOs(result.hits());
     }
 
