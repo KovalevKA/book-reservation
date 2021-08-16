@@ -3,8 +3,8 @@ package com.example.bookreservation.service.elasticSearch;
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.mapper.AbstractMapper;
-import org.elasticsearch.rest.RestStatus;
-import org.hibernate.search.engine.search.query.SearchResult;
+import org.hibernate.search.backend.elasticsearch.ElasticsearchExtension;
+import org.hibernate.search.backend.elasticsearch.search.query.ElasticsearchSearchQuery;
 import org.hibernate.search.mapper.orm.Search;
 import org.hibernate.search.mapper.orm.massindexing.MassIndexer;
 import org.hibernate.search.mapper.orm.session.SearchSession;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -43,35 +42,15 @@ public class BookElasticSerachServiceImpl implements CommonElasticSearchService<
         }
 
     }
-
-    @Override
-    public RestStatus add(BookDTO dto) throws Exception {
-        entityManager.persist(mapper.toEntity(dto));
-        return RestStatus.OK;
-    }
-
-    @Override
-    public RestStatus update(String id, BookDTO dto) throws Exception {
-        return null;
-    }
-
-    @Override
-    public RestStatus delete(String id) throws Exception {
-        return null;
-    }
-
     @Override
     public List<BookDTO> search(String keyWords) {
         SearchSession searchSession = Search.session(entityManager);
-        SearchResult<Book> result = searchSession.search(Book.class)
-                .where(searchPredicateFactory ->
-                        searchPredicateFactory.matchAll())
-                .fetchAll();
-        return mapper.toDTOs(result.hits());
+        ElasticsearchSearchQuery<Book> query = searchSession.search(Book.class)
+                .extension(ElasticsearchExtension.get())
+                .where(f -> f.matchAll())
+                .toQuery();
+        ElasticsearchSearchQuery<Book> searchQuery = query.extension(ElasticsearchExtension.get());
+        return mapper.toDTOs(searchQuery.fetchAll().hits());
     }
 
-    @Override
-    public List<BookDTO> getWithPagination(Integer countInPage, Integer page) throws IOException {
-        return null;
-    }
 }

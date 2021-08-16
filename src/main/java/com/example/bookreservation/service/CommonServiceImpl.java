@@ -9,10 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.lang.reflect.Field;
 import java.util.List;
 
-/*
-@Service
-@Lazy
-*/
+/**
+ * TODO:Переписать на EntityManager
+ */
 public class CommonServiceImpl<Entity extends AbstractEntity,
         DTO extends AbstractDTO, Repository extends JpaRepository<Entity, Long>,
         Mapper extends AbstractMapper<Entity, DTO>>

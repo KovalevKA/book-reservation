@@ -44,9 +44,8 @@ public class BookController {
     @PostMapping()
     public BookDTO addBook(
             @RequestBody @Parameter(description = "Description book") BookDTO data) throws Exception {
-        /*String id = bookService.create(data).getId();
-        data.setId(id);*/
-        service.add(data);
+        String id = bookService.create(data).getId();
+        data.setId(id);
         return data;
     }
 

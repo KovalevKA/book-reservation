@@ -8,17 +8,18 @@ import org.hibernate.annotations.NaturalId;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.*;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-@Indexed
+@Indexed(index = "book")
 @Entity
 @Table(name = "book")
 @AttributeOverride(name = "id", column = @Column(name = "book_id"))
-public class Book extends AbstractEntity {
+public class Book extends AbstractEntity implements Serializable {
 
   public static final String INDEX = "books";
 
@@ -80,21 +81,16 @@ public class Book extends AbstractEntity {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof Book)) {
-      return false;
-    }
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    if (!super.equals(o)) return false;
     Book book = (Book) o;
-    return publishYear == book.publishYear &&
-        name.equals(book.name) &&
-        publishHouse.equals(book.publishHouse) &&
-        description.equals(book.description);
+    return publishYear == book.publishYear && name.equals(book.name) && isbn.equals(book.isbn)
+            && Objects.equals(publishHouse, book.publishHouse);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, publishHouse, publishYear, description);
+    return Objects.hash(super.hashCode(), name, isbn, publishHouse, publishYear);
   }
 }
