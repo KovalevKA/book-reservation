@@ -18,6 +18,11 @@ public class TranslatorService extends
   @Autowired
   private AbstractMapper<Translator, TranslatorDTO> translatorMapper;
 
+  public TranslatorService() {
+    super();
+    setClazz(Translator.class);
+  }
+
   @Override
   public List<TranslatorDTO> getByNameLike(String name) {
     return translatorMapper

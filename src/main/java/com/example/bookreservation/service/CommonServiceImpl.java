@@ -5,13 +5,12 @@ import com.example.bookreservation.entity.AbstractEntity;
 import com.example.bookreservation.mapper.AbstractMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
 import java.lang.reflect.Field;
 import java.util.List;
 
-/**
- * TODO:Переписать на EntityManager
- */
 public class CommonServiceImpl<Entity extends AbstractEntity,
         DTO extends AbstractDTO, Repository extends JpaRepository<Entity, Long>,
         Mapper extends AbstractMapper<Entity, DTO>>
@@ -21,28 +20,39 @@ public class CommonServiceImpl<Entity extends AbstractEntity,
   private Repository repository;
   @Autowired
   private Mapper mapper;
+  @Autowired
+  EntityManager entityManager;
+
+  private Class<Entity> clazz;
+
+  public void setClazz(Class<Entity> clazzToSet) {
+    this.clazz = clazzToSet;
+  }
 
   @Override
   public List<DTO> getAll() {
-    return mapper.toDTOs(repository.findAll());
+    return mapper.toDTOs(entityManager.createQuery("FROM " + clazz.getName()).getResultList());
   }
 
   @Override
   public DTO getById(Long id) {
-    return mapper.toDTO(repository.findById(id).get());
+    return mapper.toDTO(
+            entityManager.find(clazz, id)
+    );
   }
 
   @Override
   public void deleteById(Long id) {
-    repository.deleteById(id);
+    entityManager.remove(getById(id));
   }
 
   @Override
   public DTO create(DTO dto) {
-    Entity entity = mapper.toEntity(dto);
-    return mapper.toDTO(repository.saveAndFlush(entity));
+    entityManager.persist(mapper.toEntity(dto));
+    return dto;
   }
 
+  @Transactional
   @Override
   public DTO editById(Long id, DTO dto) {
     Entity saveEntity = repository.findById(id).get();
@@ -60,6 +70,6 @@ public class CommonServiceImpl<Entity extends AbstractEntity,
       }
       field.setAccessible(false);
     }
-    return mapper.toDTO(repository.saveAndFlush(saveEntity));
+    return mapper.toDTO(saveEntity);
   }
 }

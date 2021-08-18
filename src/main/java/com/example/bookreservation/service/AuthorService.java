@@ -18,6 +18,11 @@ public class AuthorService extends
     @Autowired
     private AbstractMapper<Author, AuthorDTO> authorMapper;
 
+    public AuthorService() {
+        super();
+        setClazz(Author.class);
+    }
+
     @Override
     public List<AuthorDTO> getByNameLike(String name) {
         return authorMapper.toDTOs(authorRepository.findByNameContainsIgnoreCase(name));

@@ -10,4 +10,8 @@ import org.springframework.stereotype.Service;
 public class ClientService extends
         CommonServiceImpl<Client, ClientDTO, ClientRepository, AbstractMapper<Client, ClientDTO>> {
 
+    public ClientService() {
+        super();
+        setClazz(Client.class);
+    }
 }

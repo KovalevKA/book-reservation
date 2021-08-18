@@ -18,6 +18,11 @@ public class GenreService extends
   @Autowired
   private AbstractMapper<Genre, GenreDTO> genreMapper;
 
+  public GenreService() {
+    super();
+    setClazz(Genre.class);
+  }
+
   @Override
   public List<GenreDTO> getByNameLike(String name) {
     return genreMapper.toDTOs(genreRepository.findByNameContainsIgnoreCase(name));
