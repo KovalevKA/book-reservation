@@ -1,9 +1,6 @@
 package com.example.bookreservation.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 
 import javax.persistence.*;
@@ -15,6 +12,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @AttributeOverride(name = "id", column = @Column(name = "author_id"))
 @Table(name = "author")
@@ -39,6 +37,7 @@ public class Author extends AbstractEntity {
   public void removeBook(Book book) {
     this.bookList.remove(book);
   }
+
 
   @Override
   public boolean equals(Object o) {
