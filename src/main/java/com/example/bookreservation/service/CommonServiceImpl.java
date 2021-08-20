@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import java.lang.reflect.Field;
 import java.util.List;
 
+@Transactional
 public class CommonServiceImpl<Entity extends AbstractEntity,
         DTO extends AbstractDTO, Repository extends JpaRepository<Entity, Long>,
         Mapper extends AbstractMapper<Entity, DTO>>
@@ -43,7 +44,7 @@ public class CommonServiceImpl<Entity extends AbstractEntity,
 
   @Override
   public void deleteById(Long id) {
-    entityManager.remove(getById(id));
+    entityManager.remove(entityManager.find(clazz, id));
   }
 
   @Override
