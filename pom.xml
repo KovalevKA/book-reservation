@@ -19,7 +19,6 @@
 		<java.version>1.8</java.version>
 		<org.springdoc.version>1.2.32</org.springdoc.version>
 		<modelmapper.version>2.3.9</modelmapper.version>
-		<mockMvc.version>3.0.0</mockMvc.version>
 		<hibersearch.version>6.0.3.Final</hibersearch.version>
 	</properties>
 	<dependencies>
@@ -41,17 +40,10 @@
 			<artifactId>hibernate-search-backend-elasticsearch</artifactId>
 			<version>${hibersearch.version}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>org.elasticsearch</groupId>
 			<artifactId>elasticsearch</artifactId>
 			<version>${elasticsearch.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.rest-assured</groupId>
-			<artifactId>spring-mock-mvc</artifactId>
-			<version>${mockMvc.version}</version>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.kafka</groupId>
@@ -100,7 +92,14 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>3.12.0</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.6</version>

@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class GenreService extends
-        CommonServiceImpl<Genre, GenreDTO, GenreRepository, AbstractMapper<Genre, GenreDTO>> {
+        CommonServiceImpl<Genre, GenreDTO, AbstractMapper<Genre, GenreDTO>> {
 
   @Autowired
   private GenreRepository genreRepository;

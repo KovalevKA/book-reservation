@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class BookServiceImpl
-        extends CommonServiceImpl<Book, BookDTO, BookRepository, AbstractMapper<Book, BookDTO>>
+        extends CommonServiceImpl<Book, BookDTO, AbstractMapper<Book, BookDTO>>
         implements BookService<Book, BookDTO> {
 
     public BookServiceImpl() {

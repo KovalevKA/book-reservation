@@ -4,20 +4,18 @@ import com.example.bookreservation.dto.AbstractDTO;
 import com.example.bookreservation.entity.AbstractEntity;
 import com.example.bookreservation.mapper.AbstractMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.lang.reflect.Field;
 import java.util.List;
 
+@Transactional
 public class CommonServiceImpl<Entity extends AbstractEntity,
-        DTO extends AbstractDTO, Repository extends JpaRepository<Entity, Long>,
+        DTO extends AbstractDTO,
         Mapper extends AbstractMapper<Entity, DTO>>
         implements CommonService<Entity, DTO> {
 
-  @Autowired
-  private Repository repository;
   @Autowired
   private Mapper mapper;
   @Autowired
@@ -52,10 +50,9 @@ public class CommonServiceImpl<Entity extends AbstractEntity,
     return dto;
   }
 
-  @Transactional
   @Override
   public DTO editById(Long id, DTO dto) {
-    Entity saveEntity = repository.findById(id).get();
+    Entity saveEntity = entityManager.find(clazz, id);
 
     for (Field field : dto.getClass().getDeclaredFields()) {
       field.setAccessible(true);

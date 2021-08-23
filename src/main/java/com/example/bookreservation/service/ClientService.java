@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ClientService extends
-        CommonServiceImpl<Client, ClientDTO, ClientRepository, AbstractMapper<Client, ClientDTO>> {
+        CommonServiceImpl<Client, ClientDTO, AbstractMapper<Client, ClientDTO>> {
 
     public ClientService() {
         super();

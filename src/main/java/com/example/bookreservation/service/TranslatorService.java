@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class TranslatorService extends
-        CommonServiceImpl<Translator, TranslatorDTO, TranslatorRepository, AbstractMapper<Translator, TranslatorDTO>> {
+        CommonServiceImpl<Translator, TranslatorDTO, AbstractMapper<Translator, TranslatorDTO>> {
 
   @Autowired
   private TranslatorRepository translatorRepository;
