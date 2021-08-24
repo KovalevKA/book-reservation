@@ -3,10 +3,10 @@ package com.example.bookreservation.service;
 import com.example.bookreservation.dto.BookDTO;
 import com.example.bookreservation.entity.Book;
 import com.example.bookreservation.mapper.AbstractMapper;
-import com.example.bookreservation.repository.AuthorRepository;
 import com.example.bookreservation.repository.BookRepository;
 import com.example.bookreservation.repository.GenreRepository;
 import com.example.bookreservation.repository.TranslatorRepository;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
@@ -30,7 +30,7 @@ public class BookServiceImpl
     @Autowired
     private BookRepository bookRepository;
     @Autowired
-    private AuthorRepository authorRepository;
+    private AuthorService authorService;
     @Autowired
     private GenreRepository genreRepository;
     @Autowired
@@ -40,21 +40,30 @@ public class BookServiceImpl
 
     @Override
     public BookDTO editById(Long id, BookDTO data) throws EntityNotFoundException {
-        Book book = bookRepository.findById(id).orElseThrow(() -> new EntityNotFoundException());
-        if (!data.getName().isEmpty()) {
-            book.setName(data.getName());
-        }
-        if (!data.getPublishHouse().isEmpty()) {
-            book.setPublishHouse(data.getPublishHouse());
-        }
-        if (data.getPublishYear() != 0) {
-            book.setPublishYear(data.getPublishYear());
-        }
-        if (!data.getDescription().isEmpty()) {
-            book.setDescription(data.getDescription());
-        }
+        Book book = entityManager.find(Book.class, id);
+        book.setName(data.getName());
+        book.setPublishHouse(data.getPublishHouse());
+        book.setPublishYear(data.getPublishYear());
+        book.setDescription(data.getDescription());
 
-        return bookMapper.toDTO(bookRepository.saveAndFlush(book));
+        SessionFactory
+
+        book.getAuthorList().forEach(author -> {
+            if (!data.getAuthors().contains(author)) {
+                author.removeBook(book);
+            }
+        });
+        book.getGenreList().forEach(genre -> {
+            if (!resBook.getGenreList().contains(genre)) {
+                genre.removeBook(book);
+            }
+        });
+        book.getTranslatorList().forEach(translator -> {
+            if (!resBook.getTranslatorList().contains(translator)) {
+                translator.removeBook(book);
+            }
+        });
+        return bookMapper.toDTO(book);
     }
 
     public List<BookDTO> findByParams(Boolean isReserved, String bookName,

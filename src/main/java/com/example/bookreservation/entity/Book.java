@@ -79,6 +79,15 @@ public class Book extends AbstractEntity implements Serializable {
     this.reservList.add(reserv);
   }
 
+  public void removeAuthor(Author author){
+    this.authorList.remove(author);
+  }
+  public void removeGenre(Genre genre){
+    this.genreList.remove(genre);
+  }
+  public void removeTranslator(Translator translator){
+    this.translatorList.remove(translator);
+  }
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;

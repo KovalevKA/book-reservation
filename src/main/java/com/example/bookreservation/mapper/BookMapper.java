@@ -42,7 +42,7 @@ public class BookMapper implements AbstractMapper<Book, BookDTO> {
   public Book toEntity(BookDTO bookDTO) {
     Book book = mapper.map(bookDTO, Book.class);
 
-    /*Set<Author> authors = (Set<Author>) getNestedRecords(bookDTO.getAuthors(), authorService);
+    Set<Author> authors = (Set<Author>) getNestedRecords(bookDTO.getAuthors(), authorService);
     authors.forEach(author -> {
       author.addBook(book);
       book.addAuthor(author);
@@ -59,7 +59,7 @@ public class BookMapper implements AbstractMapper<Book, BookDTO> {
     translators.forEach(translator -> {
       translator.addBook(book);
       book.addTranslator(translator);
-    });*/
+    });
 
     return book;
   }
